@@ -244,11 +244,8 @@ void CoreUSART::setEventReceiver(hal::usart::EventReceiver* event) {
  */
 void CoreUSART::interruptEvent(void) {
   if (at32f415::usart::USART::flagGet(this->mReg, at32f415::usart::Flag::RDBF)) {
-
     uint16_t readCache = at32f415::usart::USART::dataReceive(this->mReg);
-
-    if (!this->mEventReceiver->onUartReceiver(static_cast<uint8_t>(readCache)))
-      at32f415::usart::USART::interruptEnable(this->mReg, at32f415::usart::Interrupt::RDBF, false);
+    this->mEventReceiver->onUartReceiver(static_cast<uint8_t>(readCache));
   }
 
   // send handle
