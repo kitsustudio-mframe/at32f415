@@ -98,7 +98,7 @@ enum struct at32f415::misc::InterruptService : int {
   OTGFS1 = OTGFS1_IRQn,                           /*!< otgfs1 global interrupt                              */
   CMP1 = CMP1_IRQn,                               /*!< comparator1 global interrupt                         */
   CMP2 = CMP2_IRQn,                               /*!< comparator2 global interrupt                         */
-  DMA2_Channel6_7 = DMA2_Channel6_7_IRQn,         /*!< dma2 channel 6 and channel 7 global interrupt        */
+  DMA2_Channel6_7 = DMA2_Channel6_7_IRQn          /*!< dma2 channel 6 and channel 7 global interrupt        */
 };
 
 /* ****************************************************************************************

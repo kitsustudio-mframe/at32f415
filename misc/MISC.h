@@ -61,7 +61,7 @@ class at32f415::misc::MISC : public lang::Object {
  public:
   MISC(void) = default;
 
-  virtual ~MISC(void) = default;
+  virtual ~MISC(void) override = default;
 
   /* **************************************************************************************
    * Operator Method
