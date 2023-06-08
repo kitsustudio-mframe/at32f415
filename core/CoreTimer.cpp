@@ -228,13 +228,59 @@ bool CoreTimer::startAtTick(uint32_t tick) {
 }
 
 //-----------------------------------------------------------------------------------------
-bool CoreTimer::startAtTime(uint32_t microSecond) {
-  uint32_t timeUsBase = (Core::getSystemCoreClock() / 1000000);
+bool CoreTimer::startAtTime(float second) {
+  at32f415::crm::CoreClock coreClock;
+  at32f415::crm::CRM::clocksFreqGet(coreClock);
+  
+  uint32_t sourceClock = coreClock.apb2_freq;
 
-  if (microSecond > (0xFFFFFFFF / timeUsBase))
-    return false;
+  switch (reinterpret_cast<uint32_t>(&this->mReg)) {
+    //------------------------------------------
+    case Chip::BASE_TMR1:
+      sourceClock = coreClock.apb2_freq;
+      break;
 
-  return startAtTick(microSecond * timeUsBase);
+    //------------------------------------------
+    case Chip::BASE_TMR2:
+      sourceClock = coreClock.apb1_freq;
+      break;
+    //------------------------------------------
+    case Chip::BASE_TMR3:
+      sourceClock = coreClock.apb1_freq;
+      break;
+
+    //------------------------------------------
+    case Chip::BASE_TMR4:
+      sourceClock = coreClock.apb1_freq;
+      break;
+
+    //------------------------------------------
+    case Chip::BASE_TMR5:
+      sourceClock = coreClock.apb1_freq;
+      break;
+
+    //------------------------------------------
+    case Chip::BASE_TMR9:
+      sourceClock = coreClock.apb2_freq;
+      break;
+
+    //------------------------------------------
+    case Chip::BASE_TMR10:
+      sourceClock = coreClock.apb2_freq;
+      break;
+
+    //------------------------------------------
+    case Chip::BASE_TMR11:
+      sourceClock = coreClock.apb2_freq;
+      break;
+  }
+
+  return this->startAtTick(static_cast<uint32_t>(static_cast<float>(sourceClock) * second));
+}
+
+//-----------------------------------------------------------------------------------------
+bool CoreTimer::startAtHertz(float hertz) {
+  return this->startAtTime(1.0f / hertz);
 }
 
 //-----------------------------------------------------------------------------------------
@@ -260,12 +306,12 @@ void CoreTimer::setEventCancel(hal::timer::EventCancel* event) {
   if (event == nullptr)
     this->mEventCancel = this;
 
-  else{
+  else {
     this->mEventCancel = event;
-    if(this->isBusy())
+    if (this->isBusy())
       TMR::interruptEnable(this->mReg, tmr::Interrupt::OVF, true);
   }
-    
+
   return;
 }
 
@@ -274,8 +320,8 @@ void CoreTimer::setEventCancel(hal::timer::EventCancel* event) {
  */
 
 //-----------------------------------------------------------------------------------------
-void CoreTimer::interruptEvent(void){
-  if(TMR::flagGet(this->mReg, at32f415::tmr::Flag::OVF) == false)
+void CoreTimer::interruptEvent(void) {
+  if (TMR::flagGet(this->mReg, at32f415::tmr::Flag::OVF) == false)
     return;
 
   TMR::flagClear(this->mReg, at32f415::tmr::Flag::OVF);

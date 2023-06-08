@@ -108,7 +108,9 @@ class at32f415::core::CoreTimer : public lang::Object,
 
   virtual bool startAtTick(uint32_t tick) override;
 
-  virtual bool startAtTime(uint32_t microSecond) override;
+  virtual bool startAtTime(float second) override;
+ 
+  virtual bool startAtHertz(float hertz) override;
 
   virtual void resetTick(uint32_t tick) override;
 
