@@ -122,8 +122,8 @@ using at32f415::tmr::TMR;
  */
 //-----------------------------------------------------------------------------------------
 CoreTimer::CoreTimer(at32f415::tmr::Register& reg) : mReg(reg) {
-  this->mEventCancel = nullptr;
-  this->mEventTrigger = nullptr;
+  this->mEventCancel = this;
+  this->mEventTrigger = this;
   return;
 }
 
