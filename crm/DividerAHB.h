@@ -4,29 +4,27 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_2459E0F8_02DB_41E9_B4DB_BCEFF9B591EE
-#define AT32F415_2459E0F8_02DB_41E9_B4DB_BCEFF9B591EE
+#ifndef CHIP_2459E0F8_02DB_41E9_B4DB_BCEFF9B591EE
+#define CHIP_2459E0F8_02DB_41E9_B4DB_BCEFF9B591EE
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::crm {
+namespace chip::crm {
   enum struct DividerAHB : uint8_t;
-}  // namespace at32f415::crm
+}  // namespace chip::crm
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::crm::DividerAHB : uint8_t {
+enum struct chip::crm::DividerAHB : uint8_t {
   DIV1 = 0x00,   /*!< sclk div1 to ahbclk */
   DIV2 = 0x08,   /*!< sclk div2 to ahbclk */
   DIV4 = 0x09,   /*!< sclk div4 to ahbclk */
@@ -42,4 +40,4 @@ enum struct at32f415::crm::DividerAHB : uint8_t {
  * End of file
  */
 
-#endif /* AT32F415_2459E0F8_02DB_41E9_B4DB_BCEFF9B591EE */
+#endif /* CHIP_2459E0F8_02DB_41E9_B4DB_BCEFF9B591EE */

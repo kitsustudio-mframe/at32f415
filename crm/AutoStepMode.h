@@ -4,29 +4,27 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_F18F8BD4_E9D2_4511_B13D_11E80B665195
-#define AT32F415_F18F8BD4_E9D2_4511_B13D_11E80B665195
+#ifndef CHIP_F18F8BD4_E9D2_4511_B13D_11E80B665195
+#define CHIP_F18F8BD4_E9D2_4511_B13D_11E80B665195
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::crm {
+namespace chip::crm {
   enum struct AutoStepMode : uint8_t;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::crm::AutoStepMode : uint8_t {
+enum struct chip::crm::AutoStepMode : uint8_t {
   DISABLE = 0x00, /*!< disable auto step mode */
   ENABLE = 0x03   /*!< enable auto step mode */
 };
@@ -35,4 +33,4 @@ enum struct at32f415::crm::AutoStepMode : uint8_t {
  * End of file
  */
 
-#endif /* AT32F415_F18F8BD4_E9D2_4511_B13D_11E80B665195 */
+#endif /* CHIP_F18F8BD4_E9D2_4511_B13D_11E80B665195 */

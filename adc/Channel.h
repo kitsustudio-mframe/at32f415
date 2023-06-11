@@ -4,29 +4,27 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_597F8946_D1A4_48CA_A4B7_4C48FD3CEBF1
-#define AT32F415_597F8946_D1A4_48CA_A4B7_4C48FD3CEBF1
+#ifndef CHIP_597F8946_D1A4_48CA_A4B7_4C48FD3CEBF1
+#define CHIP_597F8946_D1A4_48CA_A4B7_4C48FD3CEBF1
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::adc {
+namespace chip::adc {
   enum struct Channel : uint8_t;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::adc::Channel : uint8_t {
+enum struct chip::adc::Channel : uint8_t {
   CHANNEL0 = 0x00,  /**< adc channel 0  */
   CHANNEL1 = 0x01,  /**< adc channel 1  */
   CHANNEL2 = 0x02,  /**< adc channel 2  */
@@ -51,4 +49,4 @@ enum struct at32f415::adc::Channel : uint8_t {
  * End of file
  */
 
-#endif /* AT32F415_597F8946_D1A4_48CA_A4B7_4C48FD3CEBF1 */
+#endif /* CHIP_597F8946_D1A4_48CA_A4B7_4C48FD3CEBF1 */

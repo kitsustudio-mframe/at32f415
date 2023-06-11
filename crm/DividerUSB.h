@@ -4,29 +4,27 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_04795175_3A50_4091_9B63_43A5AC99343C
-#define AT32F415_04795175_3A50_4091_9B63_43A5AC99343C
+#ifndef CHIP_04795175_3A50_4091_9B63_43A5AC99343C
+#define CHIP_04795175_3A50_4091_9B63_43A5AC99343C
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::crm {
+namespace chip::crm {
   enum struct DividerUSB : uint8_t;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::crm::DividerUSB : uint8_t {
+enum struct chip::crm::DividerUSB : uint8_t {
   DIV1_5 = 0x00, /*!< pllclk div1.5 to usbclk */
   DIV1 = 0x01,   /*!< pllclk div1 to usbclk */
   DIV2_5 = 0x02, /*!< pllclk div2.5 to usbclk */
@@ -40,4 +38,4 @@ enum struct at32f415::crm::DividerUSB : uint8_t {
  * End of file
  */
 
-#endif /* AT32F415_04795175_3A50_4091_9B63_43A5AC99343C */
+#endif /* CHIP_04795175_3A50_4091_9B63_43A5AC99343C */

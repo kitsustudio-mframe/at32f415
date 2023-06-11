@@ -4,35 +4,32 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_20B4C8B1_8FF1_45C9_8678_F51C7602D9A8
-#define AT32F415_20B4C8B1_8FF1_45C9_8678_F51C7602D9A8
+#ifndef CHIP_20B4C8B1_8FF1_45C9_8678_F51C7602D9A8
+#define CHIP_20B4C8B1_8FF1_45C9_8678_F51C7602D9A8
 
 /* ****************************************************************************************
  * Include
  */
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../tmr/package-info.h"
-#include "hal/package-info.h"
-#include "lang/package-info.h"
-
-//-----------------------------------------------------------------------------------------
+#include "./../tmr/TMR.h"
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::core {
+namespace chip::core {
   class CoreTimer;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-class at32f415::core::CoreTimer : public lang::Object,
-                                  public hal::timer::Timer,
-                                  public hal::InterruptEvent,
-                                  public hal::timer::EventCancel,
-                                  public hal::timer::EventTrigger {
+class chip::core::CoreTimer : public mframe::lang::Object,
+                              public mframe::hal::timer::Timer,
+                              public mframe::hal::InterruptEvent,
+                              public mframe::hal::timer::EventCancel,
+                              public mframe::hal::timer::EventTrigger {
   /* **************************************************************************************
    * Variable <Public>
    */
@@ -45,9 +42,9 @@ class at32f415::core::CoreTimer : public lang::Object,
    * Variable <Private>
    */
  private:
-  at32f415::tmr::Register& mReg;
-  hal::timer::EventTrigger* mEventTrigger;
-  hal::timer::EventCancel* mEventCancel;
+  chip::tmr::Register& mReg;
+  mframe::hal::timer::EventTrigger* mEventTrigger;
+  mframe::hal::timer::EventCancel* mEventCancel;
 
   /* **************************************************************************************
    * Abstract method <Public>
@@ -66,7 +63,7 @@ class at32f415::core::CoreTimer : public lang::Object,
    *
    * @param reg
    */
-  CoreTimer(at32f415::tmr::Register& reg);
+  CoreTimer(chip::tmr::Register& reg);
 
   /**
    * @brief Destroy the Core Timer object
@@ -83,7 +80,7 @@ class at32f415::core::CoreTimer : public lang::Object,
    */
 
   /* **************************************************************************************
-   * Public Method <Override> - hal::Base
+   * Public Method <Override> - mframe::hal::Base
    */
  public:
   virtual bool deinit(void) override;
@@ -93,7 +90,7 @@ class at32f415::core::CoreTimer : public lang::Object,
   virtual bool isInit(void) override;
 
   /* **************************************************************************************
-   * Public Method <Override> - hal::timer::Timer
+   * Public Method <Override> - mframe::hal::timer::Timer
    */
  public:
   virtual void cancel(void) override;
@@ -109,29 +106,29 @@ class at32f415::core::CoreTimer : public lang::Object,
   virtual bool startAtTick(uint32_t tick) override;
 
   virtual bool startAtTime(float second) override;
- 
+
   virtual bool startAtHertz(float hertz) override;
 
   virtual void resetTick(uint32_t tick) override;
 
-  virtual void setEventTrigger(hal::timer::EventTrigger* event) override;
+  virtual void setEventTrigger(mframe::hal::timer::EventTrigger* event) override;
 
-  virtual void setEventCancel(hal::timer::EventCancel* event) override;
+  virtual void setEventCancel(mframe::hal::timer::EventCancel* event) override;
 
   /* **************************************************************************************
-   * Public Method <Override> - hal::InterruptEvent
+   * Public Method <Override> - mframe::hal::InterruptEvent
    */
  public:
   virtual void interruptEvent(void) override;
 
   /* **************************************************************************************
-   * Public Method <Override> - hal::timer::EventCencel
+   * Public Method <Override> - mframe::hal::timer::EventCencel
    */
  public:
   virtual void onTimerCancel(void) override;
 
   /* **************************************************************************************
-   * Public Method <Override> - hal::timer::EventCencel
+   * Public Method <Override> - mframe::hal::timer::EventCencel
    */
  public:
   virtual void onTimerTrigger(void) override;
@@ -169,4 +166,4 @@ class at32f415::core::CoreTimer : public lang::Object,
  * End of file
  */
 
-#endif /* AT32F415_20B4C8B1_8FF1_45C9_8678_F51C7602D9A8 */
+#endif /* CHIP_20B4C8B1_8FF1_45C9_8678_F51C7602D9A8 */

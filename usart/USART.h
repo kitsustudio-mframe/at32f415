@@ -4,8 +4,8 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_58CF5083_706E_4A10_B60C_0994F1B8798E
-#define AT32F415_58CF5083_706E_4A10_B60C_0994F1B8798E
+#ifndef CHIP_58CF5083_706E_4A10_B60C_0994F1B8798E
+#define CHIP_58CF5083_706E_4A10_B60C_0994F1B8798E
 
 /* ****************************************************************************************
  * Macro
@@ -16,8 +16,8 @@
  */
 
 //-----------------------------------------------------------------------------------------
-#include "./../Chip.h"
-#include "lang/package-info.h"
+#include "./../AT32F415.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 #include "./BreakBit.h"
@@ -36,19 +36,19 @@
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::usart {
+namespace chip::usart {
   class USART;
   extern Register& USART1;
   extern Register& USART2;
   extern Register& USART3;
   extern Register& UART4;
   extern Register& UART5;
-}  // namespace at32f415::usart
+}  // namespace chip::usart
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-class at32f415::usart::USART : public lang::Object {
+class chip::usart::USART : public mframe::lang::Object {
   /* **************************************************************************************
    * Variable <Public>
    */
@@ -570,4 +570,4 @@ class at32f415::usart::USART : public lang::Object {
  * End of file
  */
 
-#endif /* AT32F415_58CF5083_706E_4A10_B60C_0994F1B8798E */
+#endif /* CHIP_58CF5083_706E_4A10_B60C_0994F1B8798E */

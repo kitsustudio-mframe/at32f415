@@ -4,29 +4,27 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_9533A911_1113_4384_8862_5E601DA9C089
-#define AT32F415_9533A911_1113_4384_8862_5E601DA9C089
+#ifndef CHIP_9533A911_1113_4384_8862_5E601DA9C089
+#define CHIP_9533A911_1113_4384_8862_5E601DA9C089
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::crm {
+namespace chip::crm {
   enum struct SourceClockCore : uint8_t;
-}  // namespace at32f415::crm
+}  // namespace chip::crm
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::crm::SourceClockCore : uint8_t {
+enum struct chip::crm::SourceClockCore : uint8_t {
   CLOCK_HICK = 0x00, /*!< high speed internal clock */
   CLOCK_HEXT = 0x01, /*!< high speed external crystal */
   CLOCK_PLL = 0x02,  /*!< phase locking loop */
@@ -38,4 +36,4 @@ enum struct at32f415::crm::SourceClockCore : uint8_t {
  * End of file
  */
 
-#endif /* AT32F415_9533A911_1113_4384_8862_5E601DA9C089 */
+#endif /* CHIP_9533A911_1113_4384_8862_5E601DA9C089 */

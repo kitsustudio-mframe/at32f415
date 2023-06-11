@@ -4,18 +4,18 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_B3F74285_D4AA_47C7_A7BA_F460F199D3C1
-#define AT32F415_B3F74285_D4AA_47C7_A7BA_F460F199D3C1
+#ifndef CHIP_B3F74285_D4AA_47C7_A7BA_F460F199D3C1
+#define CHIP_B3F74285_D4AA_47C7_A7BA_F460F199D3C1
 
 /* ****************************************************************************************
  * Include
  */
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../Chip.h"
+#include "./../AT32F415.h"
 #include "DeepSleepEnter.h"
 #include "Flag.h"
 #include "PvmVoltage.h"
@@ -26,15 +26,15 @@
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::pwc {
+namespace chip::pwc {
   class PWC;
   extern Register& PWC0;
-}  // namespace at32f415::pwc
+}  // namespace chip::pwc
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-class at32f415::pwc::PWC : public lang::Object {
+class chip::pwc::PWC : public mframe::lang::Object {
   /* **************************************************************************************
    * Variable <Public>
    */
@@ -222,4 +222,4 @@ class at32f415::pwc::PWC : public lang::Object {
  * End of file
  */
 
-#endif /* AT32F415_B3F74285_D4AA_47C7_A7BA_F460F199D3C1 */
+#endif /* CHIP_B3F74285_D4AA_47C7_A7BA_F460F199D3C1 */

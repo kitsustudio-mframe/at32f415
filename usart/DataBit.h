@@ -1,35 +1,32 @@
 /**
  * Copyright (c) 2020 ZxyKira
  * All rights reserved.
- * 
+ *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_5DFF479A_1086_4BB6_8E1A_0373216AA033
-#define AT32F415_5DFF479A_1086_4BB6_8E1A_0373216AA033
+#ifndef CHIP_5DFF479A_1086_4BB6_8E1A_0373216AA033
+#define CHIP_5DFF479A_1086_4BB6_8E1A_0373216AA033
 
 /* ****************************************************************************************
  * Include
  */
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415{
-  namespace usart{
-    enum struct DataBit : uint8_t;
-  }
+namespace chip::usart {
+  enum struct DataBit : uint8_t;
 }
-
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::usart::DataBit : uint8_t{
+enum struct chip::usart::DataBit : uint8_t {
   BITS8 = 0x00, /*!< usart data size is 8 bits */
   BITS9 = 0x01  /*!< usart data size is 9 bits */
 };
@@ -38,4 +35,4 @@ enum struct at32f415::usart::DataBit : uint8_t{
  * End of file
  */
 
-#endif /* AT32F415_5DFF479A_1086_4BB6_8E1A_0373216AA033 */
+#endif /* CHIP_5DFF479A_1086_4BB6_8E1A_0373216AA033 */

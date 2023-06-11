@@ -22,7 +22,7 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wold-style-cast"
 #pragma clang diagnostic ignored "-Wcovered-switch-default"
-#pragma clang diagnostic ignored "-Wswitch-enum" 
+#pragma clang diagnostic ignored "-Wswitch-enum"
 
 #define getBase(x) reinterpret_cast<uint32_t>(&x)
 
@@ -40,20 +40,20 @@
 //-----------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------
-using at32f415::crm::CoreClock;
-using at32f415::crm::CRM;
-using at32f415::crm::PeriphReset;
-using at32f415::usart::Register;
-using at32f415::usart::USART;
+using chip::crm::CoreClock;
+using chip::crm::CRM;
+using chip::crm::PeriphReset;
+using chip::usart::Register;
+using chip::usart::USART;
 
 /* ****************************************************************************************
  * Variable <Static>
  */
-Register& at32f415::usart::USART1 = *reinterpret_cast<Register*>(at32f415::Chip::BASE_USART1);
-Register& at32f415::usart::USART2 = *reinterpret_cast<Register*>(at32f415::Chip::BASE_USART2);
-Register& at32f415::usart::USART3 = *reinterpret_cast<Register*>(at32f415::Chip::BASE_USART3);
-Register& at32f415::usart::UART4 = *reinterpret_cast<Register*>(at32f415::Chip::BASE_UART4);
-Register& at32f415::usart::UART5 = *reinterpret_cast<Register*>(at32f415::Chip::BASE_UART5);
+Register& chip::usart::USART1 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_USART1);
+Register& chip::usart::USART2 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_USART2);
+Register& chip::usart::USART3 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_USART3);
+Register& chip::usart::UART4 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_UART4);
+Register& chip::usart::UART5 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_UART5);
 /* ****************************************************************************************
  * Construct Method
  */
@@ -83,22 +83,22 @@ USART::~USART(void) {
  *
  */
 void USART::reset(Register& reg) {
-  if (getBase(reg) == Chip::BASE_USART1) {
+  if (getBase(reg) == AT32F415::BASE_USART1) {
     CRM::periphReset(PeriphReset::RESET_USART1, true);
     CRM::periphReset(PeriphReset::RESET_USART1, false);
 
-  } else if (getBase(reg) == Chip::BASE_USART2) {
+  } else if (getBase(reg) == AT32F415::BASE_USART2) {
     CRM::periphReset(PeriphReset::RESET_USART2, true);
     CRM::periphReset(PeriphReset::RESET_USART2, false);
 
-  } else if (getBase(reg) == Chip::BASE_USART3) {
+  } else if (getBase(reg) == AT32F415::BASE_USART3) {
     CRM::periphReset(PeriphReset::RESET_USART3, true);
     CRM::periphReset(PeriphReset::RESET_USART3, false);
 
-  } else if (getBase(reg) == Chip::BASE_UART4) {
+  } else if (getBase(reg) == AT32F415::BASE_UART4) {
     CRM::periphReset(PeriphReset::RESET_UART4, true);
     CRM::periphReset(PeriphReset::RESET_UART4, false);
-  } else if (getBase(reg) == Chip::BASE_UART5) {
+  } else if (getBase(reg) == AT32F415::BASE_UART5) {
     CRM::periphReset(PeriphReset::RESET_UART5, true);
     CRM::periphReset(PeriphReset::RESET_UART5, false);
   }
@@ -112,7 +112,7 @@ void USART::init(Register& reg, uint32_t baudrate, DataBit dataBit, StopBit stop
   uint32_t apb_clock, temp_val;
   CRM::clocksFreqGet(clocks_freq);
 
-  if (getBase(reg) == Chip::BASE_USART1) {
+  if (getBase(reg) == AT32F415::BASE_USART1) {
     apb_clock = clocks_freq.apb2_freq;
 
   } else {

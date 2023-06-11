@@ -8,14 +8,11 @@
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "./../crm/package-info.h"
-#include "./../gpio/package-info.h"
-
-//-----------------------------------------------------------------------------------------
 #include "./CoreGeneralPin.h"
-#include "./CoreGeneralPort.h"
+
+//-----------------------------------------------------------------------------------------
+#include "chip.h"
+#include "mframe.h"
 
 /* ****************************************************************************************
  * Macro
@@ -25,11 +22,11 @@
 /* ****************************************************************************************
  * Using
  */
-using at32f415::core::CoreGeneralPin;
-using at32f415::core::CoreGeneralPort;
+using chip::core::CoreGeneralPin;
+using chip::core::CoreGeneralPort;
 
-using hal::GeneralPin;
-using hal::GeneralPinMode;
+using mframe::hal::GeneralPin;
+using mframe::hal::GeneralPinMode;
 
 /* ****************************************************************************************
  * Construct Method

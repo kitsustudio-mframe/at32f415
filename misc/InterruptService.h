@@ -4,15 +4,15 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_895FED70_2682_4530_9863_24DD063C34C8
-#define AT32F415_895FED70_2682_4530_9863_24DD063C34C8
+#ifndef CHIP_895FED70_2682_4530_9863_24DD063C34C8
+#define CHIP_895FED70_2682_4530_9863_24DD063C34C8
 
 /* ****************************************************************************************
  * Include
  */
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 #include "./../chip_irqn.h"
@@ -20,16 +20,14 @@
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415 {
-  namespace misc {
-    enum struct InterruptService : int;
-  }
-}  // namespace at32f415
+namespace chip::misc {
+  enum struct InterruptService : int;
+}  // namespace chip::misc
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::misc::InterruptService : int {
+enum struct chip::misc::InterruptService : int {
   /******  cortex-m4 processor exceptions numbers ***************************************************/
   Reset = Reset_IRQn,                       /*!< 1 reset vector, invoked on power up and warm reset   */
   NonMaskableInt = NonMaskableInt_IRQn,     /*!< 2 non maskable interrupt                             */
@@ -105,4 +103,4 @@ enum struct at32f415::misc::InterruptService : int {
  * End of file
  */
 
-#endif /* AT32F415_895FED70_2682_4530_9863_24DD063C34C8 */
+#endif /* CHIP_895FED70_2682_4530_9863_24DD063C34C8 */

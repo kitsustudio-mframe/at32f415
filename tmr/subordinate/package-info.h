@@ -1,11 +1,11 @@
 /**
  * Copyright (c) 2020 ZxyKira
  * All rights reserved.
- * 
+ *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_DA48E280_EAD7_4D02_9982_C49CC5CC7895
-#define AT32F415_DA48E280_EAD7_4D02_9982_C49CC5CC7895
+#ifndef CHIP_DA48E280_EAD7_4D02_9982_C49CC5CC7895
+#define CHIP_DA48E280_EAD7_4D02_9982_C49CC5CC7895
 
 /* ****************************************************************************************
  * Include folder
@@ -21,4 +21,4 @@
  * End of file
  */
 
-#endif /* AT32F415_DA48E280_EAD7_4D02_9982_C49CC5CC7895 */
+#endif /* CHIP_DA48E280_EAD7_4D02_9982_C49CC5CC7895 */

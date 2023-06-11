@@ -4,29 +4,27 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_DA922D2F_7BEB_4160_9F37_DC1DCB160DBE
-#define AT32F415_DA922D2F_7BEB_4160_9F37_DC1DCB160DBE
+#ifndef CHIP_DA922D2F_7BEB_4160_9F37_DC1DCB160DBE
+#define CHIP_DA922D2F_7BEB_4160_9F37_DC1DCB160DBE
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::flash {
+namespace chip::flash {
   struct Register;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-struct at32f415::flash::Register {
+struct chip::flash::Register {
   /**
    * @brief flash psr register, offset:0x00
    */
@@ -319,4 +317,4 @@ struct at32f415::flash::Register {
  * End of file
  */
 
-#endif /* AT32F415_DA922D2F_7BEB_4160_9F37_DC1DCB160DBE */
+#endif /* CHIP_DA922D2F_7BEB_4160_9F37_DC1DCB160DBE */

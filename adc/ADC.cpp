@@ -8,13 +8,10 @@
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------------------
 #include "./ADC.h"
 
-#include "./../crm/package-info.h"
+//-----------------------------------------------------------------------------------------
+#include "chip.h"
 
 /* ****************************************************************************************
  * Macro
@@ -31,15 +28,15 @@
 //-----------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------
-using at32f415::adc::ADC;
-using at32f415::adc::Register;
-using at32f415::crm::CRM;
-using at32f415::crm::PeriphReset;
+using chip::adc::ADC;
+using chip::adc::Register;
+using chip::crm::CRM;
+using chip::crm::PeriphReset;
 
 /* ****************************************************************************************
  * Variable <Static>
  */
-Register& at32f415::adc::ADC1 = *reinterpret_cast<Register*>(at32f415::Chip::BASE_ADC1);
+Register& chip::adc::ADC1 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_ADC1);
 
 /* ****************************************************************************************
  * Construct Method
@@ -57,7 +54,7 @@ Register& at32f415::adc::ADC1 = *reinterpret_cast<Register*>(at32f415::Chip::BAS
  *
  */
 void ADC::reset(Register& reg) {
-  if (reinterpret_cast<uint32_t>(&reg) == at32f415::Chip::BASE_ADC1) {
+  if (reinterpret_cast<uint32_t>(&reg) == chip::AT32F415::BASE_ADC1) {
     CRM::periphReset(PeriphReset::RESET_ADC1, true);
     CRM::periphReset(PeriphReset::RESET_ADC1, false);
   }
@@ -168,6 +165,7 @@ void ADC::preemptChannelSet(Register& reg, Channel channel, uint8_t sequence, Sa
     default:
       break;
   }
+
   sequence_index = sequence + 3 - reg.psq_bit.pclen;
   switch (sequence_index) {
     case 1:

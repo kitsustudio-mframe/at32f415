@@ -4,29 +4,29 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_E708045B_10A5_4791_B027_CDA6B47A5A87
-#define AT32F415_E708045B_10A5_4791_B027_CDA6B47A5A87
+#ifndef CHIP_E708045B_10A5_4791_B027_CDA6B47A5A87
+#define CHIP_E708045B_10A5_4791_B027_CDA6B47A5A87
 
 /* ****************************************************************************************
  * Include
  */
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::tmr {
+namespace chip::tmr {
   struct Register;
-}  // namespace at32f415::tmr
+}  // namespace chip::tmr
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-struct at32f415::tmr::Register {
+struct chip::tmr::Register {
   /**
    * @brief tmr ctrl1 register, offset:0x00
    */
@@ -395,4 +395,4 @@ struct at32f415::tmr::Register {
  * End of file
  */
 
-#endif /* AT32F415_E708045B_10A5_4791_B027_CDA6B47A5A87 */
+#endif /* CHIP_E708045B_10A5_4791_B027_CDA6B47A5A87 */

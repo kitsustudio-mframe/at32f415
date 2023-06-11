@@ -8,13 +8,11 @@
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------------------
 #include "./MISC.h"
+//-----------------------------------------------------------------------------------------
 
-#include "./../chip_arm.h"
+#define USING_CHIP_ARM
+#include "chip.h"
 
 /* ****************************************************************************************
  * Macro
@@ -27,7 +25,7 @@
 //-----------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------
-using at32f415::misc::MISC;
+using chip::misc::MISC;
 
 /* ****************************************************************************************
  * Variable <Static>
@@ -101,18 +99,20 @@ void MISC::lowpowerModeConfig(LowPowerMode lp_mode, bool newState) {
   return;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------------------
 void MISC::systickClockSourceConfig(SystickClockSource source) {
-  if (source == SystickClockSource::AHBCLK_NODIV) 
+  if (source == SystickClockSource::AHBCLK_NODIV)
     SysTick->CTRL |= static_cast<uint32_t>(SystickClockSource::AHBCLK_NODIV);
 
-   else 
+  else
     SysTick->CTRL &= ~static_cast<uint32_t>(SystickClockSource::AHBCLK_NODIV);
-  
 }
 
+//-----------------------------------------------------------------------------------------
+void MISC::setInterruptPriority(InterruptService irqn, uint32_t priority){
+  NVIC_SetPriority(static_cast<IRQn_Type>(irqn), priority);
+  return;
+}
 /* ****************************************************************************************
  * Public Method <Override>
  */

@@ -4,33 +4,31 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_8E2A8A98_274D_44DB_A21F_B299615B215B
-#define AT32F415_8E2A8A98_274D_44DB_A21F_B299615B215B
+#ifndef CHIP_8E2A8A98_274D_44DB_A21F_B299615B215B
+#define CHIP_8E2A8A98_274D_44DB_A21F_B299615B215B
 
 /* ****************************************************************************************
  * Include
  */
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
-
-//-----------------------------------------------------------------------------------------
-#include "./../../Chip.h"
-#include "./Key.h"
-#include "./Register.h"
+#include "./../../AT32F415.h"
+#include "./../../flash/usd/Key.h"
+#include "./../../flash/usd/Register.h"
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::flash::usd {
+namespace chip::flash::usd {
   class USD;
   extern Register& USD0;
-}  // namespace at32f415::flash::usd
+}  // namespace chip::flash::usd
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-class at32f415::flash::usd::USD {
+class chip::flash::usd::USD {
   /* **************************************************************************************
    * Variable <Public>
    */
@@ -104,4 +102,4 @@ class at32f415::flash::usd::USD {
  * End of file
  */
 
-#endif /* AT32F415_8E2A8A98_274D_44DB_A21F_B299615B215B */
+#endif /* CHIP_8E2A8A98_274D_44DB_A21F_B299615B215B */

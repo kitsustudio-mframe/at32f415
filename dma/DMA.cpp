@@ -8,11 +8,11 @@
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------------------
 #include "./DMA.h"
+
+//-----------------------------------------------------------------------------------------
+#include "chip.h"
+#include "mframe.h"
 
 /* ****************************************************************************************
  * Macro
@@ -29,30 +29,30 @@
 //-----------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------
-using at32f415::dma::ChannelRegister;
-using at32f415::dma::DMA;
-using at32f415::dma::Register;
+using chip::dma::ChannelRegister;
+using chip::dma::DMA;
+using chip::dma::Register;
 
 /* ****************************************************************************************
  * Variable <Static>
  */
-Register& at32f415::dma::DMA1 = *reinterpret_cast<Register*>(at32f415::Chip::BASE_DMA1);
-ChannelRegister& at32f415::dma::DMA1_CHANNEL1 = *reinterpret_cast<ChannelRegister*>(at32f415::Chip::BASE_DMA1_CHANNEL1);
-ChannelRegister& at32f415::dma::DMA1_CHANNEL2 = *reinterpret_cast<ChannelRegister*>(at32f415::Chip::BASE_DMA1_CHANNEL2);
-ChannelRegister& at32f415::dma::DMA1_CHANNEL3 = *reinterpret_cast<ChannelRegister*>(at32f415::Chip::BASE_DMA1_CHANNEL3);
-ChannelRegister& at32f415::dma::DMA1_CHANNEL4 = *reinterpret_cast<ChannelRegister*>(at32f415::Chip::BASE_DMA1_CHANNEL4);
-ChannelRegister& at32f415::dma::DMA1_CHANNEL5 = *reinterpret_cast<ChannelRegister*>(at32f415::Chip::BASE_DMA1_CHANNEL5);
-ChannelRegister& at32f415::dma::DMA1_CHANNEL6 = *reinterpret_cast<ChannelRegister*>(at32f415::Chip::BASE_DMA1_CHANNEL6);
-ChannelRegister& at32f415::dma::DMA1_CHANNEL7 = *reinterpret_cast<ChannelRegister*>(at32f415::Chip::BASE_DMA1_CHANNEL7);
+Register& chip::dma::DMA1 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_DMA1);
+ChannelRegister& chip::dma::DMA1_CHANNEL1 = *reinterpret_cast<ChannelRegister*>(chip::AT32F415::BASE_DMA1_CHANNEL1);
+ChannelRegister& chip::dma::DMA1_CHANNEL2 = *reinterpret_cast<ChannelRegister*>(chip::AT32F415::BASE_DMA1_CHANNEL2);
+ChannelRegister& chip::dma::DMA1_CHANNEL3 = *reinterpret_cast<ChannelRegister*>(chip::AT32F415::BASE_DMA1_CHANNEL3);
+ChannelRegister& chip::dma::DMA1_CHANNEL4 = *reinterpret_cast<ChannelRegister*>(chip::AT32F415::BASE_DMA1_CHANNEL4);
+ChannelRegister& chip::dma::DMA1_CHANNEL5 = *reinterpret_cast<ChannelRegister*>(chip::AT32F415::BASE_DMA1_CHANNEL5);
+ChannelRegister& chip::dma::DMA1_CHANNEL6 = *reinterpret_cast<ChannelRegister*>(chip::AT32F415::BASE_DMA1_CHANNEL6);
+ChannelRegister& chip::dma::DMA1_CHANNEL7 = *reinterpret_cast<ChannelRegister*>(chip::AT32F415::BASE_DMA1_CHANNEL7);
 
-Register& at32f415::dma::DMA2 = *reinterpret_cast<Register*>(at32f415::Chip::BASE_DMA2);
-ChannelRegister& at32f415::dma::DMA2_CHANNEL1 = *reinterpret_cast<ChannelRegister*>(at32f415::Chip::BASE_DMA2_CHANNEL1);
-ChannelRegister& at32f415::dma::DMA2_CHANNEL2 = *reinterpret_cast<ChannelRegister*>(at32f415::Chip::BASE_DMA2_CHANNEL2);
-ChannelRegister& at32f415::dma::DMA2_CHANNEL3 = *reinterpret_cast<ChannelRegister*>(at32f415::Chip::BASE_DMA2_CHANNEL3);
-ChannelRegister& at32f415::dma::DMA2_CHANNEL4 = *reinterpret_cast<ChannelRegister*>(at32f415::Chip::BASE_DMA2_CHANNEL4);
-ChannelRegister& at32f415::dma::DMA2_CHANNEL5 = *reinterpret_cast<ChannelRegister*>(at32f415::Chip::BASE_DMA2_CHANNEL5);
-ChannelRegister& at32f415::dma::DMA2_CHANNEL6 = *reinterpret_cast<ChannelRegister*>(at32f415::Chip::BASE_DMA2_CHANNEL6);
-ChannelRegister& at32f415::dma::DMA2_CHANNEL7 = *reinterpret_cast<ChannelRegister*>(at32f415::Chip::BASE_DMA2_CHANNEL7);
+Register& chip::dma::DMA2 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_DMA2);
+ChannelRegister& chip::dma::DMA2_CHANNEL1 = *reinterpret_cast<ChannelRegister*>(chip::AT32F415::BASE_DMA2_CHANNEL1);
+ChannelRegister& chip::dma::DMA2_CHANNEL2 = *reinterpret_cast<ChannelRegister*>(chip::AT32F415::BASE_DMA2_CHANNEL2);
+ChannelRegister& chip::dma::DMA2_CHANNEL3 = *reinterpret_cast<ChannelRegister*>(chip::AT32F415::BASE_DMA2_CHANNEL3);
+ChannelRegister& chip::dma::DMA2_CHANNEL4 = *reinterpret_cast<ChannelRegister*>(chip::AT32F415::BASE_DMA2_CHANNEL4);
+ChannelRegister& chip::dma::DMA2_CHANNEL5 = *reinterpret_cast<ChannelRegister*>(chip::AT32F415::BASE_DMA2_CHANNEL5);
+ChannelRegister& chip::dma::DMA2_CHANNEL6 = *reinterpret_cast<ChannelRegister*>(chip::AT32F415::BASE_DMA2_CHANNEL6);
+ChannelRegister& chip::dma::DMA2_CHANNEL7 = *reinterpret_cast<ChannelRegister*>(chip::AT32F415::BASE_DMA2_CHANNEL7);
 /* ****************************************************************************************
  * Construct Method
  */

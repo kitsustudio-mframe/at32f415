@@ -4,29 +4,27 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_F2EEED98_0159_4FDE_B1EC_2B3A67375BC1
-#define AT32F415_F2EEED98_0159_4FDE_B1EC_2B3A67375BC1
+#ifndef CHIP_F2EEED98_0159_4FDE_B1EC_2B3A67375BC1
+#define CHIP_F2EEED98_0159_4FDE_B1EC_2B3A67375BC1
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::adc {
+namespace chip::adc {
   struct Register;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-struct at32f415::adc::Register {
+struct chip::adc::Register {
   /**
    * @brief adc sts register, offset:0x00
    */
@@ -339,4 +337,4 @@ struct at32f415::adc::Register {
  * End of file
  */
 
-#endif /* AT32F415_F2EEED98_0159_4FDE_B1EC_2B3A67375BC1 */
+#endif /* CHIP_F2EEED98_0159_4FDE_B1EC_2B3A67375BC1 */

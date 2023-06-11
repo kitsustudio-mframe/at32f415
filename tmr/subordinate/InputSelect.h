@@ -4,29 +4,29 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_1B5701DC_6FE1_4C03_8AF9_89950AADFBD8
-#define AT32F415_1B5701DC_6FE1_4C03_8AF9_89950AADFBD8
+#ifndef CHIP_1B5701DC_6FE1_4C03_8AF9_89950AADFBD8
+#define CHIP_1B5701DC_6FE1_4C03_8AF9_89950AADFBD8
 
 /* ****************************************************************************************
  * Include
  */
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::tmr::subordinate {
+namespace chip::tmr::subordinate {
   enum struct InputSelect : uint8_t;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::tmr::subordinate::InputSelect : uint8_t {
+enum struct chip::tmr::subordinate::InputSelect : uint8_t {
   IS0 = 0x00,   /*!< subordinate mode input select is0 */
   IS1 = 0x01,   /*!< subordinate mode input select is1 */
   IS2 = 0x02,   /*!< subordinate mode input select is2 */
@@ -41,4 +41,4 @@ enum struct at32f415::tmr::subordinate::InputSelect : uint8_t {
  * End of file
  */
 
-#endif /* AT32F415_1B5701DC_6FE1_4C03_8AF9_89950AADFBD8 */
+#endif /* CHIP_1B5701DC_6FE1_4C03_8AF9_89950AADFBD8 */

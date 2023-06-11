@@ -4,34 +4,32 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_03434AE2_6EA9_4B98_8C25_5E12DC94E3B0
-#define AT32F415_03434AE2_6EA9_4B98_8C25_5E12DC94E3B0
+#ifndef CHIP_03434AE2_6EA9_4B98_8C25_5E12DC94E3B0
+#define CHIP_03434AE2_6EA9_4B98_8C25_5E12DC94E3B0
 
 /* ****************************************************************************************
  * Include
  */
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../exint/package-info.h"
-#include "hal/package-info.h"
-#include "lang/package-info.h"
-//-----------------------------------------------------------------------------------------
+#include "./../exint/EXINT.h"
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::core {
+namespace chip::core {
   class CoreEdgeTrigger;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-class at32f415::core::CoreEdgeTrigger : public lang::Object,
-                                        public hal::trigger::EdgeTrigger,
-                                        public hal::InterruptEvent,
-                                        public hal::trigger::EventFall,
-                                        public hal::trigger::EventRise {
+class chip::core::CoreEdgeTrigger : public mframe::lang::Object,
+                                    public mframe::hal::trigger::EdgeTrigger,
+                                    public mframe::hal::InterruptEvent,
+                                    public mframe::hal::trigger::EventFall,
+                                    public mframe::hal::trigger::EventRise {
   /* **************************************************************************************
    * Variable <Public>
    */
@@ -44,9 +42,9 @@ class at32f415::core::CoreEdgeTrigger : public lang::Object,
    * Variable <Private>
    */
  private:
-  hal::trigger::EventRise* mEventRise;
-  hal::trigger::EventFall* mEventFall;
-  at32f415::exint::Line mLine;
+  mframe::hal::trigger::EventRise* mEventRise;
+  mframe::hal::trigger::EventFall* mEventFall;
+  chip::exint::Line mLine;
   bool mStatusRise;
   bool mStatusFall;
 
@@ -67,7 +65,7 @@ class at32f415::core::CoreEdgeTrigger : public lang::Object,
    *
    * @param line
    */
-  CoreEdgeTrigger(at32f415::exint::Line line);
+  CoreEdgeTrigger(chip::exint::Line line);
 
   /**
    * @brief Destroy the Core Edge Trigger object
@@ -84,7 +82,7 @@ class at32f415::core::CoreEdgeTrigger : public lang::Object,
    */
 
   /* **************************************************************************************
-   * Public Method <Override> - hal::Base
+   * Public Method <Override> - mframe::hal::Base
    */
  public:
   virtual bool deinit(void) override;
@@ -94,7 +92,7 @@ class at32f415::core::CoreEdgeTrigger : public lang::Object,
   virtual bool isInit(void) override;
 
   /* **************************************************************************************
-   * Public Method <Override> - hal::trigger::EdgeTrigger
+   * Public Method <Override> - mframe::hal::trigger::EdgeTrigger
    */
  public:
   virtual void enableAll(bool enable) override;
@@ -103,28 +101,28 @@ class at32f415::core::CoreEdgeTrigger : public lang::Object,
 
   virtual void enableRise(bool enable) override;
 
-  virtual void setEventRise(hal::trigger::EventRise* event) override;
+  virtual void setEventRise(mframe::hal::trigger::EventRise* event) override;
 
-  virtual void setEventFall(hal::trigger::EventFall* event) override;
+  virtual void setEventFall(mframe::hal::trigger::EventFall* event) override;
 
   virtual bool readRise(void) override;
 
   virtual bool readFall(void) override;
 
   /* **************************************************************************************
-   * Public Method <Override> - hal::InterruptEvent
+   * Public Method <Override> - mframe::hal::InterruptEvent
    */
  public:
   virtual void interruptEvent(void) override;
 
   /* **************************************************************************************
-   * Public Method <Override> - hal::trigger::EventFall
+   * Public Method <Override> - mframe::hal::trigger::EventFall
    */
  public:
   virtual void onEdgeTriggerFall(void) override;
 
   /* **************************************************************************************
-   * Public Method <Override> - hal::trigger::EventRise
+   * Public Method <Override> - mframe::hal::trigger::EventRise
    */
  public:
   virtual void onEdgeTriggerRise(void) override;
@@ -162,4 +160,4 @@ class at32f415::core::CoreEdgeTrigger : public lang::Object,
  * End of file
  */
 
-#endif /* AT32F415_03434AE2_6EA9_4B98_8C25_5E12DC94E3B0 */
+#endif /* CHIP_03434AE2_6EA9_4B98_8C25_5E12DC94E3B0 */

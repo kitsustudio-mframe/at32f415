@@ -1,19 +1,17 @@
 /**
  * Copyright (c) 2020 ZxyKira
  * All rights reserved.
- * 
+ *
  * SPDX-License-Identifier: MIT
  */
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------------------
 #include "./GPIO.h"
-#include "./../crm/package-info.h"
+
+//-----------------------------------------------------------------------------------------
+#include "chip.h"
 
 /* ****************************************************************************************
  * Macro
@@ -22,23 +20,30 @@
 /* ****************************************************************************************
  * Using
  */
+using chip::gpio::GPIO;
 
 //-----------------------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------------------
-using at32f415::gpio::GPIO;
-using at32f415::gpio::Register;
-using at32f415::crm::CRM;
-using at32f415::crm::PeriphReset;
+using chip::AT32F415;
+using chip::crm::CRM;
+using chip::crm::PeriphReset;
+using chip::gpio::DriveMode;
+using chip::gpio::Mode;
+using chip::gpio::OutputMode;
+using chip::gpio::PinConfig;
+using chip::gpio::Pins;
+using chip::gpio::PinsSource;
+using chip::gpio::PortSource;
+using chip::gpio::PullMode;
+using chip::gpio::Register;
 
 /* ****************************************************************************************
  * Variable <Static>
  */
-Register& at32f415::gpio::GPIOA = *reinterpret_cast<Register*>(at32f415::Chip::BASE_GPIOA);
-Register& at32f415::gpio::GPIOB = *reinterpret_cast<Register*>(at32f415::Chip::BASE_GPIOB);
-Register& at32f415::gpio::GPIOC = *reinterpret_cast<Register*>(at32f415::Chip::BASE_GPIOC);
-Register& at32f415::gpio::GPIOD = *reinterpret_cast<Register*>(at32f415::Chip::BASE_GPIOD);
-Register& at32f415::gpio::GPIOF = *reinterpret_cast<Register*>(at32f415::Chip::BASE_GPIOF);
+Register& chip::gpio::GPIOA = *reinterpret_cast<Register*>(AT32F415::BASE_GPIOA);
+Register& chip::gpio::GPIOB = *reinterpret_cast<Register*>(AT32F415::BASE_GPIOB);
+Register& chip::gpio::GPIOC = *reinterpret_cast<Register*>(AT32F415::BASE_GPIOC);
+Register& chip::gpio::GPIOD = *reinterpret_cast<Register*>(AT32F415::BASE_GPIOD);
+Register& chip::gpio::GPIOF = *reinterpret_cast<Register*>(AT32F415::BASE_GPIOF);
 /* ****************************************************************************************
  * Construct Method
  */
@@ -52,41 +57,38 @@ Register& at32f415::gpio::GPIOF = *reinterpret_cast<Register*>(at32f415::Chip::B
  */
 
 /** ---------------------------------------------------------------------------------------
- *  
+ *
  */
-void GPIO::reset(Register& reg){
+void GPIO::reset(Register& reg) {
   uint32_t base = reinterpret_cast<uint32_t>(&reg);
 
-  if(base == Chip::BASE_GPIOA){
+  if (base == AT32F415::BASE_GPIOA) {
     CRM::periphReset(PeriphReset::RESET_GPIOA, true);
     CRM::periphReset(PeriphReset::RESET_GPIOA, false);
 
-  }else if(base == Chip::BASE_GPIOB){
+  } else if (base == AT32F415::BASE_GPIOB) {
     CRM::periphReset(PeriphReset::RESET_GPIOB, true);
     CRM::periphReset(PeriphReset::RESET_GPIOB, false);
 
-  }else if(base == Chip::BASE_GPIOC){
+  } else if (base == AT32F415::BASE_GPIOC) {
     CRM::periphReset(PeriphReset::RESET_GPIOC, true);
     CRM::periphReset(PeriphReset::RESET_GPIOC, false);
 
-  }else if(base == Chip::BASE_GPIOD){
+  } else if (base == AT32F415::BASE_GPIOD) {
     CRM::periphReset(PeriphReset::RESET_GPIOD, true);
     CRM::periphReset(PeriphReset::RESET_GPIOD, false);
 
-  }else if(base == Chip::BASE_GPIOF){
+  } else if (base == AT32F415::BASE_GPIOF) {
     CRM::periphReset(PeriphReset::RESET_GPIOF, true);
     CRM::periphReset(PeriphReset::RESET_GPIOF, false);
-
   }
 }
 
-
-
 /** ---------------------------------------------------------------------------------------
- *  
+ *
  */
-void GPIO::init(Register& reg, PinConfig& pinConfig){
-uint32_t temp;
+void GPIO::init(Register& reg, PinConfig& pinConfig) {
+  uint32_t temp;
   uint16_t pinx_value, pin_index;
 
   pin_index = static_cast<uint16_t>(pinConfig.pins);
@@ -94,32 +96,25 @@ uint32_t temp;
   /* pinx_value indecate pin grounp bit[3:0] from modey[1:0] confy[1:0] */
 
   /* pin input analog config */
-  if(pinConfig.mode == Mode::ANALOG){
+  if (pinConfig.mode == Mode::ANALOG) {
     pinx_value = 0x00;
-  }else if(pinConfig.mode == Mode::INPUT){ /* pin input config */
+  } else if (pinConfig.mode == Mode::INPUT) { /* pin input config */
     pinx_value = static_cast<uint8_t>(pinConfig.pullMode) & 0x0F;
 
-    if(pinConfig.pullMode == PullMode::PULL_UP)
-    {
+    if (pinConfig.pullMode == PullMode::PULL_UP) {
       reg.scr = pin_index;
-    }
-    else if(pinConfig.pullMode == PullMode::PULL_DOWN)
-    {
+    } else if (pinConfig.pullMode == PullMode::PULL_DOWN) {
       reg.clr = pin_index;
     }
-  }
-  else{
-    pinx_value = (static_cast<uint8_t>(pinConfig.mode) & 0x08) | (static_cast<uint8_t>(pinConfig.outputMode) & 0x04) | \
+  } else {
+    pinx_value = (static_cast<uint8_t>(pinConfig.mode) & 0x08) | (static_cast<uint8_t>(pinConfig.outputMode) & 0x04) |
                  (static_cast<uint8_t>(pinConfig.driveMode) & 0x03);
   }
 
   /* pin 0~7 config */
-  if((static_cast<uint32_t>(pin_index) & (static_cast<uint32_t>(0x00FF))) != 0x00)
-  {
-    for(temp = 0; temp < 0x08; temp++)
-    {
-      if((1 << temp) & pin_index)
-      {
+  if ((static_cast<uint32_t>(pin_index) & (static_cast<uint32_t>(0x00FF))) != 0x00) {
+    for (temp = 0; temp < 0x08; temp++) {
+      if ((1 << temp) & pin_index) {
         reg.cfglr &= static_cast<uint32_t>(~(0x0F << (temp * 4)));
         reg.cfglr |= static_cast<uint32_t>((pinx_value << (temp * 4)));
       }
@@ -127,14 +122,11 @@ uint32_t temp;
   }
 
   /* pin 8~15 config */
-  if(pin_index > 0x00ff)
-  {
+  if (pin_index > 0x00ff) {
     pin_index = pin_index >> 8;
 
-    for(temp = 0; temp < 0x8; temp++)
-    {
-      if((1 << temp) & pin_index)
-      {
+    for (temp = 0; temp < 0x8; temp++) {
+      if ((1 << temp) & pin_index) {
         reg.cfghr &= static_cast<uint32_t>(~(0xf << (temp * 4)));
         reg.cfghr |= static_cast<uint32_t>(pinx_value << (temp * 4));
       }
@@ -143,9 +135,9 @@ uint32_t temp;
 }
 
 /** ---------------------------------------------------------------------------------------
- *  
+ *
  */
-void GPIO::defaultParaInit(PinConfig& pinConfig){
+void GPIO::defaultParaInit(PinConfig& pinConfig) {
   /* reset gpio init structure parameters values */
   pinConfig.pins = static_cast<uint32_t>(Pins::ALL);
   pinConfig.mode = Mode::INPUT;
@@ -155,9 +147,9 @@ void GPIO::defaultParaInit(PinConfig& pinConfig){
 }
 
 /** ---------------------------------------------------------------------------------------
- *  
+ *
  */
-void GPIO::pinWpConfig(Register& reg, Pins pins){
+void GPIO::pinWpConfig(Register& reg, Pins pins) {
   uint32_t temp = 0x00010000;
 
   temp |= static_cast<uint32_t>(pins);

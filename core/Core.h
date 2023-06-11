@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2020 ZxyKira
  * All rights reserved.
- * 
+ *
  * SPDX-License-Identifier: MIT
  */
 
@@ -10,27 +10,26 @@
 
 /* ****************************************************************************************
  * Include
- */  
-#include "lang/package-info.h" 
-#include "hal/package-info.h" 
+ */
+#include "mframe.h"
 
-#include "./CoreIomux.h"
-#include "./CoreGeneralPort.h"
-#include "./CoreInterrupt.h"
+//-----------------------------------------------------------------------------------------
+#include "./../core/CoreGeneralPort.h"
+#include "./../core/CoreInterrupt.h"
+#include "./../core/CoreIomux.h"
 
 /* ****************************************************************************************
  * Namespace
- */  
+ */
 
-namespace at32f415::core{
+namespace chip::core {
   class Core;
 }
 
 /* ****************************************************************************************
  * Class Object
- */  
-class at32f415::core::Core :public lang::Object{
-
+ */
+class chip::core::Core : public mframe::lang::Object {
   /* **************************************************************************************
    * Subclass
    */
@@ -38,15 +37,15 @@ class at32f415::core::Core :public lang::Object{
   /* **************************************************************************************
    * Variable <Public>
    */
-  public: 
-    static core::CoreInterrupt interrupt;
-    static core::CoreIomux iomux;
-    static core::CoreGeneralPort gpioa;
-    static core::CoreGeneralPort gpiob;
-    static core::CoreGeneralPort gpioc;
-    static core::CoreGeneralPort gpiod;
-    static core::CoreGeneralPort gpiof;
-    
+ public:
+  static core::CoreInterrupt interrupt;
+  static core::CoreIomux iomux;
+  static core::CoreGeneralPort gpioa;
+  static core::CoreGeneralPort gpiob;
+  static core::CoreGeneralPort gpioc;
+  static core::CoreGeneralPort gpiod;
+  static core::CoreGeneralPort gpiof;
+
   /* **************************************************************************************
    * Variable <Protected>
    */
@@ -66,16 +65,16 @@ class at32f415::core::Core :public lang::Object{
   /* **************************************************************************************
    * Construct Method
    */
-  private:
-    /**
-     * 
-     */
-    Core(void);
+ private:
+  /**
+   *
+   */
+  Core(void);
 
-    /**
-     * 
-     */
-    virtual ~Core(void) override;
+  /**
+   *
+   */
+  virtual ~Core(void) override;
 
   /* **************************************************************************************
    * Operator Method
@@ -84,17 +83,18 @@ class at32f415::core::Core :public lang::Object{
   /* **************************************************************************************
    * Public Method <Static>
    */
-  
+
   /**
    *
    */
-  public: static uint32_t getSystemCoreClock(void);
-  
+ public:
+  static uint32_t getSystemCoreClock(void);
+
   /**
    *
    */
-  public: static bool setSystemCoreClock(uint32_t mhz);
-  
+ public:
+  static bool setSystemCoreClock(uint32_t mhz);
 
   /* **************************************************************************************
    * Public Method <Override>
@@ -123,16 +123,14 @@ class at32f415::core::Core :public lang::Object{
   /* **************************************************************************************
    * Private Method <Override>
    */
-   
+
   /* **************************************************************************************
    * Private Method
-   */  
-
+   */
 };
-
 
 /* *****************************************************************************************
  * End of file
- */ 
+ */
 
-#endif/* CORE_B783141D_7465_4A74_900D_2B6244C11E04 */
+#endif /* CORE_B783141D_7465_4A74_900D_2B6244C11E04 */

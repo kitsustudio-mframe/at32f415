@@ -4,29 +4,27 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_F464D371_68CB_46D5_8719_AF6A6CF427D6
-#define AT32F415_F464D371_68CB_46D5_8719_AF6A6CF427D6
+#ifndef CHIP_F464D371_68CB_46D5_8719_AF6A6CF427D6
+#define CHIP_F464D371_68CB_46D5_8719_AF6A6CF427D6
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::dma {
+namespace chip::dma {
   struct ChannelRegister;
-}  // namespace at32f415::dma
+}  // namespace chip::dma
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-struct at32f415::dma::ChannelRegister {
+struct chip::dma::ChannelRegister {
   /**
    * @brief dma ctrl register, offset:0x08+20*(x-1) x=1...7
    */
@@ -89,4 +87,4 @@ struct at32f415::dma::ChannelRegister {
  * End of file
  */
 
-#endif /* AT32F415_F464D371_68CB_46D5_8719_AF6A6CF427D6 */
+#endif /* CHIP_F464D371_68CB_46D5_8719_AF6A6CF427D6 */

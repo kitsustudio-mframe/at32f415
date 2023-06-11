@@ -1,38 +1,33 @@
 /**
  * Copyright (c) 2020 ZxyKira
  * All rights reserved.
- * 
+ *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_D2E76734_8568_4D65_951F_2DB411686FD2
-#define AT32F415_D2E76734_8568_4D65_951F_2DB411686FD2
+#ifndef CHIP_D2E76734_8568_4D65_951F_2DB411686FD2
+#define CHIP_D2E76734_8568_4D65_951F_2DB411686FD2
 
 /* ****************************************************************************************
  * Include
  */
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
-
-//-----------------------------------------------------------------------------------------
-#include "./Line.h"
-#include "./Mode.h"
-#include "./Polarity.h"
+#include "./../exint/Line.h"
+#include "./../exint/Mode.h"
+#include "./../exint/Polarity.h"
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415{
-  namespace exint{
-    struct Config;
-  }
-}
-
+namespace chip::exint {
+  struct Config;
+}  // namespace chip::exint
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-struct at32f415::exint::Config{
+struct chip::exint::Config {
   Line line;
   Mode mode;
   Polarity polarity;
@@ -43,4 +38,4 @@ struct at32f415::exint::Config{
  * End of file
  */
 
-#endif /* AT32F415_D2E76734_8568_4D65_951F_2DB411686FD2 */
+#endif /* CHIP_D2E76734_8568_4D65_951F_2DB411686FD2 */

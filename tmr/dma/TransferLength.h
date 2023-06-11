@@ -4,29 +4,29 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_41873779_7F02_4B18_A11C_DAAAE774C530
-#define AT32F415_41873779_7F02_4B18_A11C_DAAAE774C530
+#ifndef CHIP_41873779_7F02_4B18_A11C_DAAAE774C530
+#define CHIP_41873779_7F02_4B18_A11C_DAAAE774C530
 
 /* ****************************************************************************************
  * Include
  */
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::tmr::dma {
+namespace chip::tmr::dma {
   enum struct TransferLength : uint8_t;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::tmr::dma::TransferLength : uint8_t {
+enum struct chip::tmr::dma::TransferLength : uint8_t {
   TRANSFER_1BYTE = 0x00,   /**< tmr dma transfer length 1 byte */
   TRANSFER_2BYTES = 0x01,  /**< tmr dma transfer length 2 bytes */
   TRANSFER_3BYTES = 0x02,  /**< tmr dma transfer length 3 bytes */
@@ -51,4 +51,4 @@ enum struct at32f415::tmr::dma::TransferLength : uint8_t {
  * End of file
  */
 
-#endif /* AT32F415_41873779_7F02_4B18_A11C_DAAAE774C530 */
+#endif /* CHIP_41873779_7F02_4B18_A11C_DAAAE774C530 */

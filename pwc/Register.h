@@ -4,29 +4,29 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_06245A34_8EE0_4CD1_B02E_6E6E21FCF380
-#define AT32F415_06245A34_8EE0_4CD1_B02E_6E6E21FCF380
+#ifndef CHIP_06245A34_8EE0_4CD1_B02E_6E6E21FCF380
+#define CHIP_06245A34_8EE0_4CD1_B02E_6E6E21FCF380
 
 /* ****************************************************************************************
  * Include
  */
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::pwc {
+namespace chip::pwc {
   struct Register;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-struct at32f415::pwc::Register {
+struct chip::pwc::Register {
   /**
    * @brief pwc ctrl register, offset:0x00
    */
@@ -66,4 +66,4 @@ struct at32f415::pwc::Register {
  * End of file
  */
 
-#endif /* AT32F415_06245A34_8EE0_4CD1_B02E_6E6E21FCF380 */
+#endif /* CHIP_06245A34_8EE0_4CD1_B02E_6E6E21FCF380 */

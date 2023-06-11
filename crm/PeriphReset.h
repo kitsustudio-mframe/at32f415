@@ -4,30 +4,29 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_6ABEDCA8_70D3_4EDF_8FA3_9EED1BB3001C
-#define AT32F415_6ABEDCA8_70D3_4EDF_8FA3_9EED1BB3001C
+#ifndef CHIP_6ABEDCA8_70D3_4EDF_8FA3_9EED1BB3001C
+#define CHIP_6ABEDCA8_70D3_4EDF_8FA3_9EED1BB3001C
 
 #define ENUM_MAKE_VALUE(reg_offset, bit_num) static_cast<uint32_t>(((reg_offset) << 16) | (bit_num & 0x1F))
 
 /* ****************************************************************************************
  * Include
  */
+#include "mframe.h"
 
-//-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415 ::crm {
+namespace chip ::crm {
   enum struct PeriphReset : uint32_t;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::crm::PeriphReset : uint32_t {
+enum struct chip::crm::PeriphReset : uint32_t {
   RESET_OTGFS1 = ENUM_MAKE_VALUE(0x28, 12), /*!< otgfs1 periph reset */
   RESET_IOMUX = ENUM_MAKE_VALUE(0x0C, 0),   /*!< iomux periph reset */
   RESET_EXINT = ENUM_MAKE_VALUE(0x0C, 1),   /*!< exint periph reset */
@@ -57,7 +56,7 @@ enum struct at32f415::crm::PeriphReset : uint32_t {
   RESET_I2C1 = ENUM_MAKE_VALUE(0x10, 21),   /*!< i2c1 periph reset */
   RESET_I2C2 = ENUM_MAKE_VALUE(0x10, 22),   /*!< i2c2 periph reset */
   RESET_CAN1 = ENUM_MAKE_VALUE(0x10, 25),   /*!< can1 periph reset */
-  RESET_PWC = ENUM_MAKE_VALUE(0x10, 28)    /*!< pwc periph reset */
+  RESET_PWC = ENUM_MAKE_VALUE(0x10, 28)     /*!< pwc periph reset */
 };
 
 #undef ENUM_MAKE_VALUE
@@ -66,4 +65,4 @@ enum struct at32f415::crm::PeriphReset : uint32_t {
  * End of file
  */
 
-#endif /* AT32F415_6ABEDCA8_70D3_4EDF_8FA3_9EED1BB3001C */
+#endif /* CHIP_6ABEDCA8_70D3_4EDF_8FA3_9EED1BB3001C */

@@ -4,29 +4,29 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_2A0293E8_2933_45E8_A8BA_1BE822371639
-#define AT32F415_2A0293E8_2933_45E8_A8BA_1BE822371639
+#ifndef CHIP_2A0293E8_2933_45E8_A8BA_1BE822371639
+#define CHIP_2A0293E8_2933_45E8_A8BA_1BE822371639
 
 /* ****************************************************************************************
  * Include
  */
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::tmr {
+namespace chip::tmr {
   enum struct CountMode : uint8_t;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::tmr::CountMode : uint8_t {
+enum struct chip::tmr::CountMode : uint8_t {
   UP = 0x00,        /*!< tmr counter mode up */
   DOWN = 0x01,      /*!< tmr counter mode down */
   TWO_WAY_1 = 0x02, /*!< tmr counter mode two way 1 */
@@ -38,4 +38,4 @@ enum struct at32f415::tmr::CountMode : uint8_t {
  * End of file
  */
 
-#endif /* AT32F415_2A0293E8_2933_45E8_A8BA_1BE822371639 */
+#endif /* CHIP_2A0293E8_2933_45E8_A8BA_1BE822371639 */

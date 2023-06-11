@@ -4,29 +4,27 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_E43AF8A4_08D8_4341_B4A3_AA356FBB81A8
-#define AT32F415_E43AF8A4_08D8_4341_B4A3_AA356FBB81A8
+#ifndef CHIP_E43AF8A4_08D8_4341_B4A3_AA356FBB81A8
+#define CHIP_E43AF8A4_08D8_4341_B4A3_AA356FBB81A8
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::adc {
+namespace chip::adc {
   enum struct DataAlign : uint8_t;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::adc::DataAlign : uint8_t {
+enum struct chip::adc::DataAlign : uint8_t {
   RIGHT = 0x00, /**< data right alignment */
   LEFT = 0x01   /**< data left alignment  */
 };
@@ -35,4 +33,4 @@ enum struct at32f415::adc::DataAlign : uint8_t {
  * End of file
  */
 
-#endif /* AT32F415_E43AF8A4_08D8_4341_B4A3_AA356FBB81A8 */
+#endif /* CHIP_E43AF8A4_08D8_4341_B4A3_AA356FBB81A8 */

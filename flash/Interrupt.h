@@ -4,43 +4,34 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_CAEF0E6F_94B5_4E6C_892F_A651AF251462
-#define AT32F415_CAEF0E6F_94B5_4E6C_892F_A651AF251462
+#ifndef CHIP_CAEF0E6F_94B5_4E6C_892F_A651AF251462
+#define CHIP_CAEF0E6F_94B5_4E6C_892F_A651AF251462
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::flash {
+namespace chip::flash {
   enum struct Interrupt : uint32_t;
-
-  static inline Interrupt operator|(const Interrupt a, const Interrupt b){
-    return static_cast<Interrupt>((static_cast<uint32_t>(a) | static_cast<uint32_t>(b)));
-  }
-
-  static inline Interrupt operator&(const Interrupt a, const Interrupt b){
-    return static_cast<Interrupt>((static_cast<uint32_t>(a) & static_cast<uint32_t>(b)));
-  }
-}
+  enum_auto_operator(Interrupt, uint32_t)
+}  // namespace chip::flash
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::flash::Interrupt : uint32_t {
+enum struct chip::flash::Interrupt : uint32_t {
   ERR = 0x00000001, /*!< flash error interrupt */
-  ODF = 0x00000002 /*!< flash operate done interrupt */
+  ODF = 0x00000002  /*!< flash operate done interrupt */
 };
 
 /* ****************************************************************************************
  * End of file
  */
 
-#endif /* AT32F415_CAEF0E6F_94B5_4E6C_892F_A651AF251462 */
+#endif /* CHIP_CAEF0E6F_94B5_4E6C_892F_A651AF251462 */

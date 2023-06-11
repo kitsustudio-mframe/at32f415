@@ -4,36 +4,34 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_49023B13_D982_482E_84C3_8DAD8B6AA9EA
-#define AT32F415_49023B13_D982_482E_84C3_8DAD8B6AA9EA
+#ifndef CHIP_49023B13_D982_482E_84C3_8DAD8B6AA9EA
+#define CHIP_49023B13_D982_482E_84C3_8DAD8B6AA9EA
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::dma {
+namespace chip::dma {
   struct Register;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-struct at32f415::dma::Register {
+struct chip::dma::Register {
   /**
    * @brief dma sts register, offset:0x00
    */
   union {
     volatile uint32_t sts;
 
-    struct    {
+    struct {
       volatile uint32_t gf1 : 1;       /* [0] */
       volatile uint32_t fdtf1 : 1;     /* [1] */
       volatile uint32_t hdtf1 : 1;     /* [2] */
@@ -72,7 +70,7 @@ struct at32f415::dma::Register {
   union {
     volatile uint32_t clr;
 
-    struct{
+    struct {
       volatile uint32_t gfc1 : 1;      /* [0] */
       volatile uint32_t fdtfc1 : 1;    /* [1] */
       volatile uint32_t hdtfc1 : 1;    /* [2] */
@@ -114,7 +112,7 @@ struct at32f415::dma::Register {
   union {
     volatile uint32_t src_sel0;
 
-    struct    {
+    struct {
       volatile uint32_t ch1_src : 8; /* [7:0] */
       volatile uint32_t ch2_src : 8; /* [15:8] */
       volatile uint32_t ch3_src : 8; /* [23:16] */
@@ -127,8 +125,8 @@ struct at32f415::dma::Register {
    */
   union {
     volatile uint32_t src_sel1;
-    
-    struct    {
+
+    struct {
       volatile uint32_t ch5_src : 8;     /* [7:0] */
       volatile uint32_t ch6_src : 8;     /* [15:8] */
       volatile uint32_t ch7_src : 8;     /* [23:16] */
@@ -142,4 +140,4 @@ struct at32f415::dma::Register {
  * End of file
  */
 
-#endif /* AT32F415_49023B13_D982_482E_84C3_8DAD8B6AA9EA */
+#endif /* CHIP_49023B13_D982_482E_84C3_8DAD8B6AA9EA */

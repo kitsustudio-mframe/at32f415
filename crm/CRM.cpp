@@ -8,11 +8,9 @@
 /* ****************************************************************************************
  * Include
  */
+#include "./CRM.h"
 
 //-----------------------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------------------
-#include "at32f415/crm/CRM.h"
 
 /* ****************************************************************************************
  * Macro
@@ -27,23 +25,21 @@
 #define PERIPH_REG(periph_base, value) REG32((periph_base + (value >> 16)))
 #define PERIPH_REG_BIT(value) (0x1U << (value & 0x1F))
 
-#define CRM_REG(value) PERIPH_REG(Chip::BASE_CRM, value)
+#define CRM_REG(value) PERIPH_REG(AT32F415::BASE_CRM, value)
 #define CRM_REG_BIT(value) PERIPH_REG_BIT(value)
 
 /* ****************************************************************************************
  * Using
  */
+using chip::crm::CRM;
 
 //-----------------------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------------------
-using at32f415::crm::CRM;
-using at32f415::crm::Register;
+using chip::crm::Register;
 
 /* ****************************************************************************************
  * Variable <Static>
  */
-Register& at32f415::crm::CRM0 = *reinterpret_cast<Register*>(at32f415::Chip::BASE_CRM);
+Register& chip::crm::CRM0 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_CRM);
 
 /* ****************************************************************************************
  * Construct Method

@@ -4,18 +4,18 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_22D1950D_0E59_4772_9CB3_21586637F24F
-#define AT32F415_22D1950D_0E59_4772_9CB3_21586637F24F
+#ifndef CHIP_22D1950D_0E59_4772_9CB3_21586637F24F
+#define CHIP_22D1950D_0E59_4772_9CB3_21586637F24F
 
 /* ****************************************************************************************
  * Include
  */
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../Chip.h"
+#include "./../AT32F415.h"
 #include "./BreakDutyConfig.h"
 #include "./BreakPolarity.h"
 #include "./ClockDivision.h"
@@ -38,7 +38,7 @@
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::tmr {
+namespace chip::tmr {
   class TMR;
   extern Register& TMR1;
   extern Register& TMR2;
@@ -48,12 +48,12 @@ namespace at32f415::tmr {
   extern Register& TMR9;
   extern Register& TMR10;
   extern Register& TMR11;
-}  // namespace at32f415::tmr
+}  // namespace chip::tmr
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-class at32f415::tmr::TMR {
+class chip::tmr::TMR {
   /* **************************************************************************************
    * Variable <Public>
    */
@@ -1054,4 +1054,4 @@ class at32f415::tmr::TMR {
  * End of file
  */
 
-#endif /* AT32F415_22D1950D_0E59_4772_9CB3_21586637F24F */
+#endif /* CHIP_22D1950D_0E59_4772_9CB3_21586637F24F */

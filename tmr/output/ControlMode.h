@@ -4,29 +4,29 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_9777FF87_DD0B_49AD_86E1_7C26D8D2C829
-#define AT32F415_9777FF87_DD0B_49AD_86E1_7C26D8D2C829
+#ifndef CHIP_9777FF87_DD0B_49AD_86E1_7C26D8D2C829
+#define CHIP_9777FF87_DD0B_49AD_86E1_7C26D8D2C829
 
 /* ****************************************************************************************
  * Include
  */
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::tmr::output {
+namespace chip::tmr::output {
   enum struct ControlMode : uint8_t;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::tmr::output::ControlMode : uint8_t {
+enum struct chip::tmr::output::ControlMode : uint8_t {
   OFF = 0x00,        /*!< tmr output control mode off */
   HIGH = 0x01,       /*!< tmr output control mode high */
   LOW = 0x02,        /*!< tmr output control mode low */
@@ -41,4 +41,4 @@ enum struct at32f415::tmr::output::ControlMode : uint8_t {
  * End of file
  */
 
-#endif /* AT32F415_9777FF87_DD0B_49AD_86E1_7C26D8D2C829 */
+#endif /* CHIP_9777FF87_DD0B_49AD_86E1_7C26D8D2C829 */

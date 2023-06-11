@@ -8,95 +8,92 @@
 /* ****************************************************************************************
  * Include
  */
+#include "./CoreTimer.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../crm/package-info.h"
-
-//-----------------------------------------------------------------------------------------
-#include "./../Chip.h"
-#include "./Core.h"
-#include "at32f415/core/CoreTimer.h"
+#include "chip.h"
+#include "mframe.h"
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::core {
-  static at32f415::crm::PeriphClock getPeriphClock(at32f415::tmr::Register& reg) {
+namespace chip::core {
+  static chip::crm::PeriphClock getPeriphClock(chip::tmr::Register& reg) {
     switch (reinterpret_cast<uint32_t>(&reg)) {
       //------------------------------------------
-      case Chip::BASE_TMR1:
-        return at32f415::crm::PeriphClock::TMR1;
+      case chip::AT32F415::BASE_TMR1:
+        return chip::crm::PeriphClock::TMR1;
 
       //------------------------------------------
-      case Chip::BASE_TMR2:
-        return at32f415::crm::PeriphClock::TMR2;
+      case chip::AT32F415::BASE_TMR2:
+        return chip::crm::PeriphClock::TMR2;
 
       //------------------------------------------
-      case Chip::BASE_TMR3:
-        return at32f415::crm::PeriphClock::TMR3;
+      case chip::AT32F415::BASE_TMR3:
+        return chip::crm::PeriphClock::TMR3;
 
       //------------------------------------------
-      case Chip::BASE_TMR4:
-        return at32f415::crm::PeriphClock::TMR4;
+      case chip::AT32F415::BASE_TMR4:
+        return chip::crm::PeriphClock::TMR4;
 
       //------------------------------------------
-      case Chip::BASE_TMR5:
-        return at32f415::crm::PeriphClock::TMR5;
+      case chip::AT32F415::BASE_TMR5:
+        return chip::crm::PeriphClock::TMR5;
 
       //------------------------------------------
-      case Chip::BASE_TMR9:
-        return at32f415::crm::PeriphClock::TMR9;
+      case chip::AT32F415::BASE_TMR9:
+        return chip::crm::PeriphClock::TMR9;
 
       //------------------------------------------
-      case Chip::BASE_TMR10:
-        return at32f415::crm::PeriphClock::TMR10;
+      case chip::AT32F415::BASE_TMR10:
+        return chip::crm::PeriphClock::TMR10;
 
       //------------------------------------------
-      case Chip::BASE_TMR11:
-        return at32f415::crm::PeriphClock::TMR11;
+      case chip::AT32F415::BASE_TMR11:
+        return chip::crm::PeriphClock::TMR11;
     }
 
-    return at32f415::crm::PeriphClock::NONE;
+    return chip::crm::PeriphClock::NONE;
   }
 
-  static at32f415::core::CoreInterrupt::Irq getInterruptService(at32f415::tmr::Register& reg) {
+  static chip::core::CoreInterrupt::Irq getInterruptService(chip::tmr::Register& reg) {
     switch (reinterpret_cast<uint32_t>(&reg)) {
       //------------------------------------------
-      case Chip::BASE_TMR1:
-        return at32f415::core::CoreInterrupt::IRQ_TMR1;
+      case chip::AT32F415::BASE_TMR1:
+        return chip::core::CoreInterrupt::IRQ_TMR1;
 
       //------------------------------------------
-      case Chip::BASE_TMR2:
-        return at32f415::core::CoreInterrupt::IRQ_TMR2;
+      case chip::AT32F415::BASE_TMR2:
+        return chip::core::CoreInterrupt::IRQ_TMR2;
 
       //------------------------------------------
-      case Chip::BASE_TMR3:
-        return at32f415::core::CoreInterrupt::IRQ_TMR3;
+      case chip::AT32F415::BASE_TMR3:
+        return chip::core::CoreInterrupt::IRQ_TMR3;
 
       //------------------------------------------
-      case Chip::BASE_TMR4:
-        return at32f415::core::CoreInterrupt::IRQ_TMR4;
+      case chip::AT32F415::BASE_TMR4:
+        return chip::core::CoreInterrupt::IRQ_TMR4;
 
       //------------------------------------------
-      case Chip::BASE_TMR5:
-        return at32f415::core::CoreInterrupt::IRQ_TMR5;
+      case chip::AT32F415::BASE_TMR5:
+        return chip::core::CoreInterrupt::IRQ_TMR5;
 
       //------------------------------------------
-      case Chip::BASE_TMR9:
-        return at32f415::core::CoreInterrupt::IRQ_TMR9;
+      case chip::AT32F415::BASE_TMR9:
+        return chip::core::CoreInterrupt::IRQ_TMR9;
 
       //------------------------------------------
-      case Chip::BASE_TMR10:
-        return at32f415::core::CoreInterrupt::IRQ_TMR10;
+      case chip::AT32F415::BASE_TMR10:
+        return chip::core::CoreInterrupt::IRQ_TMR10;
 
       //------------------------------------------
-      case Chip::BASE_TMR11:
-        return at32f415::core::CoreInterrupt::IRQ_TMR11;
+      case chip::AT32F415::BASE_TMR11:
+        return chip::core::CoreInterrupt::IRQ_TMR11;
     }
 
-    return at32f415::core::CoreInterrupt::IRQ_MAX_QUANTITY;
+    return chip::core::CoreInterrupt::IRQ_MAX_QUANTITY;
   }
-}  // namespace at32f415::core
+}  // namespace chip::core
 
 /* ****************************************************************************************
  * Macro
@@ -109,9 +106,9 @@ namespace at32f415::core {
 //-----------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------
-using at32f415::core::CoreTimer;
-using at32f415::crm::CRM;
-using at32f415::tmr::TMR;
+using chip::core::CoreTimer;
+using chip::crm::CRM;
+using chip::tmr::TMR;
 
 /* ****************************************************************************************
  * Variable <Static>
@@ -121,7 +118,7 @@ using at32f415::tmr::TMR;
  * Construct Method
  */
 //-----------------------------------------------------------------------------------------
-CoreTimer::CoreTimer(at32f415::tmr::Register& reg) : mReg(reg) {
+CoreTimer::CoreTimer(chip::tmr::Register& reg) : mReg(reg) {
   this->mEventCancel = this;
   this->mEventTrigger = this;
   return;
@@ -144,7 +141,7 @@ CoreTimer::~CoreTimer(void) {
  * Public Method <Static>
  */
 /* ****************************************************************************************
- * Public Method <Override> - hal::Base
+ * Public Method <Override> - mframe::hal::Base
  */
 
 //-----------------------------------------------------------------------------------------
@@ -173,13 +170,13 @@ bool CoreTimer::isInit(void) {
 }
 
 /* ****************************************************************************************
- * Public Method <Override> - hal::timer::Timer
+ * Public Method <Override> - mframe::hal::timer::Timer
  */
 
 //-----------------------------------------------------------------------------------------
 void CoreTimer::cancel(void) {
   Core::interrupt.irqEnable(getInterruptService(this->mReg), false);
-  TMR::interruptEnable(this->mReg, at32f415::tmr::Interrupt::OVF, false);
+  TMR::interruptEnable(this->mReg, chip::tmr::Interrupt::OVF, false);
   this->mEventCancel->onTimerCancel();
   return;
 }
@@ -218,8 +215,8 @@ bool CoreTimer::startAtTick(uint32_t tick) {
 
   this->resetTick(tick);
 
-  TMR::cntDirSet(this->mReg, at32f415::tmr::CountMode::UP);
-  TMR::clockSourceDivSet(this->mReg, at32f415::tmr::ClockDivision::DIV1);
+  TMR::cntDirSet(this->mReg, chip::tmr::CountMode::UP);
+  TMR::clockSourceDivSet(this->mReg, chip::tmr::ClockDivision::DIV1);
 
   TMR::interruptEnable(this->mReg, tmr::Interrupt::OVF, true);
   TMR::counterEnable(this->mReg, true);
@@ -229,48 +226,48 @@ bool CoreTimer::startAtTick(uint32_t tick) {
 
 //-----------------------------------------------------------------------------------------
 bool CoreTimer::startAtTime(float second) {
-  at32f415::crm::CoreClock coreClock;
-  at32f415::crm::CRM::clocksFreqGet(coreClock);
-  
+  chip::crm::CoreClock coreClock;
+  chip::crm::CRM::clocksFreqGet(coreClock);
+
   uint32_t sourceClock = coreClock.apb2_freq;
 
   switch (reinterpret_cast<uint32_t>(&this->mReg)) {
     //------------------------------------------
-    case Chip::BASE_TMR1:
+    case chip::AT32F415::BASE_TMR1:
       sourceClock = coreClock.apb2_freq;
       break;
 
     //------------------------------------------
-    case Chip::BASE_TMR2:
+    case chip::AT32F415::BASE_TMR2:
       sourceClock = coreClock.apb1_freq;
       break;
     //------------------------------------------
-    case Chip::BASE_TMR3:
-      sourceClock = coreClock.apb1_freq;
-      break;
-
-    //------------------------------------------
-    case Chip::BASE_TMR4:
+    case chip::AT32F415::BASE_TMR3:
       sourceClock = coreClock.apb1_freq;
       break;
 
     //------------------------------------------
-    case Chip::BASE_TMR5:
+    case chip::AT32F415::BASE_TMR4:
       sourceClock = coreClock.apb1_freq;
       break;
 
     //------------------------------------------
-    case Chip::BASE_TMR9:
+    case chip::AT32F415::BASE_TMR5:
+      sourceClock = coreClock.apb1_freq;
+      break;
+
+    //------------------------------------------
+    case chip::AT32F415::BASE_TMR9:
       sourceClock = coreClock.apb2_freq;
       break;
 
     //------------------------------------------
-    case Chip::BASE_TMR10:
+    case chip::AT32F415::BASE_TMR10:
       sourceClock = coreClock.apb2_freq;
       break;
 
     //------------------------------------------
-    case Chip::BASE_TMR11:
+    case chip::AT32F415::BASE_TMR11:
       sourceClock = coreClock.apb2_freq;
       break;
   }
@@ -291,7 +288,7 @@ void CoreTimer::resetTick(uint32_t tick) {
 }
 
 //-----------------------------------------------------------------------------------------
-void CoreTimer::CoreTimer::setEventTrigger(hal::timer::EventTrigger* event) {
+void CoreTimer::CoreTimer::setEventTrigger(mframe::hal::timer::EventTrigger* event) {
   if (event == nullptr)
     this->mEventTrigger = this;
 
@@ -302,7 +299,7 @@ void CoreTimer::CoreTimer::setEventTrigger(hal::timer::EventTrigger* event) {
 }
 
 //-----------------------------------------------------------------------------------------
-void CoreTimer::setEventCancel(hal::timer::EventCancel* event) {
+void CoreTimer::setEventCancel(mframe::hal::timer::EventCancel* event) {
   if (event == nullptr)
     this->mEventCancel = this;
 
@@ -316,22 +313,22 @@ void CoreTimer::setEventCancel(hal::timer::EventCancel* event) {
 }
 
 /* ****************************************************************************************
- * Public Method <Override> - hal::InterruptEvent
+ * Public Method <Override> - mframe::hal::InterruptEvent
  */
 
 //-----------------------------------------------------------------------------------------
 void CoreTimer::interruptEvent(void) {
-  if (TMR::flagGet(this->mReg, at32f415::tmr::Flag::OVF) == false)
+  if (TMR::flagGet(this->mReg, chip::tmr::Flag::OVF) == false)
     return;
 
-  TMR::flagClear(this->mReg, at32f415::tmr::Flag::OVF);
+  TMR::flagClear(this->mReg, chip::tmr::Flag::OVF);
 
   this->mEventTrigger->onTimerTrigger();
   return;
 }
 
 /* ****************************************************************************************
- * Public Method <Override> - hal::timer::EventCancel
+ * Public Method <Override> - mframe::hal::timer::EventCancel
  */
 
 //-----------------------------------------------------------------------------------------
@@ -340,12 +337,12 @@ void CoreTimer::onTimerCancel(void) {
 }
 
 /* ****************************************************************************************
- * Public Method <Override> - hal::timer::EventTrigger
+ * Public Method <Override> - mframe::hal::timer::EventTrigger
  */
 
 //-----------------------------------------------------------------------------------------
 void CoreTimer::onTimerTrigger(void) {
-  TMR::interruptEnable(this->mReg, at32f415::tmr::Interrupt::OVF, false);
+  TMR::interruptEnable(this->mReg, chip::tmr::Interrupt::OVF, false);
   return;
 }
 /* ****************************************************************************************

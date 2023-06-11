@@ -4,29 +4,29 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_074A0DD1_CB6E_4CE0_8AC2_F216AFFACA2E
-#define AT32F415_074A0DD1_CB6E_4CE0_8AC2_F216AFFACA2E
+#ifndef CHIP_074A0DD1_CB6E_4CE0_8AC2_F216AFFACA2E
+#define CHIP_074A0DD1_CB6E_4CE0_8AC2_F216AFFACA2E
 
 /* ****************************************************************************************
  * Include
  */
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::tmr {
+namespace chip::tmr {
   enum struct PrimarySelect : uint8_t;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::tmr::PrimarySelect : uint8_t {
+enum struct chip::tmr::PrimarySelect : uint8_t {
   RESET = 0x00,    /*!< tmr primary mode select reset */
   ENABLE = 0x01,   /*!< tmr primary mode select enable */
   OVERFLOW = 0x02, /*!< tmr primary mode select overflow */
@@ -41,4 +41,4 @@ enum struct at32f415::tmr::PrimarySelect : uint8_t {
  * End of file
  */
 
-#endif /* AT32F415_074A0DD1_CB6E_4CE0_8AC2_F216AFFACA2E */
+#endif /* CHIP_074A0DD1_CB6E_4CE0_8AC2_F216AFFACA2E */

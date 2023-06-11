@@ -4,24 +4,22 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_EA8F81C9_71FB_4890_AE44_662EFB67D038
-#define AT32F415_EA8F81C9_71FB_4890_AE44_662EFB67D038
+#ifndef CHIP_EA8F81C9_71FB_4890_AE44_662EFB67D038
+#define CHIP_EA8F81C9_71FB_4890_AE44_662EFB67D038
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::exint {
+namespace chip::exint {
   struct Register;
-}  // namespace at32f415::exint
+}  // namespace chip::exint
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
@@ -87,7 +85,7 @@ namespace at32f415::exint {
  *  - 清除標誌，即對中斷狀態寄存器（EXINT_INTSTS）對應位寫1來清除已產生的中
  * 斷，同時該操作會同步清除軟件觸發寄存器（EXINT_SWTRG）中的對應位。
  */
-struct at32f415::exint::Register {
+struct chip::exint::Register {
   union {
     /**
      * @brief 中斷使能寄存器 (EXINT_INTEN), offset:0x00
@@ -132,7 +130,7 @@ struct at32f415::exint::Register {
      * - 1：使能事件請求。
      *
      * 偏移位置：0x04
-     * 
+     *
      * 復位值：0x0000 0000
      */
     volatile uint32_t evten;
@@ -324,4 +322,4 @@ struct at32f415::exint::Register {
  * End of file
  */
 
-#endif /* AT32F415_EA8F81C9_71FB_4890_AE44_662EFB67D038 */
+#endif /* CHIP_EA8F81C9_71FB_4890_AE44_662EFB67D038 */

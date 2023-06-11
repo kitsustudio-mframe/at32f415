@@ -4,32 +4,29 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_4352FAAB_B01A_4B8E_BE3A_39D6B5D93012
-#define AT32F415_4352FAAB_B01A_4B8E_BE3A_39D6B5D93012
+#ifndef CHIP_4352FAAB_B01A_4B8E_BE3A_39D6B5D93012
+#define CHIP_4352FAAB_B01A_4B8E_BE3A_39D6B5D93012
 
 #define ENUM_MAKE_VALUE(reg_offset, bit_num) static_cast<uint32_t>(((reg_offset) << 16) | (bit_num & 0x1F))
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::crm {
+namespace chip::crm {
   enum struct PeriphClock : uint32_t;
-
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::crm::PeriphClock : uint32_t {
+enum struct chip::crm::PeriphClock : uint32_t {
   NONE = 0,
   /* ahb periph */
   DMA1 = ENUM_MAKE_VALUE(0x14, 0),    /**< dma1 periph clock */
@@ -64,7 +61,7 @@ enum struct at32f415::crm::PeriphClock : uint32_t {
   I2C1 = ENUM_MAKE_VALUE(0x1C, 21),   /**< i2c1 periph clock */
   I2C2 = ENUM_MAKE_VALUE(0x1C, 22),   /**< i2c2 periph clock */
   CAN1 = ENUM_MAKE_VALUE(0x1C, 25),   /**< can1 periph clock */
-  PWC = ENUM_MAKE_VALUE(0x1C, 28)    /**< pwc periph clock */
+  PWC = ENUM_MAKE_VALUE(0x1C, 28)     /**< pwc periph clock */
 };
 
 #undef ENUM_MAKE_VALUE
@@ -73,4 +70,4 @@ enum struct at32f415::crm::PeriphClock : uint32_t {
  * End of file
  */
 
-#endif /* AT32F415_4352FAAB_B01A_4B8E_BE3A_39D6B5D93012 */
+#endif /* CHIP_4352FAAB_B01A_4B8E_BE3A_39D6B5D93012 */

@@ -4,31 +4,27 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_F2772318_31CF_4B73_83BD_A29CF25F94BA
-#define AT32F415_F2772318_31CF_4B73_83BD_A29CF25F94BA
+#ifndef CHIP_F2772318_31CF_4B73_83BD_A29CF25F94BA
+#define CHIP_F2772318_31CF_4B73_83BD_A29CF25F94BA
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415 {
-  namespace adc {
-    enum struct VoltageMonitoring : uint32_t;
-  }
-}  // namespace at32f415
+namespace chip::adc {
+  enum struct VoltageMonitoring : uint32_t;
+}  // namespace chip::adc
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::adc::VoltageMonitoring : uint32_t {
+enum struct chip::adc::VoltageMonitoring : uint32_t {
   SINGLE_ORDINARY = 0x00800200,         /**< voltage_monitoring on a single ordinary channel */
   SINGLE_PREEMPT = 0x00400200,          /**< voltage_monitoring on a single preempt channel */
   SINGLE_ORDINARY_PREEMPT = 0x00C00200, /**< voltage_monitoring on a single ordinary or preempt channel */
@@ -42,4 +38,4 @@ enum struct at32f415::adc::VoltageMonitoring : uint32_t {
  * End of file
  */
 
-#endif /* AT32F415_F2772318_31CF_4B73_83BD_A29CF25F94BA */
+#endif /* CHIP_F2772318_31CF_4B73_83BD_A29CF25F94BA */

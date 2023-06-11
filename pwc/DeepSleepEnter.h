@@ -4,37 +4,35 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_4880F19E_D918_472A_B649_19E40FC6E120
-#define AT32F415_4880F19E_D918_472A_B649_19E40FC6E120
+#ifndef CHIP_4880F19E_D918_472A_B649_19E40FC6E120
+#define CHIP_4880F19E_D918_472A_B649_19E40FC6E120
 
 /* ****************************************************************************************
  * Include
  */
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415 {
-  namespace pwc {
-    enum struct DeepSleepEnter : uint8_t;
-  }
-} // namespace at32f415
+namespace chip::pwc {
+  enum struct DeepSleepEnter : uint8_t;
+}  // namespace chip::pwc
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::pwc::DeepSleepEnter : uint8_t {
-  WFI = 0x00, ///< use wfi enter deepsleep mode
-  WFE = 0x01  ///< use wfe enter deepsleep mode
+enum struct chip::pwc::DeepSleepEnter : uint8_t {
+  WFI = 0x00,  ///< use wfi enter deepsleep mode
+  WFE = 0x01   ///< use wfe enter deepsleep mode
 };
 
 /* ****************************************************************************************
  * End of file
  */
 
-#endif /* AT32F415_4880F19E_D918_472A_B649_19E40FC6E120 */
+#endif /* CHIP_4880F19E_D918_472A_B649_19E40FC6E120 */

@@ -4,29 +4,27 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_9FFF35CD_8553_43AD_9E6C_30B44A70D2F0
-#define AT32F415_9FFF35CD_8553_43AD_9E6C_30B44A70D2F0
+#ifndef CHIP_9FFF35CD_8553_43AD_9E6C_30B44A70D2F0
+#define CHIP_9FFF35CD_8553_43AD_9E6C_30B44A70D2F0
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::crm {
+namespace chip::crm {
   struct Register;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-struct at32f415::crm::Register {
+struct chip::crm::Register {
   /**
    * @brief crm ctrl register, offset:0x00
    */
@@ -387,4 +385,4 @@ struct at32f415::crm::Register {
  * End of file
  */
 
-#endif /* AT32F415_9FFF35CD_8553_43AD_9E6C_30B44A70D2F0 */
+#endif /* CHIP_9FFF35CD_8553_43AD_9E6C_30B44A70D2F0 */

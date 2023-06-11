@@ -4,31 +4,27 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_2A037C27_4332_4AEC_A571_04F9B4524BD8
-#define AT32F415_2A037C27_4332_4AEC_A571_04F9B4524BD8
+#ifndef CHIP_2A037C27_4332_4AEC_A571_04F9B4524BD8
+#define CHIP_2A037C27_4332_4AEC_A571_04F9B4524BD8
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415 {
-  namespace adc {
-    enum struct OrdinaryTrig : uint8_t;
-  }
-}  // namespace at32f415
+namespace chip::adc {
+  enum struct OrdinaryTrig : uint8_t;
+}  // namespace chip::adc
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::adc::OrdinaryTrig : uint8_t {
+enum struct chip::adc::OrdinaryTrig : uint8_t {
   TMR1CH1 = 0x00,            /**< timer1 ch1 event as trigger source of adc1 ordinary sequence */
   TMR1CH2 = 0x01,            /**< timer1 ch2 event as trigger source of adc1 ordinary sequence */
   TMR1CH3 = 0x02,            /**< timer1 ch3 event as trigger source of adc1 ordinary sequence */
@@ -37,11 +33,11 @@ enum struct at32f415::adc::OrdinaryTrig : uint8_t {
   TMR4CH4 = 0x05,            /**< timer4 ch4 event as trigger source of adc1 ordinary sequence */
   EXINT11_TMR1TRGOUT = 0x06, /**< exint line11/timer1 trgout event as trigger source of adc1 ordinary sequence */
   SOFTWARE = 0x07,           /**< software(OCSWTRG) control bit as trigger source of adc1 ordinary sequence */
-  TMR1TRGOUT = 0x0D         /**< timer1 trgout event as trigger source of adc1 ordinary sequence */
+  TMR1TRGOUT = 0x0D          /**< timer1 trgout event as trigger source of adc1 ordinary sequence */
 };
 
 /* ****************************************************************************************
  * End of file
  */
 
-#endif /* AT32F415_2A037C27_4332_4AEC_A571_04F9B4524BD8 */
+#endif /* CHIP_2A037C27_4332_4AEC_A571_04F9B4524BD8 */

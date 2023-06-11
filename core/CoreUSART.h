@@ -4,35 +4,32 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_25C7B452_0536_494F_9927_E6F526433BAC
-#define AT32F415_25C7B452_0536_494F_9927_E6F526433BAC
+#ifndef CHIP_25C7B452_0536_494F_9927_E6F526433BAC
+#define CHIP_25C7B452_0536_494F_9927_E6F526433BAC
 
 /* ****************************************************************************************
  * Include
  */
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../usart/package-info.h"
-#include "hal/package-info.h"
-#include "lang/package-info.h"
-
-//-----------------------------------------------------------------------------------------
+#include "./../usart/USART.h"
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::core {
+namespace chip::core {
   class CoreUSART;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-class at32f415::core::CoreUSART : public lang::Object,
-                                  public hal::usart::USART,
-                                  public hal::InterruptEvent,
-                                  public hal::usart::EventTransfer,
-                                  public hal::usart::EventReceiver {
+class chip::core::CoreUSART : public mframe::lang::Object,
+                              public mframe::hal::usart::USART,
+                              public mframe::hal::InterruptEvent,
+                              public mframe::hal::usart::EventTransfer,
+                              public mframe::hal::usart::EventReceiver {
   /* **************************************************************************************
    * Variable <Public>
    */
@@ -45,9 +42,9 @@ class at32f415::core::CoreUSART : public lang::Object,
    * Variable <Private>
    */
  private:
-  at32f415::usart::Register& mReg;
-  hal::usart::EventTransfer* mEventTransfer;
-  hal::usart::EventReceiver* mEventReceiver;
+  chip::usart::Register& mReg;
+  mframe::hal::usart::EventTransfer* mEventTransfer;
+  mframe::hal::usart::EventReceiver* mEventReceiver;
   uint32_t mBaudrate;
 
   /* **************************************************************************************
@@ -67,7 +64,7 @@ class at32f415::core::CoreUSART : public lang::Object,
    *
    * @param reg
    */
-  CoreUSART(at32f415::usart::Register& reg);
+  CoreUSART(chip::usart::Register& reg);
 
   /**
    * @brief Destroy the Core USART object
@@ -84,7 +81,7 @@ class at32f415::core::CoreUSART : public lang::Object,
    */
 
   /* **************************************************************************************
-   * Public Method <Override> - hal::Base
+   * Public Method <Override> - mframe::hal::Base
    */
  public:
   virtual bool deinit(void) override;
@@ -93,7 +90,7 @@ class at32f415::core::CoreUSART : public lang::Object,
 
   virtual bool isInit(void) override;
   /* **************************************************************************************
-   * Public Method <Override> - hal::usart::USART
+   * Public Method <Override> - mframe::hal::usart::USART
    */
  public:
   virtual uint32_t setBaudrate(uint32_t baudrate) override;
@@ -104,24 +101,24 @@ class at32f415::core::CoreUSART : public lang::Object,
 
   virtual void beginReceiver(bool enable) override;
 
-  virtual void setEventTransfer(hal::usart::EventTransfer* event) override;
+  virtual void setEventTransfer(mframe::hal::usart::EventTransfer* event) override;
 
-  virtual void setEventReceiver(hal::usart::EventReceiver* event) override;
+  virtual void setEventReceiver(mframe::hal::usart::EventReceiver* event) override;
 
   /* **************************************************************************************
-   * Public Method <Override> - hal::InterruptEvent
+   * Public Method <Override> - mframe::hal::InterruptEvent
    */
  public:
   virtual void interruptEvent(void) override;
 
   /* **************************************************************************************
-   * Public Method <Override> - hal::usart::EventReceiver
+   * Public Method <Override> - mframe::hal::usart::EventReceiver
    */
  public:
   virtual bool onUartReceiver(const uint8_t data) override;
 
   /* **************************************************************************************
-   * Public Method <Override> - hal::usart::EventTransfer
+   * Public Method <Override> - mframe::hal::usart::EventTransfer
    */
  public:
   virtual bool onUartTransfer(uint8_t& data) override;
@@ -158,4 +155,4 @@ class at32f415::core::CoreUSART : public lang::Object,
  * End of file
  */
 
-#endif /* AT32F415_25C7B452_0536_494F_9927_E6F526433BAC */
+#endif /* CHIP_25C7B452_0536_494F_9927_E6F526433BAC */

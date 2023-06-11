@@ -4,37 +4,37 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_BBD44BB3_537B_4F2D_AC46_178E67949C57
-#define AT32F415_BBD44BB3_537B_4F2D_AC46_178E67949C57
+#ifndef CHIP_BBD44BB3_537B_4F2D_AC46_178E67949C57
+#define CHIP_BBD44BB3_537B_4F2D_AC46_178E67949C57
 
 /* ****************************************************************************************
  * Include
  */
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::tmr {
+namespace chip::tmr {
   enum struct Flag : uint32_t;
 
-  static inline Flag operator|(Flag a, Flag b){
+  static inline Flag operator|(Flag a, Flag b) {
     return static_cast<Flag>((static_cast<uint32_t>(a) | static_cast<uint32_t>(b)));
   }
 
-  static inline Flag operator&(const Flag a, const Flag b){
+  static inline Flag operator&(const Flag a, const Flag b) {
     return static_cast<Flag>((static_cast<uint32_t>(a) & static_cast<uint32_t>(b)));
   }
-}
+}  // namespace chip::tmr
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::tmr::Flag : uint32_t {
+enum struct chip::tmr::Flag : uint32_t {
   OVF = 0x00000001,          /*!< tmr flag overflow */
   C1 = 0x00000002,           /*!< tmr flag channel 1 */
   C2 = 0x00000004,           /*!< tmr flag channel 2 */
@@ -46,11 +46,11 @@ enum struct at32f415::tmr::Flag : uint32_t {
   C1_RECAPTURE = 0x00000200, /*!< tmr flag channel 1 recapture */
   C2_RECAPTURE = 0x00000400, /*!< tmr flag channel 2 recapture */
   C3_RECAPTURE = 0x00000800, /*!< tmr flag channel 3 recapture */
-  C4_RECAPTURE = 0x00001000 /*!< tmr flag channel 4 recapture */
+  C4_RECAPTURE = 0x00001000  /*!< tmr flag channel 4 recapture */
 };
 
 /* ****************************************************************************************
  * End of file
  */
 
-#endif /* AT32F415_BBD44BB3_537B_4F2D_AC46_178E67949C57 */
+#endif /* CHIP_BBD44BB3_537B_4F2D_AC46_178E67949C57 */

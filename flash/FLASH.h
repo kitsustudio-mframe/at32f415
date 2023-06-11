@@ -4,46 +4,46 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_39BF0942_072C_4AB3_9CBC_16781034D7F9
-#define AT32F415_39BF0942_072C_4AB3_9CBC_16781034D7F9
+#ifndef CHIP_39BF0942_072C_4AB3_9CBC_16781034D7F9
+#define CHIP_39BF0942_072C_4AB3_9CBC_16781034D7F9
 
 /* ****************************************************************************************
  * Include
  */
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../Chip.h"
-#include "./Flag.h"
-#include "./Interrupt.h"
-#include "./Register.h"
-#include "./Status.h"
-#include "./Timeout.h"
-#include "./WaitCycle.h"
+#include "./../AT32F415.h"
+#include "./../flash/Flag.h"
+#include "./../flash/Interrupt.h"
+#include "./../flash/Register.h"
+#include "./../flash/Status.h"
+#include "./../flash/Timeout.h"
+#include "./../flash/WaitCycle.h"
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::flash {
+namespace chip::flash {
   class FLASH;
   extern Register &FLASH0;
-}  // namespace at32f415::flash
+}  // namespace chip::flash
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-class at32f415::flash::FLASH : public lang::Object {
+class chip::flash::FLASH : public mframe::lang::Object {
   /* **************************************************************************************
    * Variable <Public>
    */
  public:
-  static const uint32_t FLASH_UNLOCK_KEY1 = 0x45670123;      /*!< flash operation unlock order key1 */
-  static const uint32_t FLASH_UNLOCK_KEY2 = 0xCDEF89AB;      /*!< flash operation unlock order key2 */
-  static const uint16_t FAP_RELIEVE_KEY = 0x00A5;            /*!< flash fap relieve key val */
-  static const uint16_t FAP_HIGH_LEVEL_KEY = 0x00CC;         /*!< flash fap high level enable key val */
-  static const uint32_t SLIB_UNLOCK_KEY = 0xA35F6D24;        /*!< flash slib operation unlock order key */
+  static const uint32_t FLASH_UNLOCK_KEY1 = 0x45670123; /*!< flash operation unlock order key1 */
+  static const uint32_t FLASH_UNLOCK_KEY2 = 0xCDEF89AB; /*!< flash operation unlock order key2 */
+  static const uint16_t FAP_RELIEVE_KEY = 0x00A5;       /*!< flash fap relieve key val */
+  static const uint16_t FAP_HIGH_LEVEL_KEY = 0x00CC;    /*!< flash fap high level enable key val */
+  static const uint32_t SLIB_UNLOCK_KEY = 0xA35F6D24;   /*!< flash slib operation unlock order key */
 
   static const uint32_t SLIB_START_SECTOR = 0x000007FF;      /*!< flash slib start sector */
   static const uint32_t SLIB_DATA_START_SECTOR = 0x003FF800; /*!< flash slib d-bus area start sector */
@@ -478,4 +478,4 @@ class at32f415::flash::FLASH : public lang::Object {
  * End of file
  */
 
-#endif /* AT32F415_39BF0942_072C_4AB3_9CBC_16781034D7F9 */
+#endif /* CHIP_39BF0942_072C_4AB3_9CBC_16781034D7F9 */

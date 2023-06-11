@@ -4,29 +4,27 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_EDC70A94_923D_49D6_A20D_E60F8A0E649B
-#define AT32F415_EDC70A94_923D_49D6_A20D_E60F8A0E649B
+#ifndef CHIP_EDC70A94_923D_49D6_A20D_E60F8A0E649B
+#define CHIP_EDC70A94_923D_49D6_A20D_E60F8A0E649B
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::crm {
+namespace chip::crm {
   enum struct PostDividerPLL : uint8_t;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::crm::PostDividerPLL : uint8_t {
+enum struct chip::crm::PostDividerPLL : uint8_t {
   DIV1 = 0x00,  /*!< pll post-division div1 */
   DIV2 = 0x01,  /*!< pll post-division div2 */
   DIV4 = 0x02,  /*!< pll post-division div4 */
@@ -39,4 +37,4 @@ enum struct at32f415::crm::PostDividerPLL : uint8_t {
  * End of file
  */
 
-#endif /* AT32F415_EDC70A94_923D_49D6_A20D_E60F8A0E649B */
+#endif /* CHIP_EDC70A94_923D_49D6_A20D_E60F8A0E649B */

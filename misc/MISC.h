@@ -4,15 +4,15 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_8D35ED70_755D_46B9_8B3F_46E016321712
-#define AT32F415_8D35ED70_755D_46B9_8B3F_46E016321712
+#ifndef CHIP_8D35ED70_755D_46B9_8B3F_46E016321712
+#define CHIP_8D35ED70_755D_46B9_8B3F_46E016321712
 
 /* ****************************************************************************************
  * Include
  */
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 #include "InterruptService.h"
@@ -23,16 +23,14 @@
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415 {
-  namespace misc {
-    class MISC;
-  }
-}  // namespace at32f415
+namespace chip::misc {
+  class MISC;
+}  // namespace chip::misc
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-class at32f415::misc::MISC : public lang::Object {
+class chip::misc::MISC : public mframe::lang::Object {
   /* **************************************************************************************
    * Variable <Public>
    */
@@ -140,6 +138,14 @@ class at32f415::misc::MISC : public lang::Object {
    */
   static void systickClockSourceConfig(SystickClockSource source);
 
+  /**
+   * @brief 設定中斷優先權
+   * 
+   * @param irqn 
+   * @param priority 
+   */
+  static void setInterruptPriority(InterruptService irqn, uint32_t priority);
+
   /* **************************************************************************************
    * Public Method <Override>
    */
@@ -177,4 +183,4 @@ class at32f415::misc::MISC : public lang::Object {
  * End of file
  */
 
-#endif /* AT32F415_8D35ED70_755D_46B9_8B3F_46E016321712 */
+#endif /* CHIP_8D35ED70_755D_46B9_8B3F_46E016321712 */

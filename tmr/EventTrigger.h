@@ -4,29 +4,29 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_6B227D55_8921_4F5D_9594_8EB250CEBA4F
-#define AT32F415_6B227D55_8921_4F5D_9594_8EB250CEBA4F
+#ifndef CHIP_6B227D55_8921_4F5D_9594_8EB250CEBA4F
+#define CHIP_6B227D55_8921_4F5D_9594_8EB250CEBA4F
 
 /* ****************************************************************************************
  * Include
  */
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::tmr {
+namespace chip::tmr {
   enum struct EventTrigger : uint32_t;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::tmr::EventTrigger : uint32_t {
+enum struct chip::tmr::EventTrigger : uint32_t {
   OVERFLOW = 0x00000001, /*!< tmr event triggered by software of overflow */
   C1 = 0x00000002,       /*!< tmr event triggered by software of channel 1 */
   C2 = 0x00000004,       /*!< tmr event triggered by software of channel 2 */
@@ -41,4 +41,4 @@ enum struct at32f415::tmr::EventTrigger : uint32_t {
  * End of file
  */
 
-#endif /* AT32F415_6B227D55_8921_4F5D_9594_8EB250CEBA4F */
+#endif /* CHIP_6B227D55_8921_4F5D_9594_8EB250CEBA4F */

@@ -4,29 +4,29 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_4C72F3F1_6189_4C60_9557_DD5D3F89509E
-#define AT32F415_4C72F3F1_6189_4C60_9557_DD5D3F89509E
+#ifndef CHIP_4C72F3F1_6189_4C60_9557_DD5D3F89509E
+#define CHIP_4C72F3F1_6189_4C60_9557_DD5D3F89509E
 
 /* ****************************************************************************************
  * Include
  */
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::tmr::dma {
+namespace chip::tmr::dma {
   enum struct RequestSource : uint8_t;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::tmr::dma::RequestSource : uint8_t {
+enum struct chip::tmr::dma::RequestSource : uint8_t {
   CHANNEL = 0x00, /**< tmr dma request source select channel */
   OVERFLOW = 0x01 /**< tmr dma request source select overflow */
 };
@@ -35,4 +35,4 @@ enum struct at32f415::tmr::dma::RequestSource : uint8_t {
  * End of file
  */
 
-#endif /* AT32F415_4C72F3F1_6189_4C60_9557_DD5D3F89509E */
+#endif /* CHIP_4C72F3F1_6189_4C60_9557_DD5D3F89509E */

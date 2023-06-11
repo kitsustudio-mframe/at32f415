@@ -30,22 +30,22 @@
 //-----------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------
-using at32f415::crm::CRM;
-using at32f415::crm::PeriphReset;
-using at32f415::tmr::Register;
-using at32f415::tmr::TMR;
+using chip::crm::CRM;
+using chip::crm::PeriphReset;
+using chip::tmr::Register;
+using chip::tmr::TMR;
 
 /* ****************************************************************************************
  * Variable <Static>
  */
-Register& at32f415::tmr::TMR1 = *reinterpret_cast<Register*>(at32f415::Chip::BASE_TMR1);
-Register& at32f415::tmr::TMR2 = *reinterpret_cast<Register*>(at32f415::Chip::BASE_TMR2);
-Register& at32f415::tmr::TMR3 = *reinterpret_cast<Register*>(at32f415::Chip::BASE_TMR3);
-Register& at32f415::tmr::TMR4 = *reinterpret_cast<Register*>(at32f415::Chip::BASE_TMR4);
-Register& at32f415::tmr::TMR5 = *reinterpret_cast<Register*>(at32f415::Chip::BASE_TMR5);
-Register& at32f415::tmr::TMR9 = *reinterpret_cast<Register*>(at32f415::Chip::BASE_TMR9);
-Register& at32f415::tmr::TMR10 = *reinterpret_cast<Register*>(at32f415::Chip::BASE_TMR10);
-Register& at32f415::tmr::TMR11 = *reinterpret_cast<Register*>(at32f415::Chip::BASE_TMR11);
+Register& chip::tmr::TMR1 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_TMR1);
+Register& chip::tmr::TMR2 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_TMR2);
+Register& chip::tmr::TMR3 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_TMR3);
+Register& chip::tmr::TMR4 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_TMR4);
+Register& chip::tmr::TMR5 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_TMR5);
+Register& chip::tmr::TMR9 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_TMR9);
+Register& chip::tmr::TMR10 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_TMR10);
+Register& chip::tmr::TMR11 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_TMR11);
 /* ****************************************************************************************
  * Construct Method
  */
@@ -146,7 +146,7 @@ void TMR::baseInit(Register& reg, uint32_t pr, uint32_t div) {
 
   /* trigger the overflow event to immediately reload pr value and div value */
   reg.swevt_bit.ovfswtr = true;
-  
+
   return;
 }
 

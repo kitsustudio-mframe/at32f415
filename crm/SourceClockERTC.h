@@ -4,29 +4,27 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_42E31C46_1237_45CA_A025_FCF8AB2F4BA5
-#define AT32F415_42E31C46_1237_45CA_A025_FCF8AB2F4BA5
+#ifndef CHIP_42E31C46_1237_45CA_A025_FCF8AB2F4BA5
+#define CHIP_42E31C46_1237_45CA_A025_FCF8AB2F4BA5
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::crm {
+namespace chip::crm {
   enum struct SourceClockERTC : uint8_t;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::crm::SourceClockERTC : uint8_t {
+enum struct chip::crm::SourceClockERTC : uint8_t {
   CLOCK_NOCLK = 0x00,   /*!< no clock as ertc clock source */
   CLOCK_LEXT = 0x01,    /*!< low speed external crystal as ertc clock source */
   CLOCK_LICK = 0x02,    /*!< low speed internal clock as ertc clock source */
@@ -37,4 +35,4 @@ enum struct at32f415::crm::SourceClockERTC : uint8_t {
  * End of file
  */
 
-#endif /* AT32F415_42E31C46_1237_45CA_A025_FCF8AB2F4BA5 */
+#endif /* CHIP_42E31C46_1237_45CA_A025_FCF8AB2F4BA5 */

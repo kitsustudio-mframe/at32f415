@@ -4,22 +4,20 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_F31C2395_0064_4C5E_8DFF_BD1CACAF0FCF
-#define AT32F415_F31C2395_0064_4C5E_8DFF_BD1CACAF0FCF
+#ifndef CHIP_F31C2395_0064_4C5E_8DFF_BD1CACAF0FCF
+#define CHIP_F31C2395_0064_4C5E_8DFF_BD1CACAF0FCF
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::crm {
+namespace chip::crm {
   enum struct MultPLL : uint8_t;
 
 }
@@ -27,7 +25,7 @@ namespace at32f415::crm {
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::crm::MultPLL : uint8_t {
+enum struct chip::crm::MultPLL : uint8_t {
   MULT2 = 0,   /*!< pll multiplication factor 2 */
   MULT3 = 1,   /*!< pll multiplication factor 3 */
   MULT4 = 2,   /*!< pll multiplication factor 4 */
@@ -97,4 +95,4 @@ enum struct at32f415::crm::MultPLL : uint8_t {
  * End of file
  */
 
-#endif /* AT32F415_F31C2395_0064_4C5E_8DFF_BD1CACAF0FCF */
+#endif /* CHIP_F31C2395_0064_4C5E_8DFF_BD1CACAF0FCF */

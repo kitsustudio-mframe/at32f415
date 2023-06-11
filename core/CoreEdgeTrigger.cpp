@@ -8,132 +8,129 @@
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "./../crm/package-info.h"
-
-//-----------------------------------------------------------------------------------------
-#include "./Core.h"
 #include "./CoreEdgeTrigger.h"
+
+//-----------------------------------------------------------------------------------------
+#include "chip.h"
+#include "mframe.h"
 
 /* ****************************************************************************************
  * namesapce;
  */
-namespace at32f415::core {
+namespace chip::core {
   static uint32_t coreEdgeTriggerLevel = 0x00000000U;
 
   static void coreEdgeTriggerResetPeriph(uint32_t mask) {
-    at32f415::exint::EXINT0.intsts |= static_cast<uint32_t>(mask);
+    chip::exint::EXINT0.intsts |= static_cast<uint32_t>(mask);
     mask = ~mask;
 
-    at32f415::exint::EXINT0.inten &= static_cast<uint32_t>(mask);
-    at32f415::exint::EXINT0.evten &= static_cast<uint32_t>(mask);
-    at32f415::exint::EXINT0.polcfg1 &= static_cast<uint32_t>(mask);
-    at32f415::exint::EXINT0.polcfg2 &= static_cast<uint32_t>(mask);
+    chip::exint::EXINT0.inten &= static_cast<uint32_t>(mask);
+    chip::exint::EXINT0.evten &= static_cast<uint32_t>(mask);
+    chip::exint::EXINT0.polcfg1 &= static_cast<uint32_t>(mask);
+    chip::exint::EXINT0.polcfg2 &= static_cast<uint32_t>(mask);
 
     return;
   }
 
-  static at32f415::core::CoreInterrupt::Irq getInterruptService(at32f415::exint::Line line) {
+  static chip::core::CoreInterrupt::Irq getInterruptService(chip::exint::Line line) {
     switch (line) {
       //------------------------------------------
-      case at32f415::exint::Line::LINE0:
-        return at32f415::core::CoreInterrupt::IRQ_EXINT0;
+      case chip::exint::Line::LINE0:
+        return chip::core::CoreInterrupt::IRQ_EXINT0;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE1:
-        return at32f415::core::CoreInterrupt::IRQ_EXINT1;
+      case chip::exint::Line::LINE1:
+        return chip::core::CoreInterrupt::IRQ_EXINT1;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE2:
-        return at32f415::core::CoreInterrupt::IRQ_EXINT2;
+      case chip::exint::Line::LINE2:
+        return chip::core::CoreInterrupt::IRQ_EXINT2;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE3:
-        return at32f415::core::CoreInterrupt::IRQ_EXINT3;
+      case chip::exint::Line::LINE3:
+        return chip::core::CoreInterrupt::IRQ_EXINT3;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE4:
-        return at32f415::core::CoreInterrupt::IRQ_EXINT4;
+      case chip::exint::Line::LINE4:
+        return chip::core::CoreInterrupt::IRQ_EXINT4;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE5:
-        return at32f415::core::CoreInterrupt::IRQ_EXINT5;
+      case chip::exint::Line::LINE5:
+        return chip::core::CoreInterrupt::IRQ_EXINT5;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE6:
-        return at32f415::core::CoreInterrupt::IRQ_EXINT6;
+      case chip::exint::Line::LINE6:
+        return chip::core::CoreInterrupt::IRQ_EXINT6;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE7:
-        return at32f415::core::CoreInterrupt::IRQ_EXINT7;
+      case chip::exint::Line::LINE7:
+        return chip::core::CoreInterrupt::IRQ_EXINT7;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE8:
-        return at32f415::core::CoreInterrupt::IRQ_EXINT8;
+      case chip::exint::Line::LINE8:
+        return chip::core::CoreInterrupt::IRQ_EXINT8;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE9:
-        return at32f415::core::CoreInterrupt::IRQ_EXINT9;
+      case chip::exint::Line::LINE9:
+        return chip::core::CoreInterrupt::IRQ_EXINT9;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE10:
-        return at32f415::core::CoreInterrupt::IRQ_EXINT10;
+      case chip::exint::Line::LINE10:
+        return chip::core::CoreInterrupt::IRQ_EXINT10;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE11:
-        return at32f415::core::CoreInterrupt::IRQ_EXINT11;
+      case chip::exint::Line::LINE11:
+        return chip::core::CoreInterrupt::IRQ_EXINT11;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE12:
-        return at32f415::core::CoreInterrupt::IRQ_EXINT12;
+      case chip::exint::Line::LINE12:
+        return chip::core::CoreInterrupt::IRQ_EXINT12;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE13:
-        return at32f415::core::CoreInterrupt::IRQ_EXINT13;
+      case chip::exint::Line::LINE13:
+        return chip::core::CoreInterrupt::IRQ_EXINT13;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE14:
-        return at32f415::core::CoreInterrupt::IRQ_EXINT14;
+      case chip::exint::Line::LINE14:
+        return chip::core::CoreInterrupt::IRQ_EXINT14;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE15:
-        return at32f415::core::CoreInterrupt::IRQ_EXINT15;
+      case chip::exint::Line::LINE15:
+        return chip::core::CoreInterrupt::IRQ_EXINT15;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE16:
-        return at32f415::core::CoreInterrupt::IRQ_PVM;
+      case chip::exint::Line::LINE16:
+        return chip::core::CoreInterrupt::IRQ_PVM;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE17:
-        return at32f415::core::CoreInterrupt::IRQ_ERTC_WKUP;
+      case chip::exint::Line::LINE17:
+        return chip::core::CoreInterrupt::IRQ_ERTC_WKUP;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE18:
-        return at32f415::core::CoreInterrupt::IRQ_OTGFS_WAKE;
+      case chip::exint::Line::LINE18:
+        return chip::core::CoreInterrupt::IRQ_OTGFS_WAKE;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE19:
-        return at32f415::core::CoreInterrupt::IRQ_CMP1;
+      case chip::exint::Line::LINE19:
+        return chip::core::CoreInterrupt::IRQ_CMP1;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE20:
-        return at32f415::core::CoreInterrupt::IRQ_CMP2;
+      case chip::exint::Line::LINE20:
+        return chip::core::CoreInterrupt::IRQ_CMP2;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE21:
-        return at32f415::core::CoreInterrupt::IRQ_ERTC_ALARM;
+      case chip::exint::Line::LINE21:
+        return chip::core::CoreInterrupt::IRQ_ERTC_ALARM;
 
       //------------------------------------------
-      case at32f415::exint::Line::LINE22:
-        return at32f415::core::CoreInterrupt::IRQ_ERTC_WKUP;
-      
+      case chip::exint::Line::LINE22:
+        return chip::core::CoreInterrupt::IRQ_ERTC_WKUP;
+
       default:
-        return at32f415::core::CoreInterrupt::IRQ_MAX_QUANTITY;
+        return chip::core::CoreInterrupt::IRQ_MAX_QUANTITY;
     }
-    
   }
-}  // namespace at32f415::core
+}  // namespace chip::core
 
 /* ****************************************************************************************
  * Macro
@@ -146,8 +143,8 @@ namespace at32f415::core {
 //-----------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------
-using at32f415::core::CoreEdgeTrigger;
-using at32f415::exint::EXINT0;
+using chip::core::CoreEdgeTrigger;
+using chip::exint::EXINT0;
 
 /* ****************************************************************************************
  * Variable <Static>
@@ -158,7 +155,7 @@ using at32f415::exint::EXINT0;
  */
 
 //-----------------------------------------------------------------------------------------
-CoreEdgeTrigger::CoreEdgeTrigger(at32f415::exint::Line line) {
+CoreEdgeTrigger::CoreEdgeTrigger(chip::exint::Line line) {
   this->mEventFall = nullptr;
   this->mEventRise = nullptr;
   this->mLine = line;
@@ -183,7 +180,7 @@ CoreEdgeTrigger::~CoreEdgeTrigger(void) {
  */
 
 /* ****************************************************************************************
- * Public Method <Override> - hal::Base
+ * Public Method <Override> - mframe::hal::Base
  */
 
 //-----------------------------------------------------------------------------------------
@@ -221,7 +218,7 @@ bool CoreEdgeTrigger::isInit(void) {
 }
 
 /* ****************************************************************************************
- * Public Method <Override> - hal::trigger::EdgeTrigger
+ * Public Method <Override> - mframe::hal::trigger::EdgeTrigger
  */
 
 //-----------------------------------------------------------------------------------------
@@ -302,8 +299,8 @@ void CoreEdgeTrigger::enableRise(bool enable) {
 }
 
 //-----------------------------------------------------------------------------------------
-void CoreEdgeTrigger::setEventRise(hal::trigger::EventRise* event) {
-  if(event)
+void CoreEdgeTrigger::setEventRise(mframe::hal::trigger::EventRise* event) {
+  if (event)
     this->mEventRise = event;
 
   else
@@ -313,8 +310,8 @@ void CoreEdgeTrigger::setEventRise(hal::trigger::EventRise* event) {
 }
 
 //-----------------------------------------------------------------------------------------
-void CoreEdgeTrigger::setEventFall(hal::trigger::EventFall* event) {
-  if(event)
+void CoreEdgeTrigger::setEventFall(mframe::hal::trigger::EventFall* event) {
+  if (event)
     this->mEventFall = event;
 
   else
@@ -325,7 +322,7 @@ void CoreEdgeTrigger::setEventFall(hal::trigger::EventFall* event) {
 
 //-----------------------------------------------------------------------------------------
 bool CoreEdgeTrigger::readRise(void) {
-  if(this->mStatusRise){
+  if (this->mStatusRise) {
     this->mStatusRise = false;
     return true;
   }
@@ -335,7 +332,7 @@ bool CoreEdgeTrigger::readRise(void) {
 
 //-----------------------------------------------------------------------------------------
 bool CoreEdgeTrigger::readFall(void) {
-  if(this->mStatusFall){
+  if (this->mStatusFall) {
     this->mStatusFall = false;
     return true;
   }
@@ -344,23 +341,22 @@ bool CoreEdgeTrigger::readFall(void) {
 }
 
 /* ****************************************************************************************
- * Public Method <Override> - hal::InterruptEvent
+ * Public Method <Override> - mframe::hal::InterruptEvent
  */
 
 //-----------------------------------------------------------------------------------------
 void CoreEdgeTrigger::interruptEvent(void) {
   uint32_t mask = static_cast<uint32_t>(this->mLine);
-  if(EXINT0.polcfg1 & mask){
-
-    if(coreEdgeTriggerLevel & mask){
+  if (EXINT0.polcfg1 & mask) {
+    if (coreEdgeTriggerLevel & mask) {
       EXINT0.polcfg1 &= ~mask;
       EXINT0.polcfg2 |= mask;
     }
-    
+
     this->mEventRise->onEdgeTriggerRise();
 
-  }else if(EXINT0.polcfg2 & mask){
-    if(coreEdgeTriggerLevel & mask){
+  } else if (EXINT0.polcfg2 & mask) {
+    if (coreEdgeTriggerLevel & mask) {
       EXINT0.polcfg2 &= ~mask;
       EXINT0.polcfg1 |= mask;
     }
@@ -373,21 +369,21 @@ void CoreEdgeTrigger::interruptEvent(void) {
 }
 
 /* ****************************************************************************************
- * Public Method <Override> - hal::trigger::EventFall
+ * Public Method <Override> - mframe::hal::trigger::EventFall
  */
 
 //-----------------------------------------------------------------------------------------
-void CoreEdgeTrigger::onEdgeTriggerFall(void){
+void CoreEdgeTrigger::onEdgeTriggerFall(void) {
   this->mStatusFall = true;
   return;
 }
 
 /* ****************************************************************************************
- * Public Method <Override> - hal::trigger::EventRise
+ * Public Method <Override> - mframe::hal::trigger::EventRise
  */
 
 //-----------------------------------------------------------------------------------------
-void CoreEdgeTrigger::onEdgeTriggerRise(void){
+void CoreEdgeTrigger::onEdgeTriggerRise(void) {
   this->mStatusRise = true;
   return;
 }

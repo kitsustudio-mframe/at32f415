@@ -4,56 +4,54 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_3B3265D7_1A90_4225_920F_1A2377378018
-#define AT32F415_3B3265D7_1A90_4225_920F_1A2377378018
+#ifndef CHIP_3B3265D7_1A90_4225_920F_1A2377378018
+#define CHIP_3B3265D7_1A90_4225_920F_1A2377378018
 
 /* ****************************************************************************************
  * Include
  */
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../Chip.h"
-#include "lang/package-info.h"
-
-//-----------------------------------------------------------------------------------------
-#include "AutoStepMode.h"
-#include "ClockOutSelect.h"
-#include "CoreClock.h"
-#include "DividerADC.h"
-#include "DividerAHB.h"
-#include "DividerAPB1.h"
-#include "DividerAPB2.h"
-#include "DividerClockOut.h"
-#include "DividerHICK.h"
-#include "DividerUSB.h"
-#include "Flag.h"
-#include "HickFrequencySCLK.h"
-#include "Interrupt.h"
-#include "MultPLL.h"
-#include "PeriphClock.h"
-#include "PeriphClockSleepMode.h"
-#include "PeriphReset.h"
-#include "PostDividerPLL.h"
-#include "ReferenceClockPLL.h"
-#include "Register.h"
-#include "SourceClockCore.h"
-#include "SourceClockERTC.h"
-#include "SourceClockPLL.h"
-#include "SourceClockSCLK.h"
-#include "SourceClockUSB.h"
+#include "./../AT32F415.h"
+#include "./../crm/AutoStepMode.h"
+#include "./../crm/ClockOutSelect.h"
+#include "./../crm/CoreClock.h"
+#include "./../crm/DividerADC.h"
+#include "./../crm/DividerAHB.h"
+#include "./../crm/DividerAPB1.h"
+#include "./../crm/DividerAPB2.h"
+#include "./../crm/DividerClockOut.h"
+#include "./../crm/DividerHICK.h"
+#include "./../crm/DividerUSB.h"
+#include "./../crm/Flag.h"
+#include "./../crm/HickFrequencySCLK.h"
+#include "./../crm/Interrupt.h"
+#include "./../crm/MultPLL.h"
+#include "./../crm/PeriphClock.h"
+#include "./../crm/PeriphClockSleepMode.h"
+#include "./../crm/PeriphReset.h"
+#include "./../crm/PostDividerPLL.h"
+#include "./../crm/ReferenceClockPLL.h"
+#include "./../crm/Register.h"
+#include "./../crm/SourceClockCore.h"
+#include "./../crm/SourceClockERTC.h"
+#include "./../crm/SourceClockPLL.h"
+#include "./../crm/SourceClockSCLK.h"
+#include "./../crm/SourceClockUSB.h"
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415 ::crm {
+namespace chip::crm {
   class CRM;
   extern Register& CRM0;
-}  // namespace at32f415::crm
+}  // namespace chip::crm
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-class at32f415::crm::CRM : public lang::Object {
+class chip::crm::CRM : public mframe::lang::Object {
   /* **************************************************************************************
    * Variable <Public>
    */
@@ -643,4 +641,4 @@ class at32f415::crm::CRM : public lang::Object {
  * End of file
  */
 
-#endif /* AT32F415_3B3265D7_1A90_4225_920F_1A2377378018 */
+#endif /* CHIP_3B3265D7_1A90_4225_920F_1A2377378018 */

@@ -4,63 +4,58 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_F4FCF7C7_7A29_4865_BF90_32ED6A92AF8E
-#define AT32F415_F4FCF7C7_7A29_4865_BF90_32ED6A92AF8E
+#ifndef CHIP_F4FCF7C7_7A29_4865_BF90_32ED6A92AF8E
+#define CHIP_F4FCF7C7_7A29_4865_BF90_32ED6A92AF8E
 
 /* ****************************************************************************************
  * Include
  */
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
-
-//-----------------------------------------------------------------------------------------
-#include "./../Chip.h"
-#include "Channel.h"
-#include "ChannelRegister.h"
-#include "Config.h"
-#include "Direction.h"
-#include "Flag.h"
-#include "Flexible.h"
-#include "Interrupt.h"
-#include "MemoryDataSize.h"
-#include "MemoryInc.h"
-#include "PeripheralDataSize.h"
-#include "PeripheralInc.h"
-#include "PriorityLevel.h"
-#include "Register.h"
+#include "./../AT32F415.h"
+#include "./../dma/Channel.h"
+#include "./../dma/ChannelRegister.h"
+#include "./../dma/Config.h"
+#include "./../dma/Direction.h"
+#include "./../dma/Flag.h"
+#include "./../dma/Flexible.h"
+#include "./../dma/Interrupt.h"
+#include "./../dma/MemoryDataSize.h"
+#include "./../dma/MemoryInc.h"
+#include "./../dma/PeripheralDataSize.h"
+#include "./../dma/PeripheralInc.h"
+#include "./../dma/PriorityLevel.h"
+#include "./../dma/Register.h"
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415 {
-  namespace dma {
-    class DMA;
-    extern Register& DMA1;
-    extern ChannelRegister& DMA1_CHANNEL1;
-    extern ChannelRegister& DMA1_CHANNEL2;
-    extern ChannelRegister& DMA1_CHANNEL3;
-    extern ChannelRegister& DMA1_CHANNEL4;
-    extern ChannelRegister& DMA1_CHANNEL5;
-    extern ChannelRegister& DMA1_CHANNEL6;
-    extern ChannelRegister& DMA1_CHANNEL7;
+namespace chip::dma {
+  class DMA;
+  extern Register& DMA1;
+  extern ChannelRegister& DMA1_CHANNEL1;
+  extern ChannelRegister& DMA1_CHANNEL2;
+  extern ChannelRegister& DMA1_CHANNEL3;
+  extern ChannelRegister& DMA1_CHANNEL4;
+  extern ChannelRegister& DMA1_CHANNEL5;
+  extern ChannelRegister& DMA1_CHANNEL6;
+  extern ChannelRegister& DMA1_CHANNEL7;
 
-    extern Register& DMA2;
-    extern ChannelRegister& DMA2_CHANNEL1;
-    extern ChannelRegister& DMA2_CHANNEL2;
-    extern ChannelRegister& DMA2_CHANNEL3;
-    extern ChannelRegister& DMA2_CHANNEL4;
-    extern ChannelRegister& DMA2_CHANNEL5;
-    extern ChannelRegister& DMA2_CHANNEL6;
-    extern ChannelRegister& DMA2_CHANNEL7;
-
-  }  // namespace dma
-}  // namespace at32f415
+  extern Register& DMA2;
+  extern ChannelRegister& DMA2_CHANNEL1;
+  extern ChannelRegister& DMA2_CHANNEL2;
+  extern ChannelRegister& DMA2_CHANNEL3;
+  extern ChannelRegister& DMA2_CHANNEL4;
+  extern ChannelRegister& DMA2_CHANNEL5;
+  extern ChannelRegister& DMA2_CHANNEL6;
+  extern ChannelRegister& DMA2_CHANNEL7;
+}  // namespace chip::dma
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-class at32f415::dma::DMA {
+class chip::dma::DMA {
   /* **************************************************************************************
    * Variable <Public>
    */
@@ -394,4 +389,4 @@ class at32f415::dma::DMA {
  * End of file
  */
 
-#endif /* AT32F415_F4FCF7C7_7A29_4865_BF90_32ED6A92AF8E */
+#endif /* CHIP_F4FCF7C7_7A29_4865_BF90_32ED6A92AF8E */

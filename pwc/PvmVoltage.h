@@ -4,29 +4,29 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_A1509F76_D764_443D_91AC_A52D865473C1
-#define AT32F415_A1509F76_D764_443D_91AC_A52D865473C1
+#ifndef CHIP_A1509F76_D764_443D_91AC_A52D865473C1
+#define CHIP_A1509F76_D764_443D_91AC_A52D865473C1
 
 /* ****************************************************************************************
  * Include
  */
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::pwc {
+namespace chip::pwc {
   enum struct PvmVoltage : uint8_t;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::pwc::PvmVoltage : uint8_t {
+enum struct chip::pwc::PvmVoltage : uint8_t {
   VOLTAGE_2V3 = 0x01, /**< power voltage monitoring boundary 2.3v */
   VOLTAGE_2V4 = 0x02, /**< power voltage monitoring boundary 2.4v */
   VOLTAGE_2V5 = 0x03, /**< power voltage monitoring boundary 2.5v */
@@ -40,4 +40,4 @@ enum struct at32f415::pwc::PvmVoltage : uint8_t {
  * End of file
  */
 
-#endif /* AT32F415_A1509F76_D764_443D_91AC_A52D865473C1 */
+#endif /* CHIP_A1509F76_D764_443D_91AC_A52D865473C1 */

@@ -4,31 +4,27 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_51F6D24A_FE05_4796_947B_046F2F4214F7
-#define AT32F415_51F6D24A_FE05_4796_947B_046F2F4214F7
+#ifndef CHIP_51F6D24A_FE05_4796_947B_046F2F4214F7
+#define CHIP_51F6D24A_FE05_4796_947B_046F2F4214F7
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415 {
-  namespace adc {
-    enum struct SampleTime : uint8_t;
-  }
-}  // namespace at32f415
+namespace chip::adc {
+  enum struct SampleTime : uint8_t;
+}  // namespace chip::adc
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::adc::SampleTime : uint8_t {
+enum struct chip::adc::SampleTime : uint8_t {
   CYCLE_1_5 = 0x00,  /**< adc sample time 1.5 cycle */
   CYCLE_7_5 = 0x01,  /**< adc sample time 7.5 cycle */
   CYCLE_13_5 = 0x02, /**< adc sample time 13.5 cycle */
@@ -43,4 +39,4 @@ enum struct at32f415::adc::SampleTime : uint8_t {
  * End of file
  */
 
-#endif /* AT32F415_51F6D24A_FE05_4796_947B_046F2F4214F7 */
+#endif /* CHIP_51F6D24A_FE05_4796_947B_046F2F4214F7 */

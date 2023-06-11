@@ -4,26 +4,24 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_238DC162_D5C0_4BA0_BE3D_ACD29155C0EC
-#define AT32F415_238DC162_D5C0_4BA0_BE3D_ACD29155C0EC
+#ifndef CHIP_238DC162_D5C0_4BA0_BE3D_ACD29155C0EC
+#define CHIP_238DC162_D5C0_4BA0_BE3D_ACD29155C0EC
 
 /* ****************************************************************************************
  * Include
  */
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415 {
-  namespace usart {
-    struct Register;
-  }
-}  // namespace at32f415
+namespace chip::usart {
+  struct Register;
+}  // namespace chip::usart
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
@@ -31,41 +29,41 @@ namespace at32f415 {
 
 /**
  * @brief @brief 通用同步異步收發器(USART)
- * 
+ *
  * 通用同步異步收發器（USART）是一個能通過多種不同的配置與使用不同的數據格式的外設進行通信的通用接口，
  * 同時支持異步全雙工，異步半雙工以及同步傳輸。 USART 提供了可編程的波特率發生器，
  * 根據系統頻率以及分頻係數的不同，可產生高達 9.375MBits/s 的波特率，
  * 用戶以通過配置系統時鐘以及分頻係數以此產生所需要的特定通信頻率。
- * 
+ *
  * USART 除了支持標準的 NRZ 異步以及同步收發通信協議外，
  * 還支持一些常用的其他類型的串行通信協議，如 LIN(局域互聯網)，
  * IrDA（紅外數據組織）SIRENDEC 規範，ISO7816-3 標準的異步智能卡協議，
  * 以及 CTS/RTS（Clear To Send/Request To Send）硬件流操作。
- * 
+ *
  * USART 還支持多處理器通信，以及可配置通過空閒幀或 ID 匹配喚醒的靜默模式，
  * 以此搭建 USART 網絡，並且同時支持使用 DMA 進行數據的收發，以此實現高速通信。
- * 
+ *
  * ---
  * USART主要特性如下所列：
- * 
+ *
  * - 可編程配置的全雙工或半雙工通信
  *   - 全雙工異步通信
  *   - 單線半雙工通信
- * 
+ *
  * - 可編程配置的通信模式
  *   - NRZ標準格式（Mark/Space）
  *   - LIN（局域互聯網）：LIN主機有發送間隔幀的能力以及LIN從機有檢測間隔幀的能力
  *   - IrDASIR（串行紅外）：在普通模式下持續時間為3/16位，在紅外低功耗模式下位
- * 
+ *
  * - 持續時間可調
  *   - ISO7816-3標準裡定義的異步智能卡協議：智能卡模式支持0.5或1.5個停止位
  *   - RS-232CTS/RTS（ClearToSend/RequestToSend）硬件流操作
  */
-struct at32f415::usart::Register {
+struct chip::usart::Register {
   union {
     /**
      * @brief 狀態寄存器 (USART_STS), offset:0x00
-     * 
+     *
      * 偏移位置：0x00
      * 復位值：0x0000 00C0
      */
@@ -84,7 +82,7 @@ struct at32f415::usart::Register {
        *
        * - 0：無；
        * - 1：有。
-       * 
+       *
        * 復位值：0x0
        */
       volatile uint32_t perr : 1;
@@ -99,7 +97,7 @@ struct at32f415::usart::Register {
        *
        * - 0：無；
        * - 1：有。
-       * 
+       *
        * 復位值：0x0
        */
       volatile uint32_t ferr : 1;
@@ -113,7 +111,7 @@ struct at32f415::usart::Register {
        *
        * - 0：無；
        * - 1：有。
-       * 
+       *
        * 復位值：0x0
        */
       volatile uint32_t nerr : 1;
@@ -130,7 +128,7 @@ struct at32f415::usart::Register {
        *
        * 注意：該位被置位時，DT 寄存器中的數據不會丟失，但
        * 是後續的數據會被覆蓋。
-       * 
+       *
        * 復位值：0x0
        */
       volatile uint32_t roerr : 1;
@@ -144,7 +142,7 @@ struct at32f415::usart::Register {
        *
        * - 0：無；
        * - 1：有。
-       * 
+       *
        * 復位值：0x0
        */
       volatile uint32_t idlef : 1;
@@ -158,7 +156,7 @@ struct at32f415::usart::Register {
        *
        * - 0：未收到；
        * - 1：收到。
-       * 
+       *
        * 復位值：0x1
        */
       volatile uint32_t rdbf : 1;
@@ -172,7 +170,7 @@ struct at32f415::usart::Register {
        *
        * - 0：未完成；
        * - 1：完成。
-       * 
+       *
        * 復位值：0x1
        */
       volatile uint32_t tdc : 1;
@@ -186,7 +184,7 @@ struct at32f415::usart::Register {
        *
        * 0：非空；
        * 1：空。
-       * 
+       *
        * 復位值：0x0
        */
       volatile uint32_t tdbe : 1;
@@ -195,10 +193,10 @@ struct at32f415::usart::Register {
        * @brief 間隔幀標誌 (break frame flag) [8] (RO)
        *
        * 當檢測到間隔幀時，該位被硬件置起，由軟件將其清零。
-       * 
+       *
        * - 0：無；
        * - 1：有。
-       * 
+       *
        * 復位值：0x0
        */
       volatile uint32_t bff : 1;
@@ -211,7 +209,7 @@ struct at32f415::usart::Register {
        *
        * - 0：無；
        * - 1：有。
-       * 
+       *
        * 復位值：0x0
        */
       volatile uint32_t ctscf : 1; /* [9] */
@@ -227,7 +225,7 @@ struct at32f415::usart::Register {
   union {
     /**
      * @brief 數據寄存器 (USART_DT), offset:0x04
-     * 
+     *
      * 偏移位置：0x04
      * 復位值：0x0000 0000
      */
@@ -260,7 +258,7 @@ struct at32f415::usart::Register {
      * @brief 波特比率寄存器 (USART_BAUDR) , offset:0x08
      *
      * 注意：如果TE或 RE被分別禁止，波特計數器停止計數。
-     * 
+     *
      * 偏移位置：0x08
      * 復位值：0x0000 0000
      */
@@ -287,7 +285,7 @@ struct at32f415::usart::Register {
   union {
     /**
      * @brief 控制寄存器1 (UART CTRL 1) , offset:0x0C
-     * 
+     *
      * 偏移位置：0x0C
      * 復位值：0x0000 0000
      */
@@ -445,7 +443,7 @@ struct at32f415::usart::Register {
   union {
     /**
      * @brief 控制寄存器2 (USART_CTRL2), offset:0x10
-     * 
+     *
      * 偏移位置：0x10
      * 復位值：0x0000 0000
      */
@@ -568,7 +566,7 @@ struct at32f415::usart::Register {
   union {
     /**
      * @brief 控制寄存器3 (USART_CTRL3), offset:0x14
-     * 
+     *
      * 偏移位置：0x14
      * 復位值：0x0000 0000
      */
@@ -683,7 +681,7 @@ struct at32f415::usart::Register {
   union {
     /**
      * @brief 保護時間和預分頻寄存器 (USART_GDIV), offset:0x18
-     * 
+     *
      * 偏移位置：0x18
      * 復位值：0x0000 0000
      */
@@ -697,21 +695,21 @@ struct at32f415::usart::Register {
        * @brief 紅外或者智能卡分頻係數(IrDA/smartcard division)[7:0] <RW>
        *
        * 紅外(IrDA)模式：
-       * 
+       *
        * 8 位[7：0]有效，普通模式無效且只能設置為 00000001，
-       * 
+       *
        * 低功耗模式分頻係數對外設時鐘進行分頻，作為脈衝寬度的基數週期；
-       * 
+       *
        * - 00000000：保留–不要寫入該值；
        * - 00000001：1 分頻；
        * - 00000010：2 分頻；
        * - ......
-       * 
-       *  
+       *
+       *
        * 智能卡模式：
-       * 
+       *
        * 低 5 位[4：0]有效，分頻係數對外設時鐘進行分頻，給智能卡提供時鐘。可以設置為如下值：
-       * 
+       *
        * - 00000：保留–不要寫入該值；
        * - 00001：2 分頻；
        * - 00010：4 分頻；
@@ -741,4 +739,4 @@ struct at32f415::usart::Register {
  * End of file
  */
 
-#endif /* AT32F415_238DC162_D5C0_4BA0_BE3D_ACD29155C0EC */
+#endif /* CHIP_238DC162_D5C0_4BA0_BE3D_ACD29155C0EC */

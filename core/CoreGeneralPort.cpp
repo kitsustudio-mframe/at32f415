@@ -8,13 +8,11 @@
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "./../crm/package-info.h"
-#include "lang/package-info.h"
-
-//-----------------------------------------------------------------------------------------
 #include "./CoreGeneralPort.h"
+
+//-----------------------------------------------------------------------------------------
+#include "chip.h"
+#include "mframe.h"
 
 /* ****************************************************************************************
  * Namespace
@@ -23,11 +21,11 @@
 /* ****************************************************************************************
  * Using
  */
-using namespace at32f415::core;
+using namespace chip::core;
 
-using at32f415::crm::CRM;
-using at32f415::crm::PeriphClock;
-using at32f415::crm::PeriphReset;
+using chip::crm::CRM;
+using chip::crm::PeriphClock;
+using chip::crm::PeriphReset;
 
 /* ****************************************************************************************
  * Macro
@@ -64,21 +62,21 @@ CoreGeneralPort::~CoreGeneralPort(void) {
 /* ****************************************************************************************
  * Public Method <Static>
  */
-at32f415::crm::PeriphClock CoreGeneralPort::getPeriphClock(gpio::Register& reg) {
+chip::crm::PeriphClock CoreGeneralPort::getPeriphClock(gpio::Register& reg) {
   switch (reinterpret_cast<uint32_t>(&reg)) {
-    case Chip::BASE_GPIOA:
+    case AT32F415::BASE_GPIOA:
       return PeriphClock::GPIOA;
 
-    case Chip::BASE_GPIOB:
+    case AT32F415::BASE_GPIOB:
       return PeriphClock::GPIOB;
 
-    case Chip::BASE_GPIOC:
+    case AT32F415::BASE_GPIOC:
       return PeriphClock::GPIOC;
 
-    case Chip::BASE_GPIOD:
+    case AT32F415::BASE_GPIOD:
       return PeriphClock::GPIOD;
 
-    case Chip::BASE_GPIOF:
+    case AT32F415::BASE_GPIOF:
       return PeriphClock::GPIOF;
 
     default:
@@ -86,7 +84,7 @@ at32f415::crm::PeriphClock CoreGeneralPort::getPeriphClock(gpio::Register& reg) 
   }
 }
 /* ****************************************************************************************
- * Public Method <Override> hal::Base
+ * Public Method <Override> mframe::hal::Base
  */
 
 /**
@@ -96,7 +94,7 @@ bool CoreGeneralPort::deinit(void) {
   if (!this->isInit())
     return false;
 
-  at32f415::crm::CRM::periphClockEnable(getPeriphClock(this->mReg), false);
+  chip::crm::CRM::periphClockEnable(getPeriphClock(this->mReg), false);
   return true;
 }
 
@@ -107,7 +105,7 @@ bool CoreGeneralPort::init(void) {
   if (this->isInit())
     return false;
 
-  at32f415::crm::CRM::periphClockEnable(getPeriphClock(this->mReg), true);
+  chip::crm::CRM::periphClockEnable(getPeriphClock(this->mReg), true);
   return false;
 }
 
@@ -117,11 +115,11 @@ bool CoreGeneralPort::init(void) {
  * @return false = not init, true = initd
  */
 bool CoreGeneralPort::isInit(void) {
-  return at32f415::crm::CRM::getPeriphClockEnable(getPeriphClock(this->mReg));
+  return chip::crm::CRM::getPeriphClockEnable(getPeriphClock(this->mReg));
 }
 
 /* ****************************************************************************************
- * Public Method <Override> hal::GeneralPort
+ * Public Method <Override> mframe::hal::GeneralPort
  */
 
 /**
@@ -393,7 +391,7 @@ bool CoreGeneralPort::setAnalog(uint32_t pin) {
 /**
  *
  */
-at32f415::gpio::Register& CoreGeneralPort::getRegister(void) {
+chip::gpio::Register& CoreGeneralPort::getRegister(void) {
   return this->mReg;
 }
 

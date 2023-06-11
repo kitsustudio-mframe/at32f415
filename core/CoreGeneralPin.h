@@ -11,27 +11,25 @@
 /* ****************************************************************************************
  * Include
  */
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../gpio/package-info.h"
-#include "hal/package-info.h"
-#include "lang/package-info.h"
-//-----------------------------------------------------------------------------------------
-#include "./CoreGeneralPort.h"
+#include "./../core/CoreGeneralPort.h"
+#include "./../gpio/GPIO.h"
 
 /* ****************************************************************************************
  * Namespace
  */
 
-namespace at32f415::core {
+namespace chip::core {
   class CoreGeneralPin;
 }
 
 /* ****************************************************************************************
  * Class Object
  */
-class at32f415::core::CoreGeneralPin : public lang::Object,
-                                       public hal::GeneralPin {
+class chip::core::CoreGeneralPin : public mframe::lang::Object,
+                                   public mframe::hal::GeneralPin {
   /* **************************************************************************************
    * Subclass
    */
@@ -83,7 +81,7 @@ class at32f415::core::CoreGeneralPin : public lang::Object,
    */
 
   /* **************************************************************************************
-   * Public Method <Override> - hal::GeneralOutput
+   * Public Method <Override> - mframe::hal::GeneralOutput
    */
  public:
   /**
@@ -112,7 +110,7 @@ class at32f415::core::CoreGeneralPin : public lang::Object,
   virtual void setValue(bool level) override;
 
   /* **************************************************************************************
-   * Public Method <Override> - hal::GeneralInput
+   * Public Method <Override> - mframe::hal::GeneralInput
    */
  public:
   /**
@@ -124,22 +122,22 @@ class at32f415::core::CoreGeneralPin : public lang::Object,
   virtual bool getValue(void) override;
 
   /* **************************************************************************************
-   * Public Method <Override> - hal::GeneralPin
+   * Public Method <Override> - mframe::hal::GeneralPin
    */
   /**
    * @brief
    *
    * @return PinMode
    */
-  virtual hal::GeneralPinMode getPinMode(void) override;
+  virtual mframe::hal::GeneralPinMode getPinMode(void) override;
 
   /**
    * @brief Set the Pin Mode object
    *
    * @param mode
-   * @return hal::GeneralPinMode 返回設定模式
+   * @return mframe::hal::GeneralPinMode 返回設定模式
    */
-  virtual hal::GeneralPinMode setPinMode(hal::GeneralPinMode mode) override;
+  virtual mframe::hal::GeneralPinMode setPinMode(mframe::hal::GeneralPinMode mode) override;
 
   /**
    * @brief  Get io direction.

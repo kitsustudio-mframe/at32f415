@@ -4,29 +4,29 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_D44FCB04_69D0_4E5E_A8D7_88BCFB506302
-#define AT32F415_D44FCB04_69D0_4E5E_A8D7_88BCFB506302
+#ifndef CHIP_D44FCB04_69D0_4E5E_A8D7_88BCFB506302
+#define CHIP_D44FCB04_69D0_4E5E_A8D7_88BCFB506302
 
 /* ****************************************************************************************
  * Include
  */
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::tmr::subordinate {
+namespace chip::tmr::subordinate {
   enum struct ModeSelect : uint8_t;
 }
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-enum struct at32f415::tmr::subordinate::ModeSelect : uint8_t {
+enum struct chip::tmr::subordinate::ModeSelect : uint8_t {
   DISABLE = 0x00,         /*!< subordinate mode disable */
   ENCODER_A = 0x01,       /*!< subordinate mode select encoder mode a */
   ENCODER_B = 0x02,       /*!< subordinate mode select encoder mode b */
@@ -41,4 +41,4 @@ enum struct at32f415::tmr::subordinate::ModeSelect : uint8_t {
  * End of file
  */
 
-#endif /* AT32F415_D44FCB04_69D0_4E5E_A8D7_88BCFB506302 */
+#endif /* CHIP_D44FCB04_69D0_4E5E_A8D7_88BCFB506302 */

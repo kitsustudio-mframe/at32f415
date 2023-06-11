@@ -4,42 +4,40 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef AT32F415_046BB99C_B4E1_4688_B3BD_014FD9291302
-#define AT32F415_046BB99C_B4E1_4688_B3BD_014FD9291302
+#ifndef CHIP_046BB99C_B4E1_4688_B3BD_014FD9291302
+#define CHIP_046BB99C_B4E1_4688_B3BD_014FD9291302
 
 /* ****************************************************************************************
  * Include
  */
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "lang/package-info.h"
-
-//-----------------------------------------------------------------------------------------
-#include "./../Chip.h"
-#include "./Channel.h"
-#include "./Config.h"
-#include "./DataAlign.h"
-#include "./Flag.h"
-#include "./Interrupt.h"
-#include "./OrdinaryTrig.h"
-#include "./PreemptChannel.h"
-#include "./PreemptTrig.h"
-#include "./Register.h"
-#include "./SampleTime.h"
-#include "./VoltageMonitoring.h"
+#include "./../AT32F415.h"
+#include "./../adc/Channel.h"
+#include "./../adc/Config.h"
+#include "./../adc/DataAlign.h"
+#include "./../adc/Flag.h"
+#include "./../adc/Interrupt.h"
+#include "./../adc/OrdinaryTrig.h"
+#include "./../adc/PreemptChannel.h"
+#include "./../adc/PreemptTrig.h"
+#include "./../adc/Register.h"
+#include "./../adc/SampleTime.h"
+#include "./../adc/VoltageMonitoring.h"
 
 /* ****************************************************************************************
  * Namespace
  */
-namespace at32f415::adc {
+namespace chip::adc {
   class ADC;
   extern Register& ADC1;
-}  // namespace at32f415::adc
+}  // namespace chip::adc
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-class at32f415::adc::ADC {
+class chip::adc::ADC {
   /* **************************************************************************************
    * Variable <Public>
    */
@@ -620,4 +618,4 @@ class at32f415::adc::ADC {
  * End of file
  */
 
-#endif /* AT32F415_046BB99C_B4E1_4688_B3BD_014FD9291302 */
+#endif /* CHIP_046BB99C_B4E1_4688_B3BD_014FD9291302 */

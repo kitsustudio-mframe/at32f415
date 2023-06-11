@@ -8,26 +8,22 @@
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-#include "hal/package-info.h"
-#include "lang/package-info.h"
-
-//-----------------------------------------------------------------------------------------
-#include "./../crm/package-info.h"
-#include "./../flash/package-info.h"
 #include "./Core.h"
+
+//-----------------------------------------------------------------------------------------
+#include "chip.h"
+#include "mframe.h"
 
 /* ****************************************************************************************
  * Using
  */
-using namespace at32f415::core;
-using namespace at32f415::crm;
+using namespace chip::core;
+using namespace chip::crm;
 
 //-----------------------------------------------------------------------------------------
 
-using at32f415::flash::FLASH;
-using at32f415::flash::WaitCycle;
+using chip::flash::FLASH;
+using chip::flash::WaitCycle;
 
 /* ****************************************************************************************
  * Extern
@@ -44,11 +40,11 @@ CoreInterrupt Core::interrupt = CoreInterrupt();
 
 CoreIomux Core::iomux = CoreIomux();
 
-CoreGeneralPort Core::gpioa = CoreGeneralPort(at32f415::gpio::GPIOA);
-CoreGeneralPort Core::gpiob = CoreGeneralPort(at32f415::gpio::GPIOB);
-CoreGeneralPort Core::gpioc = CoreGeneralPort(at32f415::gpio::GPIOC);
-CoreGeneralPort Core::gpiod = CoreGeneralPort(at32f415::gpio::GPIOD);
-CoreGeneralPort Core::gpiof = CoreGeneralPort(at32f415::gpio::GPIOF);
+CoreGeneralPort Core::gpioa = CoreGeneralPort(chip::gpio::GPIOA);
+CoreGeneralPort Core::gpiob = CoreGeneralPort(chip::gpio::GPIOB);
+CoreGeneralPort Core::gpioc = CoreGeneralPort(chip::gpio::GPIOC);
+CoreGeneralPort Core::gpiod = CoreGeneralPort(chip::gpio::GPIOD);
+CoreGeneralPort Core::gpiof = CoreGeneralPort(chip::gpio::GPIOF);
 
 #pragma clang diagnostic pop
 /* ****************************************************************************************
@@ -81,7 +77,7 @@ Core::~Core(void) {
  *
  */
 uint32_t Core::getSystemCoreClock(void) {
-  return Chip::systemCoreClockHz;
+  return AT32F415::systemCoreClockHz;
 }
 
 /**
@@ -158,7 +154,7 @@ bool Core::setSystemCoreClock(uint32_t mhz) {
   CRM::usbClockSourceSelect(SourceClockUSB::HICK);
 
   /* update system_core_clock global variable */
-  Chip::systemCoreClockUpdate();
+  AT32F415::systemCoreClockUpdate();
 
   return true;
 }

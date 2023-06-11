@@ -1,20 +1,17 @@
 /**
  * Copyright (c) 2020 ZxyKira
  * All rights reserved.
- * 
+ *
  * SPDX-License-Identifier: MIT
  */
 
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
-
-
-//-----------------------------------------------------------------------------------------
 #include "./IOMUX.h"
-#include "./../../crm/package-info.h"
+
+//-----------------------------------------------------------------------------------------
+#include "chip.h"
 
 /* ****************************************************************************************
  * Macro
@@ -31,24 +28,24 @@
 //-----------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------
-using at32f415::gpio::iomux::IOMUX;
-using at32f415::gpio::iomux::Register;
-using at32f415::crm::CRM;
-using at32f415::crm::PeriphReset;
+using chip::crm::CRM;
+using chip::crm::PeriphReset;
+using chip::gpio::iomux::IOMUX;
+using chip::gpio::iomux::Register;
 
 /* ****************************************************************************************
  * Variable <Static>
  */
-Register& at32f415::gpio::iomux::IOMUX0 = *reinterpret_cast<Register*>(at32f415::Chip::BASE_IOMUX);
+Register& chip::gpio::iomux::IOMUX0 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_IOMUX);
 
 /* ****************************************************************************************
  * Construct Method
  */
-IOMUX::IOMUX(void){
+IOMUX::IOMUX(void) {
   return;
 }
 
-IOMUX::~IOMUX(void){
+IOMUX::~IOMUX(void) {
   return;
 }
 /* ****************************************************************************************
@@ -60,17 +57,17 @@ IOMUX::~IOMUX(void){
  */
 
 /** ---------------------------------------------------------------------------------------
- *  
+ *
  */
-void IOMUX::iomuxReset(void){
+void IOMUX::iomuxReset(void) {
   CRM::periphReset(PeriphReset::RESET_IOMUX, true);
   CRM::periphReset(PeriphReset::RESET_IOMUX, false);
 }
 
 /** ---------------------------------------------------------------------------------------
- *  
+ *
  */
-void IOMUX::eventOutputConfig(PortSource portSource, PinsSource pinsSource){
+void IOMUX::eventOutputConfig(PortSource portSource, PinsSource pinsSource) {
   uint32_t tmpreg = 0x00;
 
   tmpreg = IOMUX0.evtout;
@@ -84,14 +81,13 @@ void IOMUX::eventOutputConfig(PortSource portSource, PinsSource pinsSource){
 }
 
 /** ---------------------------------------------------------------------------------------
- *  
+ *
  */
-void IOMUX::exintLineConfig(PortSource portSource, PinsSource pinsSource){
+void IOMUX::exintLineConfig(PortSource portSource, PinsSource pinsSource) {
   uint32_t tmp = 0x00;
   tmp = ((uint32_t)0x0F) << (0x04 * (static_cast<uint8_t>(pinsSource) & (uint8_t)0x03));
 
-  switch (static_cast<uint8_t>(pinsSource) >> 0x02)
-  {
+  switch (static_cast<uint8_t>(pinsSource) >> 0x02) {
     case 0:
       IOMUX0.exintc1 &= ~tmp;
       IOMUX0.exintc1 |= ((static_cast<uint32_t>(portSource)) << (0x04 * (static_cast<uint8_t>(pinsSource) & (uint8_t)0x03)));
@@ -114,14 +110,14 @@ void IOMUX::exintLineConfig(PortSource portSource, PinsSource pinsSource){
 }
 
 /** ---------------------------------------------------------------------------------------
- *  
+ *
  */
-void IOMUX::pinRemapConfig(PinMap pinMap, bool newState){
+void IOMUX::pinRemapConfig(PinMap pinMap, bool newState) {
   uint32_t reg_addr, remap_mask;
   uint8_t bit_offset, bit_num, bit_val;
 
   /* get register address, bit offset, bit number and remap value */
-  reg_addr = Chip::BASE_IOMUX + (static_cast<uint32_t>(pinMap) >> 24);
+  reg_addr = AT32F415::BASE_IOMUX + (static_cast<uint32_t>(pinMap) >> 24);
   bit_offset = (static_cast<uint32_t>(pinMap) >> 16) & 0xFF;
   bit_num = (static_cast<uint32_t>(pinMap) >> 8) & 0xFF;
   bit_val = static_cast<uint32_t>(pinMap) & 0xFF;
@@ -135,8 +131,7 @@ void IOMUX::pinRemapConfig(PinMap pinMap, bool newState){
   /* clear remap value */
   *(uint32_t*)reg_addr &= ~remap_mask;
 
-  if(newState != false)
-  {
+  if (newState != false) {
     /* set remap value */
     *(uint32_t*)reg_addr |= (uint32_t)(bit_val << bit_offset);
   }
@@ -164,7 +159,7 @@ void IOMUX::pinRemapConfig(PinMap pinMap, bool newState){
 /* ****************************************************************************************
  * Private Method
  */
- 
+
 #pragma clang diagnostic pop
 /* ****************************************************************************************
  * End of file
