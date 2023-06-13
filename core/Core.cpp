@@ -51,16 +51,12 @@ CoreGeneralPort Core::gpiof = CoreGeneralPort(chip::gpio::GPIOF);
  * Construct Method
  */
 
-/**
- *
- */
+//-----------------------------------------------------------------------------------------
 Core::Core(void) {
   return;
 }
 
-/**
- *
- */
+//-----------------------------------------------------------------------------------------
 Core::~Core(void) {
   return;
 }
@@ -73,16 +69,12 @@ Core::~Core(void) {
  * Public Method <Static>
  */
 
-/**
- *
- */
+//-----------------------------------------------------------------------------------------
 uint32_t Core::getSystemCoreClock(void) {
   return AT32F415::systemCoreClockHz;
 }
 
-/**
- *
- */
+//-----------------------------------------------------------------------------------------
 bool Core::setSystemCoreClock(uint32_t mhz) {
   if ((mhz > 256) || (mhz < 16))
     return false;
@@ -157,6 +149,19 @@ bool Core::setSystemCoreClock(uint32_t mhz) {
   AT32F415::systemCoreClockUpdate();
 
   return true;
+}
+
+//-----------------------------------------------------------------------------------------
+void Core::defaultSetup(void){
+  Core::setSystemCoreClock(144);
+  Core::iomux.init();
+  Core::gpioa.init();
+  Core::gpiob.init();
+  Core::gpioc.init();
+  Core::gpiod.init();
+  Core::gpiof.init();
+  Core::iomux.remapSWDIO(CoreIomux::MapSWDIO::JTAGDISABLE);
+  return;
 }
 
 /* ****************************************************************************************

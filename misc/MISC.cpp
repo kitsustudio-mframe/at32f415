@@ -83,7 +83,7 @@ void MISC::priorityGroupConfig(PriorityGroup priority_group) {
  *
  */
 void MISC::vectorTableSet(uint32_t base, uint32_t offset) {
-  SCB->VTOR = base | (offset & (uint32_t)0x1FFFFF80);
+  SCB->VTOR = base | (offset & static_cast<uint32_t>(0x1FFFFF80));
 }
 
 /** ---------------------------------------------------------------------------------------

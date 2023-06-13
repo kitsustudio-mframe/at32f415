@@ -4,9 +4,8 @@
  *
  * SPDX-License-Identifier: MIT
  */
-
-#ifndef CORE_B783141D_7465_4A74_900D_2B6244C11E04
-#define CORE_B783141D_7465_4A74_900D_2B6244C11E04
+#ifndef CHIP_7658BF00_E759_4C0A_83D5_FAE155AB2283
+#define CHIP_7658BF00_E759_4C0A_83D5_FAE155AB2283
 
 /* ****************************************************************************************
  * Include
@@ -14,37 +13,22 @@
 #include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../core/CoreGeneralPort.h"
-#include "./../core/CoreInterrupt.h"
-#include "./../core/CoreIomux.h"
 
 /* ****************************************************************************************
  * Namespace
  */
-
 namespace chip::core {
-  class Core;
-}
+  class CoreHardwareInfo;
+}  // namespace chip::core
 
 /* ****************************************************************************************
- * Class Object
+ * Class/Interface/Struct/Enum
  */
-class chip::core::Core : public mframe::lang::Object {
-  /* **************************************************************************************
-   * Subclass
-   */
-
+class chip::core::CoreHardwareInfo : public mframe::lang::Object,
+                                     public mframe::lang::managerment::HardwareInfo {
   /* **************************************************************************************
    * Variable <Public>
    */
- public:
-  static core::CoreInterrupt interrupt;
-  static core::CoreIomux iomux;
-  static core::CoreGeneralPort gpioa;
-  static core::CoreGeneralPort gpiob;
-  static core::CoreGeneralPort gpioc;
-  static core::CoreGeneralPort gpiod;
-  static core::CoreGeneralPort gpiof;
 
   /* **************************************************************************************
    * Variable <Protected>
@@ -65,16 +49,18 @@ class chip::core::Core : public mframe::lang::Object {
   /* **************************************************************************************
    * Construct Method
    */
- private:
+ public:
   /**
+   * @brief Construct a new Core Hardware Info object
    *
    */
-  Core(void);
+  CoreHardwareInfo(void);
 
   /**
+   * @brief Destroy the Core Hardware Info object
    *
    */
-  virtual ~Core(void) override;
+  virtual ~CoreHardwareInfo(void) override;
 
   /* **************************************************************************************
    * Operator Method
@@ -83,34 +69,16 @@ class chip::core::Core : public mframe::lang::Object {
   /* **************************************************************************************
    * Public Method <Static>
    */
- public:
-
-  /**
-   * @brief Get the System Core Clock object
-   * 
-   * @return uint32_t 
-   */
-  static uint32_t getSystemCoreClock(void);
-
-  /**
-   * @brief Set the System Core Clock object
-   *
-   * @param mhz
-   * @return true
-   * @return false
-   */
-  static bool setSystemCoreClock(uint32_t mhz);
-
-  /**
-   * @brief 
-   * 
-   */
-  static void defaultSetup(void);
 
   /* **************************************************************************************
-   * Public Method <Override>
+   * Public Method <Override> - mframe::lang::managerment::HardwareInfo
    */
+ public:
+  virtual int systemClock(void) override;
 
+  virtual const char* manufacturer(void) override;
+
+  virtual const char* model(void) override;
   /* **************************************************************************************
    * Public Method
    */
@@ -140,8 +108,8 @@ class chip::core::Core : public mframe::lang::Object {
    */
 };
 
-/* *****************************************************************************************
+/* ****************************************************************************************
  * End of file
  */
 
-#endif /* CORE_B783141D_7465_4A74_900D_2B6244C11E04 */
+#endif /* CHIP_7658BF00_E759_4C0A_83D5_FAE155AB2283 */

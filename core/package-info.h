@@ -18,6 +18,7 @@
 #include "./CoreEdgeTrigger.h"
 #include "./CoreGeneralPin.h"
 #include "./CoreGeneralPort.h"
+#include "./CoreHardwareInfo.h"
 #include "./CoreInterrupt.h"
 #include "./CoreIomux.h"
 #include "./CoreTimer.h"
