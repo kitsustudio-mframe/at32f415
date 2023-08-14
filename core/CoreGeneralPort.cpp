@@ -360,7 +360,10 @@ bool CoreGeneralPort::configOutput(uint32_t pin, OutputMode mode, bool opendrain
       break;
   }
 
-  this->mReg.scr |= (1 << pin);
+  if(value)
+    this->mReg.scr |= (1 << pin);
+  else
+    this->mReg.clr |= (1 << pin);
 
   return false;
 }
