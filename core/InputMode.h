@@ -4,8 +4,8 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef CORE_BA1F141E_4C52_4D14_ADD3_852400BDE8F1
-#define CORE_BA1F141E_4C52_4D14_ADD3_852400BDE8F1
+#ifndef CHIP_BA1F141E_4C52_4D14_ADD3_852400BDE8F1
+#define CHIP_BA1F141E_4C52_4D14_ADD3_852400BDE8F1
 
 /* ****************************************************************************************
  * Include
@@ -36,4 +36,4 @@ enum struct chip::core::InputMode : char {
  * End of file
  */
 
-#endif /* CORE_BA1F141E_4C52_4D14_ADD3_852400BDE8F1 */
+#endif /* CHIP_BA1F141E_4C52_4D14_ADD3_852400BDE8F1 */

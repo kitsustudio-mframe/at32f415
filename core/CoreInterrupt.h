@@ -5,8 +5,8 @@
  * SPDX-License-Identifier: MIT
  */
 
-#ifndef CORE_F1908D49_0286_4F03_95AD_EC7128B908B9
-#define CORE_F1908D49_0286_4F03_95AD_EC7128B908B9
+#ifndef CHIP_F1908D49_0286_4F03_95AD_EC7128B908B9
+#define CHIP_F1908D49_0286_4F03_95AD_EC7128B908B9
 
 /* ****************************************************************************************
  * Include
@@ -216,4 +216,4 @@ class chip::core::CoreInterrupt : public mframe::lang::Object, mframe::hal::Inte
  * End of file
  */
 
-#endif /* CORE_F1908D49_0286_4F03_95AD_EC7128B908B9 */
+#endif /* CHIP_F1908D49_0286_4F03_95AD_EC7128B908B9 */
