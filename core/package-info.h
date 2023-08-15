@@ -15,6 +15,8 @@
  * Include
  */
 #include "./Core.h"
+#include "./CoreAnalogInputPin.h"
+#include "./CoreAnalogInputPort.h"
 #include "./CoreEdgeTrigger.h"
 #include "./CoreGeneralPin.h"
 #include "./CoreGeneralPort.h"

@@ -635,6 +635,26 @@
               <FilePath>.\core\Core.h</FilePath>
             </File>
             <File>
+              <FileName>CoreAnalogInputPin.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\core\CoreAnalogInputPin.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CoreAnalogInputPin.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\core\CoreAnalogInputPin.h</FilePath>
+            </File>
+            <File>
+              <FileName>CoreAnalogInputPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\core\CoreAnalogInputPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CoreAnalogInputPort.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\core\CoreAnalogInputPort.h</FilePath>
+            </File>
+            <File>
               <FileName>CoreGeneralPin.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\core\CoreGeneralPin.cpp</FilePath>
