@@ -56,7 +56,7 @@ CoreAnalogInputPin::~CoreAnalogInputPin(void) {
  */
 
 //-----------------------------------------------------------------------------------------
-int CoreAnalogInputPin::convert(void) {
+int CoreAnalogInputPin::read(void) {
   return this->mCoreAnalogInputPort.read(this->mChannel);
 }
 

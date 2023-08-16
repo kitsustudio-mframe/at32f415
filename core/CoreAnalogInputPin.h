@@ -82,7 +82,7 @@ class chip::core::CoreAnalogInputPin : public mframe::lang::Object,
    */
  public:
 
-  virtual int convert(void) override;
+  virtual int read(void) override;
 
   virtual int getConvertLevel(void) override;
 

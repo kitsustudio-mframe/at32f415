@@ -25,7 +25,8 @@ namespace chip::core {
  * Class/Interface/Struct/Enum
  */
 class chip::core::CoreAnalogInputPort : public mframe::lang::Object,
-public mframe::hal::AnalogInputPort {
+                                        public mframe::hal::AnalogInputPort,
+                                        public mframe::hal::InterruptEvent {
   /* **************************************************************************************
    * Variable <Public>
    */
@@ -37,9 +38,8 @@ public mframe::hal::AnalogInputPort {
   /* **************************************************************************************
    * Variable <Private>
    */
-  private:
-    uint16_t mValue[16];
-
+ private:
+  int mResult[16];
   /* **************************************************************************************
    * Abstract method <Public>
    */
@@ -54,13 +54,13 @@ public mframe::hal::AnalogInputPort {
  public:
   /**
    * @brief Construct a new Core Analog Input Port object
-   * 
+   *
    */
   CoreAnalogInputPort(void);
 
   /**
    * @brief Destroy the Core Analog Input Port object
-   * 
+   *
    */
   virtual ~CoreAnalogInputPort(void) override;
 
@@ -76,56 +76,63 @@ public mframe::hal::AnalogInputPort {
    * Public Method <Override> - mframe::hal::AnalogInputPort
    */
  public:
-  /**
-   * @brief
-   *
-   * @param pin
-   * @return int
-   */
   virtual int read(int channel) override;
 
-  /**.
-   * @brief Get the adc convert bit.
-   *
-   * @return int
-   */
   virtual int getConvertLevel(void) override;
 
   /* **************************************************************************************
    * Public Method <Override> - mframe::hal::Base
    */
  public:
-  /**
-   * @brief 硬體去初始化。
-   *
-   * @return true 去初始化成功。
-   * @return false 去初始化失敗，可能原因如下：
-   * - 設備尚未初始化。
-   * - 設備異常。
-   */
   virtual bool deinit(void) override;
 
-  /**
-   * @brief 硬體初始化。
-   *
-   * @return true 初始化成功
-   * @return false 初始化失敗，可能原因如下：
-   * - 設備已經初始化。
-   * - 設備異常。
-   */
   virtual bool init(void) override;
 
-  /**
-   * @brief 取得硬體是否已初始化。
-   *
-   * @return true 設備上會初始化。
-   * @return false 設備已經初始化。
-   */
   virtual bool isInit(void) override;
+
+  /* **************************************************************************************
+   * Public Method <Override> - mframe::hal::InterruptEvent
+   */
+ public:
+  virtual void interruptEvent(void) override;
 
   /* **************************************************************************************
    * Public Method
    */
+ public:
+  /**
+   * @brief 設定ADC轉換取樣時間
+   *
+   * @param channel 通道
+   * @param sampleTime 取樣時間
+   * @return true 設定成功
+   * @return false 設定失敗，可能為未知的通道
+   */
+  virtual bool setSampleTime(int channel, chip::adc::SampleTime sampleTime);
+
+  /**
+   * @brief ADC校正。
+   *
+   * @return true 校正成功。
+   * @return false 校正失敗，可能ADC尚未啟用或是忙碌。
+   */
+  virtual bool calibration(void);
+
+  /**
+   * @brief ADC啟用。
+   *
+   * @return true 啟用成功。
+   * @return false 啟用失敗，可能ADC已經啟用或是尚未初始化。
+   */
+  virtual bool enable(void);
+
+  /**
+   * @brief ADC停用。
+   *
+   * @return true 停用成功。
+   * @return false 停用失敗，可能ADC尚未啟用或是尚未初始化。
+   */
+  virtual bool disable(void);
 
   /* **************************************************************************************
    * Protected Method <Static>

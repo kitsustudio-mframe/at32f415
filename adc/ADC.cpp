@@ -102,9 +102,7 @@ void ADC::voltageMonitorThresholdValueSet(Register& reg, uint16_t highThreshold,
   return;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------------------
 void ADC::preemptChannelSet(Register& reg, Channel channel, uint8_t sequence, SampleTime sampleTime) {
   uint16_t sequence_index = 0;
   switch (channel) {
@@ -185,9 +183,7 @@ void ADC::preemptChannelSet(Register& reg, Channel channel, uint8_t sequence, Sa
   }
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------------------
 void ADC::ordinaryChannelSet(Register& reg, Channel channel, uint8_t sequence, SampleTime sampleTime) {
   switch (channel) {
     case Channel::CHANNEL0:
