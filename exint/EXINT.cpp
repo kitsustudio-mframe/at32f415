@@ -22,7 +22,7 @@
 using chip::exint::EXINT;
 
 //-----------------------------------------------------------------------------------------
-using chip::AT32F415;
+using chip::Processor;
 using chip::exint::Config;
 using chip::exint::Line;
 using chip::exint::Mode;
@@ -32,7 +32,7 @@ using chip::exint::Register;
 /* ****************************************************************************************
  * Variable <Static>
  */
-Register& chip::exint::EXINT0 = *reinterpret_cast<Register*>(AT32F415::BASE_EXINT);
+Register& chip::exint::EXINT0 = *reinterpret_cast<Register*>(Processor::BASE_EXINT);
 /* ****************************************************************************************
  * Construct Method
  */

@@ -13,7 +13,7 @@
 #include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../AT32F415.h"
+#include "./../Processor.h"
 #include "./../dma/Channel.h"
 #include "./../dma/ChannelRegister.h"
 #include "./../dma/Config.h"

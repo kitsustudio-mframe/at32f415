@@ -13,7 +13,7 @@
 #include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../AT32F415.h"
+#include "./../Processor.h"
 #include "./../crm/PeriphClock.h"
 #include "./../crm/PeriphReset.h"
 #include "./../gpio/DriveMode.h"

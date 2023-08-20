@@ -23,7 +23,7 @@
 using chip::gpio::GPIO;
 
 //-----------------------------------------------------------------------------------------
-using chip::AT32F415;
+using chip::Processor;
 using chip::crm::CRM;
 using chip::crm::PeriphReset;
 using chip::gpio::DriveMode;
@@ -39,11 +39,11 @@ using chip::gpio::Register;
 /* ****************************************************************************************
  * Variable <Static>
  */
-Register& chip::gpio::GPIOA = *reinterpret_cast<Register*>(AT32F415::BASE_GPIOA);
-Register& chip::gpio::GPIOB = *reinterpret_cast<Register*>(AT32F415::BASE_GPIOB);
-Register& chip::gpio::GPIOC = *reinterpret_cast<Register*>(AT32F415::BASE_GPIOC);
-Register& chip::gpio::GPIOD = *reinterpret_cast<Register*>(AT32F415::BASE_GPIOD);
-Register& chip::gpio::GPIOF = *reinterpret_cast<Register*>(AT32F415::BASE_GPIOF);
+Register& chip::gpio::GPIOA = *reinterpret_cast<Register*>(Processor::BASE_GPIOA);
+Register& chip::gpio::GPIOB = *reinterpret_cast<Register*>(Processor::BASE_GPIOB);
+Register& chip::gpio::GPIOC = *reinterpret_cast<Register*>(Processor::BASE_GPIOC);
+Register& chip::gpio::GPIOD = *reinterpret_cast<Register*>(Processor::BASE_GPIOD);
+Register& chip::gpio::GPIOF = *reinterpret_cast<Register*>(Processor::BASE_GPIOF);
 /* ****************************************************************************************
  * Construct Method
  */
@@ -62,23 +62,23 @@ Register& chip::gpio::GPIOF = *reinterpret_cast<Register*>(AT32F415::BASE_GPIOF)
 void GPIO::reset(Register& reg) {
   uint32_t base = reinterpret_cast<uint32_t>(&reg);
 
-  if (base == AT32F415::BASE_GPIOA) {
+  if (base == Processor::BASE_GPIOA) {
     CRM::periphReset(PeriphReset::RESET_GPIOA, true);
     CRM::periphReset(PeriphReset::RESET_GPIOA, false);
 
-  } else if (base == AT32F415::BASE_GPIOB) {
+  } else if (base == Processor::BASE_GPIOB) {
     CRM::periphReset(PeriphReset::RESET_GPIOB, true);
     CRM::periphReset(PeriphReset::RESET_GPIOB, false);
 
-  } else if (base == AT32F415::BASE_GPIOC) {
+  } else if (base == Processor::BASE_GPIOC) {
     CRM::periphReset(PeriphReset::RESET_GPIOC, true);
     CRM::periphReset(PeriphReset::RESET_GPIOC, false);
 
-  } else if (base == AT32F415::BASE_GPIOD) {
+  } else if (base == Processor::BASE_GPIOD) {
     CRM::periphReset(PeriphReset::RESET_GPIOD, true);
     CRM::periphReset(PeriphReset::RESET_GPIOD, false);
 
-  } else if (base == AT32F415::BASE_GPIOF) {
+  } else if (base == Processor::BASE_GPIOF) {
     CRM::periphReset(PeriphReset::RESET_GPIOF, true);
     CRM::periphReset(PeriphReset::RESET_GPIOF, false);
   }

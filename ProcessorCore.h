@@ -24,7 +24,7 @@ extern "C" {
 #define __Vendor_SysTickConfig 0 /*!< set to 1 if different systick config is used */
 #define __FPU_PRESENT 0U         /*!< fpu present                                  */
 
-#include "chip_irqn.h"
+#include "ProcessorInterrupt.h"
 
 /**
  * @}
@@ -32,7 +32,7 @@ extern "C" {
 
 #include <stdint.h>
 
-#include "arm/core_cm4.h"
+#include "arm.h"
 
 #ifdef __cplusplus
 }

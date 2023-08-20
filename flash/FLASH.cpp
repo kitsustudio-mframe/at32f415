@@ -24,7 +24,7 @@
 using chip::flash::FLASH;
 
 //-----------------------------------------------------------------------------------------
-using chip::AT32F415;
+using chip::Processor;
 using chip::flash::Interrupt;
 using chip::flash::Register;
 using chip::flash::Status;
@@ -34,7 +34,7 @@ using chip::flash::WaitCycle;
 /* ****************************************************************************************
  * Variable <Static>
  */
-Register &chip::flash::FLASH0 = *reinterpret_cast<Register *>(AT32F415::BASE_FLASH_REG);
+Register &chip::flash::FLASH0 = *reinterpret_cast<Register *>(Processor::BASE_FLASH_REG);
 
 /* ****************************************************************************************
  * Construct Method

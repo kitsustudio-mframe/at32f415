@@ -15,7 +15,7 @@
 #include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../AT32F415.h"
+#include "./../Processor.h"
 #include "./../flash/Flag.h"
 #include "./../flash/Interrupt.h"
 #include "./../flash/Register.h"

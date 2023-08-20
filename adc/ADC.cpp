@@ -36,7 +36,7 @@ using chip::crm::PeriphReset;
 /* ****************************************************************************************
  * Variable <Static>
  */
-Register& chip::adc::ADC1 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_ADC1);
+Register& chip::adc::ADC1 = *reinterpret_cast<Register*>(chip::Processor::BASE_ADC1);
 
 /* ****************************************************************************************
  * Construct Method
@@ -52,7 +52,7 @@ Register& chip::adc::ADC1 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_AD
 
 //-----------------------------------------------------------------------------------------
 void ADC::reset(Register& reg) {
-  if (reinterpret_cast<uint32_t>(&reg) == chip::AT32F415::BASE_ADC1) {
+  if (reinterpret_cast<uint32_t>(&reg) == chip::Processor::BASE_ADC1) {
     CRM::periphReset(PeriphReset::RESET_ADC1, true);
     CRM::periphReset(PeriphReset::RESET_ADC1, false);
   }

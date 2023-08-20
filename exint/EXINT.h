@@ -13,7 +13,7 @@
 #include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../AT32F415.h"
+#include "./../Processor.h"
 #include "./../exint/Config.h"
 #include "./../exint/Line.h"
 #include "./../exint/Mode.h"

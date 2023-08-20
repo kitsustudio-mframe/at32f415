@@ -15,7 +15,7 @@
 #include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../AT32F415.h"
+#include "./../Processor.h"
 #include "./BreakDutyConfig.h"
 #include "./BreakPolarity.h"
 #include "./ClockDivision.h"

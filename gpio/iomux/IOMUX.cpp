@@ -36,7 +36,7 @@ using chip::gpio::iomux::Register;
 /* ****************************************************************************************
  * Variable <Static>
  */
-Register& chip::gpio::iomux::IOMUX0 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_IOMUX);
+Register& chip::gpio::iomux::IOMUX0 = *reinterpret_cast<Register*>(chip::Processor::BASE_IOMUX);
 
 /* ****************************************************************************************
  * Construct Method
@@ -117,7 +117,7 @@ void IOMUX::pinRemapConfig(PinMap pinMap, bool newState) {
   uint8_t bit_offset, bit_num, bit_val;
 
   /* get register address, bit offset, bit number and remap value */
-  reg_addr = AT32F415::BASE_IOMUX + (static_cast<uint32_t>(pinMap) >> 24);
+  reg_addr = Processor::BASE_IOMUX + (static_cast<uint32_t>(pinMap) >> 24);
   bit_offset = (static_cast<uint32_t>(pinMap) >> 16) & 0xFF;
   bit_num = (static_cast<uint32_t>(pinMap) >> 8) & 0xFF;
   bit_val = static_cast<uint32_t>(pinMap) & 0xFF;

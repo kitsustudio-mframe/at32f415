@@ -13,7 +13,7 @@
 #include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../AT32F415.h"
+#include "./../Processor.h"
 #include "./../crm/AutoStepMode.h"
 #include "./../crm/ClockOutSelect.h"
 #include "./../crm/CoreClock.h"

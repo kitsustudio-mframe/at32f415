@@ -13,7 +13,7 @@
 #include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../AT32F415.h"
+#include "./../Processor.h"
 #include "./../adc/Channel.h"
 #include "./../adc/Config.h"
 #include "./../adc/DataAlign.h"

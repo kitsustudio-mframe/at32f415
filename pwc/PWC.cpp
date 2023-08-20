@@ -10,7 +10,7 @@
  */
 
 //-----------------------------------------------------------------------------------------
-#include "./../chip_arm.h"
+#include "./../ProcessorCore.h"
 #include "./../crm/package-info.h"
 
 //-----------------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ using chip::pwc::Register;
 /* ****************************************************************************************
  * Variable <Static>
  */
-Register& chip::pwc::PWC0 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_PWC);
+Register& chip::pwc::PWC0 = *reinterpret_cast<Register*>(chip::Processor::BASE_PWC);
 
 /* ****************************************************************************************
  * Construct Method

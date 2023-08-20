@@ -38,14 +38,14 @@ using chip::tmr::TMR;
 /* ****************************************************************************************
  * Variable <Static>
  */
-Register& chip::tmr::TMR1 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_TMR1);
-Register& chip::tmr::TMR2 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_TMR2);
-Register& chip::tmr::TMR3 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_TMR3);
-Register& chip::tmr::TMR4 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_TMR4);
-Register& chip::tmr::TMR5 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_TMR5);
-Register& chip::tmr::TMR9 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_TMR9);
-Register& chip::tmr::TMR10 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_TMR10);
-Register& chip::tmr::TMR11 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_TMR11);
+Register& chip::tmr::TMR1 = *reinterpret_cast<Register*>(chip::Processor::BASE_TMR1);
+Register& chip::tmr::TMR2 = *reinterpret_cast<Register*>(chip::Processor::BASE_TMR2);
+Register& chip::tmr::TMR3 = *reinterpret_cast<Register*>(chip::Processor::BASE_TMR3);
+Register& chip::tmr::TMR4 = *reinterpret_cast<Register*>(chip::Processor::BASE_TMR4);
+Register& chip::tmr::TMR5 = *reinterpret_cast<Register*>(chip::Processor::BASE_TMR5);
+Register& chip::tmr::TMR9 = *reinterpret_cast<Register*>(chip::Processor::BASE_TMR9);
+Register& chip::tmr::TMR10 = *reinterpret_cast<Register*>(chip::Processor::BASE_TMR10);
+Register& chip::tmr::TMR11 = *reinterpret_cast<Register*>(chip::Processor::BASE_TMR11);
 /* ****************************************************************************************
  * Construct Method
  */

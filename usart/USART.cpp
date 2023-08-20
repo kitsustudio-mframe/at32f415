@@ -49,11 +49,11 @@ using chip::usart::USART;
 /* ****************************************************************************************
  * Variable <Static>
  */
-Register& chip::usart::USART1 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_USART1);
-Register& chip::usart::USART2 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_USART2);
-Register& chip::usart::USART3 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_USART3);
-Register& chip::usart::UART4 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_UART4);
-Register& chip::usart::UART5 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_UART5);
+Register& chip::usart::USART1 = *reinterpret_cast<Register*>(chip::Processor::BASE_USART1);
+Register& chip::usart::USART2 = *reinterpret_cast<Register*>(chip::Processor::BASE_USART2);
+Register& chip::usart::USART3 = *reinterpret_cast<Register*>(chip::Processor::BASE_USART3);
+Register& chip::usart::UART4 = *reinterpret_cast<Register*>(chip::Processor::BASE_UART4);
+Register& chip::usart::UART5 = *reinterpret_cast<Register*>(chip::Processor::BASE_UART5);
 /* ****************************************************************************************
  * Construct Method
  */
@@ -83,22 +83,22 @@ USART::~USART(void) {
  *
  */
 void USART::reset(Register& reg) {
-  if (getBase(reg) == AT32F415::BASE_USART1) {
+  if (getBase(reg) == Processor::BASE_USART1) {
     CRM::periphReset(PeriphReset::RESET_USART1, true);
     CRM::periphReset(PeriphReset::RESET_USART1, false);
 
-  } else if (getBase(reg) == AT32F415::BASE_USART2) {
+  } else if (getBase(reg) == Processor::BASE_USART2) {
     CRM::periphReset(PeriphReset::RESET_USART2, true);
     CRM::periphReset(PeriphReset::RESET_USART2, false);
 
-  } else if (getBase(reg) == AT32F415::BASE_USART3) {
+  } else if (getBase(reg) == Processor::BASE_USART3) {
     CRM::periphReset(PeriphReset::RESET_USART3, true);
     CRM::periphReset(PeriphReset::RESET_USART3, false);
 
-  } else if (getBase(reg) == AT32F415::BASE_UART4) {
+  } else if (getBase(reg) == Processor::BASE_UART4) {
     CRM::periphReset(PeriphReset::RESET_UART4, true);
     CRM::periphReset(PeriphReset::RESET_UART4, false);
-  } else if (getBase(reg) == AT32F415::BASE_UART5) {
+  } else if (getBase(reg) == Processor::BASE_UART5) {
     CRM::periphReset(PeriphReset::RESET_UART5, true);
     CRM::periphReset(PeriphReset::RESET_UART5, false);
   }
@@ -112,7 +112,7 @@ void USART::init(Register& reg, uint32_t baudrate, DataBit dataBit, StopBit stop
   uint32_t apb_clock, temp_val;
   CRM::clocksFreqGet(clocks_freq);
 
-  if (getBase(reg) == AT32F415::BASE_USART1) {
+  if (getBase(reg) == Processor::BASE_USART1) {
     apb_clock = clocks_freq.apb2_freq;
 
   } else {

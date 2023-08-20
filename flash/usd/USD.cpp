@@ -23,14 +23,14 @@
 //-----------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------
-using chip::AT32F415;
+using chip::Processor;
 using chip::flash::usd::Register;
 using chip::flash::usd::USD;
 
 /* ****************************************************************************************
  * Variable <Static>
  */
-Register& chip::flash::usd::USD0 = *reinterpret_cast<Register*>(AT32F415::BASE_USD);
+Register& chip::flash::usd::USD0 = *reinterpret_cast<Register*>(Processor::BASE_USD);
 
 /* ****************************************************************************************
  * Construct Method

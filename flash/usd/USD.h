@@ -13,7 +13,7 @@
 #include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../../AT32F415.h"
+#include "./../../Processor.h"
 #include "./../../flash/usd/Key.h"
 #include "./../../flash/usd/Register.h"
 

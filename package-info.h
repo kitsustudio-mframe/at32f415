@@ -11,7 +11,6 @@
  * Include folder
  */
 #include "./adc/package-info.h"
-#include "./core/package-info.h"
 #include "./crm/package-info.h"
 #include "./dma/package-info.h"
 #include "./exint/package-info.h"
@@ -25,14 +24,14 @@
 /* ****************************************************************************************
  * Include
  */
-#include "./AT32F415.h"
+#include "./Processor.h"
 
-#ifdef USING_CHIP_ARM
-#include "./chip_arm.h"
+#ifdef USING_PROCESSOR_CORE
+#include "./ProcessorCore.h"
 #endif
 
-#ifdef USING_CHIP_IRQN
-#include "./chip_irqn.h"
+#ifdef USING_PROCESSOR_INTERRUPT
+#include "./ProcessorInterrupt.h"
 #endif
 
 /* ****************************************************************************************

@@ -15,7 +15,7 @@
 #include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../AT32F415.h"
+#include "./../Processor.h"
 #include "DeepSleepEnter.h"
 #include "Flag.h"
 #include "PvmVoltage.h"

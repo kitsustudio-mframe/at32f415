@@ -13,7 +13,7 @@
 #include "mframe.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../../AT32F415.h"
+#include "./../../Processor.h"
 #include "./../../gpio/PinsSource.h"
 #include "./../../gpio/PortSource.h"
 #include "./../../gpio/iomux/PinMap.h"

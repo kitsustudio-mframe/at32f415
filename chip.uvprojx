@@ -10,13 +10,13 @@
       <TargetName>chip</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>6180000::V6.18::ARMCLANG</pCCUsed>
+      <pCCUsed>6160000::V6.16::ARMCLANG</pCCUsed>
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>ARMCM4</Device>
           <Vendor>ARM</Vendor>
-          <PackID>ARM.CMSIS.5.9.0</PackID>
+          <PackID>ARM.CMSIS.5.8.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000,0x00020000) IROM(0x00000000,0x00040000) CPUTYPE("Cortex-M4") CLOCK(12000000) ESEL ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -49,7 +49,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\.keil\Objects\</OutputDirectory>
-          <OutputName>chip_at32f415</OutputName>
+          <OutputName>chip</OutputName>
           <CreateExecutable>0</CreateExecutable>
           <CreateLib>1</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -82,7 +82,7 @@
           <AfterMake>
             <RunUserProg1>1</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name>cmd.exe /C copy .keil\Objects\chip_at32f415.lib .\</UserProg1Name>
+            <UserProg1Name>cmd.exe /C copy .keil\Objects\chip.lib .\</UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
@@ -186,7 +186,6 @@
             <RvdsVP>0</RvdsVP>
             <RvdsMve>0</RvdsMve>
             <RvdsCdeCp>0</RvdsCdeCp>
-            <nBranchProt>0</nBranchProt>
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -340,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>AT32F415RBT7</Define>
               <Undefine></Undefine>
-              <IncludePath>..\</IncludePath>
+              <IncludePath>.\</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -385,24 +384,29 @@
           <GroupName>src</GroupName>
           <Files>
             <File>
-              <FileName>chip_arm.h</FileName>
+              <FileName>package-info.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\chip_arm.h</FilePath>
+              <FilePath>.\package-info.h</FilePath>
             </File>
             <File>
-              <FileName>chip_irqn.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\chip_irqn.h</FilePath>
-            </File>
-            <File>
-              <FileName>AT32F415.cpp</FileName>
+              <FileName>Processor.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\AT32F415.cpp</FilePath>
+              <FilePath>.\Processor.cpp</FilePath>
             </File>
             <File>
-              <FileName>AT32F415.h</FileName>
+              <FileName>Processor.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\AT32F415.h</FilePath>
+              <FilePath>.\Processor.h</FilePath>
+            </File>
+            <File>
+              <FileName>ProcessorCore.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\ProcessorCore.h</FilePath>
+            </File>
+            <File>
+              <FileName>ProcessorInterrupt.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\ProcessorInterrupt.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -618,136 +622,6 @@
               <FileName>SourceClockUSB.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\crm\SourceClockUSB.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>src/core</GroupName>
-          <Files>
-            <File>
-              <FileName>Core.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\core\Core.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Core.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\core\Core.h</FilePath>
-            </File>
-            <File>
-              <FileName>CoreAnalogInputPin.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\core\CoreAnalogInputPin.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CoreAnalogInputPin.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\core\CoreAnalogInputPin.h</FilePath>
-            </File>
-            <File>
-              <FileName>CoreAnalogInputPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\core\CoreAnalogInputPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CoreAnalogInputPort.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\core\CoreAnalogInputPort.h</FilePath>
-            </File>
-            <File>
-              <FileName>CoreGeneralPin.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\core\CoreGeneralPin.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CoreGeneralPin.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\core\CoreGeneralPin.h</FilePath>
-            </File>
-            <File>
-              <FileName>CoreGeneralPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\core\CoreGeneralPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CoreGeneralPort.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\core\CoreGeneralPort.h</FilePath>
-            </File>
-            <File>
-              <FileName>CoreHardwareInfo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\core\CoreHardwareInfo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CoreHardwareInfo.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\core\CoreHardwareInfo.h</FilePath>
-            </File>
-            <File>
-              <FileName>CoreInterrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\core\CoreInterrupt.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CoreInterrupt.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\core\CoreInterrupt.h</FilePath>
-            </File>
-            <File>
-              <FileName>CoreIomux.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\core\CoreIomux.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CoreIomux.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\core\CoreIomux.h</FilePath>
-            </File>
-            <File>
-              <FileName>InputMode.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\core\InputMode.h</FilePath>
-            </File>
-            <File>
-              <FileName>OutputMode.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\core\OutputMode.h</FilePath>
-            </File>
-            <File>
-              <FileName>package-info.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\core\package-info.h</FilePath>
-            </File>
-            <File>
-              <FileName>CoreUSART.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\core\CoreUSART.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CoreUSART.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\core\CoreUSART.h</FilePath>
-            </File>
-            <File>
-              <FileName>CoreTimer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\core\CoreTimer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CoreTimer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\core\CoreTimer.h</FilePath>
-            </File>
-            <File>
-              <FileName>CoreEdgeTrigger.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\core\CoreEdgeTrigger.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CoreEdgeTrigger.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\core\CoreEdgeTrigger.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1433,90 +1307,6 @@
               <FileName>package-info.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\tmr\subordinate\package-info.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>resource</GroupName>
-          <GroupOption>
-            <CommonProperty>
-              <UseCPPCompiler>0</UseCPPCompiler>
-              <RVCTCodeConst>0</RVCTCodeConst>
-              <RVCTZI>0</RVCTZI>
-              <RVCTOtherData>0</RVCTOtherData>
-              <ModuleSelection>0</ModuleSelection>
-              <IncludeInBuild>0</IncludeInBuild>
-              <AlwaysBuild>2</AlwaysBuild>
-              <GenerateAssemblyFile>2</GenerateAssemblyFile>
-              <AssembleAssemblyFile>2</AssembleAssemblyFile>
-              <PublicsOnly>2</PublicsOnly>
-              <StopOnExitCode>11</StopOnExitCode>
-              <CustomArgument></CustomArgument>
-              <IncludeLibraryModules></IncludeLibraryModules>
-              <ComprImg>1</ComprImg>
-            </CommonProperty>
-            <GroupArmAds>
-              <Cads>
-                <interw>2</interw>
-                <Optim>0</Optim>
-                <oTime>2</oTime>
-                <SplitLS>2</SplitLS>
-                <OneElfS>2</OneElfS>
-                <Strict>2</Strict>
-                <EnumInt>2</EnumInt>
-                <PlainCh>2</PlainCh>
-                <Ropi>2</Ropi>
-                <Rwpi>2</Rwpi>
-                <wLevel>0</wLevel>
-                <uThumb>2</uThumb>
-                <uSurpInc>2</uSurpInc>
-                <uC99>2</uC99>
-                <uGnu>2</uGnu>
-                <useXO>2</useXO>
-                <v6Lang>0</v6Lang>
-                <v6LangP>0</v6LangP>
-                <vShortEn>2</vShortEn>
-                <vShortWch>2</vShortWch>
-                <v6Lto>2</v6Lto>
-                <v6WtE>2</v6WtE>
-                <v6Rtti>2</v6Rtti>
-                <VariousControls>
-                  <MiscControls></MiscControls>
-                  <Define></Define>
-                  <Undefine></Undefine>
-                  <IncludePath></IncludePath>
-                </VariousControls>
-              </Cads>
-              <Aads>
-                <interw>2</interw>
-                <Ropi>2</Ropi>
-                <Rwpi>2</Rwpi>
-                <thumb>2</thumb>
-                <SplitLS>2</SplitLS>
-                <SwStkChk>2</SwStkChk>
-                <NoWarn>2</NoWarn>
-                <uSurpInc>2</uSurpInc>
-                <useXO>2</useXO>
-                <ClangAsOpt>0</ClangAsOpt>
-                <VariousControls>
-                  <MiscControls></MiscControls>
-                  <Define></Define>
-                  <Undefine></Undefine>
-                  <IncludePath></IncludePath>
-                </VariousControls>
-              </Aads>
-            </GroupArmAds>
-          </GroupOption>
-          <Files>
-            <File>
-              <FileName>chip_interrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\resource\chip_interrupt.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>chip_startup.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\resource\chip_startup.s</FilePath>
             </File>
           </Files>
         </Group>

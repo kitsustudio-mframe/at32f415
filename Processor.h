@@ -18,13 +18,13 @@
  * Namespace
  */
 namespace chip {
-  class AT32F415;
+  class Processor;
 }  // namespace chip
 
 /* ****************************************************************************************
  * Class/Interface/Struct/Enum
  */
-class chip::AT32F415 : public mframe::lang::Object {
+class chip::Processor : public mframe::lang::Object {
   /* **************************************************************************************
    * Variable <Public>
    */
@@ -120,9 +120,9 @@ class chip::AT32F415 : public mframe::lang::Object {
    * Construct Method
    */
  private:
-  AT32F415(void) = default;
+  Processor(void) = default;
 
-  virtual ~AT32F415(void) override = default;
+  virtual ~Processor(void) override = default;
 
   /* **************************************************************************************
    * Operator Method

@@ -8,10 +8,10 @@
 /* ****************************************************************************************
  * Include
  */
-#include "./AT32F415.h"
+#include "./Processor.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./chip_arm.h"
+#include "./ProcessorCore.h"
 #include "./crm/package-info.h"
 
 /* ****************************************************************************************
@@ -22,7 +22,7 @@
 /* ****************************************************************************************
  * Using
  */
-using chip::AT32F415;
+using chip::Processor;
 
 //-----------------------------------------------------------------------------------------
 using namespace chip::crm;
@@ -30,8 +30,8 @@ using namespace chip::crm;
 /* ****************************************************************************************
  * Variable <Static>
  */
-uint32_t AT32F415::systemCoreClock = CRM::HICK_VALUE;
-uint32_t AT32F415::systemCoreClockHz = CRM::HICK_VALUE;
+uint32_t Processor::systemCoreClock = CRM::HICK_VALUE;
+uint32_t Processor::systemCoreClockHz = CRM::HICK_VALUE;
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmissing-variable-declarations"
@@ -42,7 +42,7 @@ uint32_t SystemCoreClock = CRM::HICK_VALUE;
  * Legacy Function
  */
 extern "C" void SystemInit(void){
-  chip::AT32F415::systemInit();
+  chip::Processor::systemInit();
   return;
 }
 
@@ -58,24 +58,22 @@ extern "C" void SystemInit(void){
  * Public Method <Static>
  */
 
-/** ---------------------------------------------------------------------------------------
- *
- */
-void AT32F415::systemInit(void) {
+//-----------------------------------------------------------------------------------------
+void Processor::systemInit(void) {
   /* reset the crm clock configuration to the default reset state(for debug purpose) */
   /* set hicken bit */
   CRM0.ctrl_bit.hicken = true;
 
   /* wait hick stable */
-  while (CRM0.ctrl_bit.hickstbl != true)
-    ;
+  while (CRM0.ctrl_bit.hickstbl != true){
+  }
 
   /* hick used as system clock */
   CRM0.cfg_bit.sclksel = static_cast<uint8_t>(crm::SourceClockSCLK::HICK);
 
   /* wait sclk switch status */
-  while (CRM0.cfg_bit.sclksts != static_cast<uint8_t>(crm::SourceClockSCLK::HICK))
-    ;
+  while (CRM0.cfg_bit.sclksts != static_cast<uint8_t>(crm::SourceClockSCLK::HICK)){
+  }
 
   /* reset cfg register, include sclk switch, ahbdiv, apb1div, apb2div, adcdiv,
      clkout pllrcs, pllhextdiv, pllmult, usbdiv and pllrange bits */
@@ -100,15 +98,13 @@ void AT32F415::systemInit(void) {
 #endif
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
-void AT32F415::systemCoreClockUpdate(void) {
-  uint32_t pll_mult = 0, pll_mult_h = 0, pll_clock_source = 0, temp = 0, div_value = 0;
+//-----------------------------------------------------------------------------------------
+void Processor::systemCoreClockUpdate(void) {
+  uint32_t pll_mult = 0, pll_mult_h = 0, pll_clock_source = 0, temp = 0, divValue = 0;
   uint32_t pllrcsfreq = 0, pll_ms = 0, pll_ns = 0, pll_fr = 0;
   crm::SourceClockSCLK sclk_source;
 
-  static const uint8_t sys_ahb_div_table[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
+  static const uint8_t systemDivTableAHB[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
 
   /* get sclk source */
   sclk_source = crm::CRM::sysclkSwitchStatusGet();
@@ -176,12 +172,13 @@ void AT32F415::systemCoreClockUpdate(void) {
   /* compute sclk, ahbclk frequency */
   /* get ahb division */
   temp = CRM0.cfg_bit.ahbdiv;
-  div_value = sys_ahb_div_table[temp];
+  divValue = systemDivTableAHB[temp];
   systemCoreClockHz = systemCoreClock;
   /* ahbclk frequency */
-  systemCoreClock = systemCoreClock >> div_value;
+  systemCoreClock = systemCoreClock >> divValue;
   SystemCoreClock = systemCoreClock;
 }
+
 /* ****************************************************************************************
  * Public Method <Override>
  */
