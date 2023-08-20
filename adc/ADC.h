@@ -574,6 +574,47 @@ class chip::adc::ADC {
   static void ordinaryChannelSet(Register& reg, Channel channel, uint8_t sequence, SampleTime sampleTime);
 
   /**
+   * @brief  configure preempt channel's sample time of the specified adc peripheral.
+   *
+   * @param reg 選擇adc外設。.
+   *        該參數可以是以下值之一:
+   *        ADC1.
+   *
+   * @param channel select the channel.
+   *        該參數可以是以下值之一:
+   *        - Channel::CHANNEL0
+   *        - Channel::CHANNEL1
+   *        - Channel::CHANNEL2
+   *        - Channel::CHANNEL3
+   *        - Channel::CHANNEL4
+   *        - Channel::CHANNEL5
+   *        - Channel::CHANNEL6
+   *        - Channel::CHANNEL7
+   *        - Channel::CHANNEL8
+   *        - Channel::CHANNEL9
+   *        - Channel::CHANNEL10
+   *        - Channel::CHANNEL11
+   *        - Channel::CHANNEL12
+   *        - Channel::CHANNEL13
+   *        - Channel::CHANNEL14
+   *        - Channel::CHANNEL15
+   *        - Channel::CHANNEL16
+   *        - Channel::CHANNEL17
+   *
+   * @param sampleTime config the sampletime of adc channel.
+   *        該參數可以是以下值之一:
+   *        - ADC_SAMPLETIME_1_5
+   *        - ADC_SAMPLETIME_7_5
+   *        - ADC_SAMPLETIME_13_5
+   *        - ADC_SAMPLETIME_28_5
+   *        - ADC_SAMPLETIME_41_5
+   *        - ADC_SAMPLETIME_55_5
+   *        - ADC_SAMPLETIME_71_5
+   *        - ADC_SAMPLETIME_239_5   
+   */
+  static void setChannelSampleTime(Register& reg, Channel channel, SampleTime sampleTime);
+
+  /**
    * @brief enable or disable the preempt channel's external trigger and
    *        set external trigger event of the specified adc peripheral.
    *

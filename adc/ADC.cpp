@@ -50,9 +50,7 @@ Register& chip::adc::ADC1 = *reinterpret_cast<Register*>(chip::AT32F415::BASE_AD
  * Public Method <Static>
  */
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------------------
 void ADC::reset(Register& reg) {
   if (reinterpret_cast<uint32_t>(&reg) == chip::AT32F415::BASE_ADC1) {
     CRM::periphReset(PeriphReset::RESET_ADC1, true);
@@ -60,9 +58,7 @@ void ADC::reset(Register& reg) {
   }
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------------------
 void ADC::baseDefaultParaInit(Config& config) {
   config.sequenceMode = false;
   config.repeatMode = false;
@@ -71,9 +67,7 @@ void ADC::baseDefaultParaInit(Config& config) {
   return;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------------------
 void ADC::baseConfig(Register& reg, Config& baseStruct) {
   reg.ctrl1_bit.sqen = baseStruct.sequenceMode;
   reg.ctrl2_bit.rpen = baseStruct.repeatMode;
@@ -82,9 +76,7 @@ void ADC::baseConfig(Register& reg, Config& baseStruct) {
   return;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------------------
 void ADC::voltageMonitorEnable(Register& reg, VoltageMonitoring voltageMonitoring) {
   reg.ctrl1_bit.ocvmen = false;
   reg.ctrl1_bit.pcvmen = false;
@@ -93,9 +85,7 @@ void ADC::voltageMonitorEnable(Register& reg, VoltageMonitoring voltageMonitorin
   return;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------------------
 void ADC::voltageMonitorThresholdValueSet(Register& reg, uint16_t highThreshold, uint16_t lowThreshold) {
   reg.vmhb_bit.vmhb = highThreshold;
   reg.vmlb_bit.vmlb = lowThreshold;
@@ -298,39 +288,47 @@ void ADC::ordinaryChannelSet(Register& reg, Channel channel, uint8_t sequence, S
   }
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
-void ADC::ordinaryConversionTriggerSet(Register& reg, OrdinaryTrig ordinaryTrig, bool newState) {
-  if (static_cast<uint8_t>(ordinaryTrig) > 7) {
-    reg.ctrl2_bit.octesel_h = 1;
-    reg.ctrl2_bit.octesel_l = static_cast<uint8_t>(ordinaryTrig) & 0x7;
-  } else {
-    reg.ctrl2_bit.octesel_h = 0;
-    reg.ctrl2_bit.octesel_l = static_cast<uint8_t>(ordinaryTrig) & 0x7;
+//-----------------------------------------------------------------------------------------
+void ADC::setChannelSampleTime(Register& reg, Channel channel, SampleTime sampleTime){
+  uint32_t ch = static_cast<uint32_t>(channel);
+  volatile uint32_t* ptr = &reg.spt2;
+
+  if(ch >= 10){
+    ptr = &reg.spt1;
+    ch -= 10;
   }
+
+  uint32_t shift = (3 * ch);
+  *ptr &= ~(0x07U << shift);
+  *ptr |= static_cast<uint32_t>(sampleTime) << shift;
+  return;
+}
+
+//-----------------------------------------------------------------------------------------
+void ADC::ordinaryConversionTriggerSet(Register& reg, OrdinaryTrig ordinaryTrig, bool newState) {
+  reg.ctrl2_bit.octesel_l = static_cast<uint8_t>(ordinaryTrig) & 0x7;
+  reg.ctrl2_bit.octesel_h = 0;
+
+  if (static_cast<uint8_t>(ordinaryTrig) > 7) 
+    reg.ctrl2_bit.octesel_h = 1;
+    
   reg.ctrl2_bit.octen = newState;
   return;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------------------
 void ADC::preemptConversionTriggerSet(Register& reg, PreemptTrig preemptTrig, bool newState) {
-  if (static_cast<uint8_t>(preemptTrig) > 7) {
+  reg.ctrl2_bit.pctesel_l = static_cast<uint8_t>(preemptTrig) & 0x7;
+  reg.ctrl2_bit.pctesel_h = 0;
+
+  if (static_cast<uint8_t>(preemptTrig) > 7) 
     reg.ctrl2_bit.pctesel_h = 1;
-    reg.ctrl2_bit.pctesel_l = static_cast<uint8_t>(preemptTrig) & 0x7;
-  } else {
-    reg.ctrl2_bit.pctesel_h = 0;
-    reg.ctrl2_bit.pctesel_l = static_cast<uint8_t>(preemptTrig) & 0x7;
-  }
+
   reg.ctrl2_bit.pcten = newState;
   return;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------------------
 void ADC::preemptOffsetValueSet(Register& reg, PreemptChannel preemptChannel, uint16_t offsetValue) {
   switch (preemptChannel) {
     case PreemptChannel::CHANNEL1:
@@ -354,9 +352,7 @@ void ADC::preemptOffsetValueSet(Register& reg, PreemptChannel preemptChannel, ui
   }
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------------------
 uint16_t ADC::preemptConversionDataGet(Register& reg, PreemptChannel preemptChannel) {
   uint16_t preempt_conv_data_index = 0;
 
