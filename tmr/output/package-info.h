@@ -4,8 +4,15 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef CHIP_13B32F4F_C981_407A_AFF4_9F736A4E0982
-#define CHIP_13B32F4F_C981_407A_AFF4_9F736A4E0982
+
+/* ****************************************************************************************
+ * Define
+ */
+#ifdef USING_CHIP_TMR
+#ifndef USING_CHIP_TMR_OUTPUT
+#define USING_CHIP_TMR_OUTPUT
+#endif
+#endif
 
 /* ****************************************************************************************
  * Include folder
@@ -14,13 +21,14 @@
 /* ****************************************************************************************
  * Include
  */
+#ifdef USING_CHIP_TMR_OUTPUT
 #include "Config.h"
 #include "ControlMode.h"
 #include "Force.h"
 #include "Polarity.h"
+#undef USING_CHIP_TMR_OUTPUT
+#endif
 
 /* ****************************************************************************************
  * End of file
  */
-
-#endif /* CHIP_13B32F4F_C981_407A_AFF4_9F736A4E0982 */

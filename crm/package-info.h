@@ -4,8 +4,15 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef CHIP_1179087E_1333_4B3D_803B_989D8BA7D83B
-#define CHIP_1179087E_1333_4B3D_803B_989D8BA7D83B
+
+/* ****************************************************************************************
+ * Define
+ */
+#ifdef USING_CHIP
+#ifndef USING_CHIP_CRM
+#define USING_CHIP_CRM
+#endif
+#endif
 
 /* ****************************************************************************************
  * Include folder
@@ -14,6 +21,7 @@
 /* ****************************************************************************************
  * Include
  */
+#ifdef USING_CHIP_CRM
 #include "./AutoStepMode.h"
 #include "./CRM.h"
 #include "./ClockOutSelect.h"
@@ -40,9 +48,9 @@
 #include "./SourceClockPLL.h"
 #include "./SourceClockSCLK.h"
 #include "./SourceClockUSB.h"
+#undef USING_CHIP_CRM
+#endif
 
 /* ****************************************************************************************
  * End of file
  */
-
-#endif /* CHIP_1179087E_1333_4B3D_803B_989D8BA7D83B */

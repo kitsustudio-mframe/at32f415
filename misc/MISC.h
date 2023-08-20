@@ -10,15 +10,11 @@
 /* ****************************************************************************************
  * Include
  */
-
-//-----------------------------------------------------------------------------------------
 #include "mframe.h"
+#define USING_CHIP_MISC
+#include "chip.h"
 
 //-----------------------------------------------------------------------------------------
-#include "InterruptService.h"
-#include "LowPowerMode.h"
-#include "PriorityGroup.h"
-#include "SystickClockSource.h"
 
 /* ****************************************************************************************
  * Namespace
@@ -140,9 +136,9 @@ class chip::misc::MISC : public mframe::lang::Object {
 
   /**
    * @brief 設定中斷優先權
-   * 
-   * @param irqn 
-   * @param priority 
+   *
+   * @param irqn
+   * @param priority
    */
   static void setInterruptPriority(InterruptService irqn, uint32_t priority);
 

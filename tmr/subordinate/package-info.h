@@ -4,8 +4,15 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef CHIP_DA48E280_EAD7_4D02_9982_C49CC5CC7895
-#define CHIP_DA48E280_EAD7_4D02_9982_C49CC5CC7895
+
+/* ****************************************************************************************
+ * Define
+ */
+#ifdef USING_CHIP_TMR
+#ifndef USING_CHIP_TMR_SUBORDINATE
+#define USING_CHIP_TMR_SUBORDINATE
+#endif
+#endif
 
 /* ****************************************************************************************
  * Include folder
@@ -14,11 +21,12 @@
 /* ****************************************************************************************
  * Include
  */
+#ifdef USING_CHIP_TMR_SUBORDINATE
 #include "InputSelect.h"
 #include "ModeSelect.h"
+#undef USING_CHIP_TMR_SUBORDINATE
+#endif
 
 /* ****************************************************************************************
  * End of file
  */
-
-#endif /* CHIP_DA48E280_EAD7_4D02_9982_C49CC5CC7895 */

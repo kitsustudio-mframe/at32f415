@@ -4,8 +4,15 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef CHIP_26AE0635_FDA9_4246_94BA_77B603B397D9
-#define CHIP_26AE0635_FDA9_4246_94BA_77B603B397D9
+
+/* ****************************************************************************************
+ * Define
+ */
+#ifdef USING_CHIP
+#ifndef USING_CHIP_MISC
+#define USING_CHIP_MISC
+#endif
+#endif
 
 /* ****************************************************************************************
  * Include folder
@@ -14,14 +21,15 @@
 /* ****************************************************************************************
  * Include
  */
+#ifdef USING_CHIP_MISC
 #include "InterruptService.h"
 #include "LowPowerMode.h"
 #include "MISC.h"
 #include "PriorityGroup.h"
 #include "SystickClockSource.h"
+#undef USING_CHIP_MISC
+#endif
 
 /* ****************************************************************************************
  * End of file
  */
-
-#endif /* CHIP_26AE0635_FDA9_4246_94BA_77B603B397D9 */

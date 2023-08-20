@@ -11,22 +11,10 @@
  * Include
  */
 #include "mframe.h"
+#define USING_CHIP_DMA
+#include "chip.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../Processor.h"
-#include "./../dma/Channel.h"
-#include "./../dma/ChannelRegister.h"
-#include "./../dma/Config.h"
-#include "./../dma/Direction.h"
-#include "./../dma/Flag.h"
-#include "./../dma/Flexible.h"
-#include "./../dma/Interrupt.h"
-#include "./../dma/MemoryDataSize.h"
-#include "./../dma/MemoryInc.h"
-#include "./../dma/PeripheralDataSize.h"
-#include "./../dma/PeripheralInc.h"
-#include "./../dma/PriorityLevel.h"
-#include "./../dma/Register.h"
 
 /* ****************************************************************************************
  * Namespace

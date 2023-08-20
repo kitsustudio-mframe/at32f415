@@ -8,11 +8,13 @@
 /* ****************************************************************************************
  * Include
  */
+#define USING_CHIP_CRM
 #include "./Processor.h"
+
+#include "chip.h"
 
 //-----------------------------------------------------------------------------------------
 #include "./ProcessorCore.h"
-#include "./crm/package-info.h"
 
 /* ****************************************************************************************
  * Macro
@@ -41,7 +43,7 @@ uint32_t SystemCoreClock = CRM::HICK_VALUE;
 /* ****************************************************************************************
  * Legacy Function
  */
-extern "C" void SystemInit(void){
+extern "C" void SystemInit(void) {
   chip::Processor::systemInit();
   return;
 }
@@ -65,14 +67,14 @@ void Processor::systemInit(void) {
   CRM0.ctrl_bit.hicken = true;
 
   /* wait hick stable */
-  while (CRM0.ctrl_bit.hickstbl != true){
+  while (CRM0.ctrl_bit.hickstbl != true) {
   }
 
   /* hick used as system clock */
   CRM0.cfg_bit.sclksel = static_cast<uint8_t>(crm::SourceClockSCLK::HICK);
 
   /* wait sclk switch status */
-  while (CRM0.cfg_bit.sclksts != static_cast<uint8_t>(crm::SourceClockSCLK::HICK)){
+  while (CRM0.cfg_bit.sclksts != static_cast<uint8_t>(crm::SourceClockSCLK::HICK)) {
   }
 
   /* reset cfg register, include sclk switch, ahbdiv, apb1div, apb2div, adcdiv,

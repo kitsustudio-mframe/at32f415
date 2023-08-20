@@ -109,7 +109,7 @@ void MISC::systickClockSourceConfig(SystickClockSource source) {
 }
 
 //-----------------------------------------------------------------------------------------
-void MISC::setInterruptPriority(InterruptService irqn, uint32_t priority){
+void MISC::setInterruptPriority(InterruptService irqn, uint32_t priority) {
   NVIC_SetPriority(static_cast<IRQn_Type>(irqn), priority);
   return;
 }

@@ -4,8 +4,15 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef CHIP_67076931_96BA_4728_85B8_A4FACB0B709A
-#define CHIP_67076931_96BA_4728_85B8_A4FACB0B709A
+
+/* ****************************************************************************************
+ * Define
+ */
+#ifdef USING_CHIP
+#ifndef USING_CHIP_GPIO
+#define USING_CHIP_GPIO
+#endif
+#endif
 
 /* ****************************************************************************************
  * Include folder
@@ -15,6 +22,7 @@
 /* ****************************************************************************************
  * Include
  */
+#ifdef USING_CHIP_GPIO
 #include "./DriveMode.h"
 #include "./GPIO.h"
 #include "./Mode.h"
@@ -25,9 +33,9 @@
 #include "./PortSource.h"
 #include "./PullMode.h"
 #include "./Register.h"
+#undef USING_CHIP_GPIO
+#endif
 
 /* ****************************************************************************************
  * End of file
  */
-
-#endif /* CHIP_67076931_96BA_4728_85B8_A4FACB0B709A */

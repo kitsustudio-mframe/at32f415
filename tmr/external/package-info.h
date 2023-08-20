@@ -4,8 +4,15 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef CHIP_4CA22084_7483_462D_9011_99B81C9772B5
-#define CHIP_4CA22084_7483_462D_9011_99B81C9772B5
+
+/* ****************************************************************************************
+ * Define
+ */
+#ifdef USING_CHIP_TMR
+#ifndef USING_CHIP_TMR_EXTERNAL
+#define USING_CHIP_TMR_EXTERNAL
+#endif
+#endif
 
 /* ****************************************************************************************
  * Include folder
@@ -14,11 +21,12 @@
 /* ****************************************************************************************
  * Include
  */
+#ifdef USING_CHIP_TMR_EXTERNAL
 #include "Divider.h"
 #include "Polarity.h"
+#undef USING_CHIP_TMR_EXTERNAL
+#endif
 
 /* ****************************************************************************************
  * End of file
  */
-
-#endif /* CHIP_4CA22084_7483_462D_9011_99B81C9772B5 */

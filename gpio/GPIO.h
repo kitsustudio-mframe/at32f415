@@ -11,20 +11,10 @@
  * Include
  */
 #include "mframe.h"
+#define USING_CHIP_GPIO
+#include "chip.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../Processor.h"
-#include "./../crm/PeriphClock.h"
-#include "./../crm/PeriphReset.h"
-#include "./../gpio/DriveMode.h"
-#include "./../gpio/Mode.h"
-#include "./../gpio/OutputMode.h"
-#include "./../gpio/PinConfig.h"
-#include "./../gpio/Pins.h"
-#include "./../gpio/PinsSource.h"
-#include "./../gpio/PortSource.h"
-#include "./../gpio/PullMode.h"
-#include "./../gpio/Register.h"
 
 /* ****************************************************************************************
  * Namespace

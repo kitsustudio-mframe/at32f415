@@ -11,34 +11,10 @@
  * Include
  */
 #include "mframe.h"
+#define USING_CHIP_CRM
+#include "chip.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../Processor.h"
-#include "./../crm/AutoStepMode.h"
-#include "./../crm/ClockOutSelect.h"
-#include "./../crm/CoreClock.h"
-#include "./../crm/DividerADC.h"
-#include "./../crm/DividerAHB.h"
-#include "./../crm/DividerAPB1.h"
-#include "./../crm/DividerAPB2.h"
-#include "./../crm/DividerClockOut.h"
-#include "./../crm/DividerHICK.h"
-#include "./../crm/DividerUSB.h"
-#include "./../crm/Flag.h"
-#include "./../crm/HickFrequencySCLK.h"
-#include "./../crm/Interrupt.h"
-#include "./../crm/MultPLL.h"
-#include "./../crm/PeriphClock.h"
-#include "./../crm/PeriphClockSleepMode.h"
-#include "./../crm/PeriphReset.h"
-#include "./../crm/PostDividerPLL.h"
-#include "./../crm/ReferenceClockPLL.h"
-#include "./../crm/Register.h"
-#include "./../crm/SourceClockCore.h"
-#include "./../crm/SourceClockERTC.h"
-#include "./../crm/SourceClockPLL.h"
-#include "./../crm/SourceClockSCLK.h"
-#include "./../crm/SourceClockUSB.h"
 
 /* ****************************************************************************************
  * Namespace

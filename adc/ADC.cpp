@@ -8,10 +8,11 @@
 /* ****************************************************************************************
  * Include
  */
-#include "./ADC.h"
+#define USING_CHIP_CRM
+#include "chip.h"
 
 //-----------------------------------------------------------------------------------------
-#include "chip.h"
+#include "./ADC.h"
 
 /* ****************************************************************************************
  * Macro
@@ -289,11 +290,11 @@ void ADC::ordinaryChannelSet(Register& reg, Channel channel, uint8_t sequence, S
 }
 
 //-----------------------------------------------------------------------------------------
-void ADC::setChannelSampleTime(Register& reg, Channel channel, SampleTime sampleTime){
+void ADC::setChannelSampleTime(Register& reg, Channel channel, SampleTime sampleTime) {
   uint32_t ch = static_cast<uint32_t>(channel);
   volatile uint32_t* ptr = &reg.spt2;
 
-  if(ch >= 10){
+  if (ch >= 10) {
     ptr = &reg.spt1;
     ch -= 10;
   }
@@ -309,9 +310,9 @@ void ADC::ordinaryConversionTriggerSet(Register& reg, OrdinaryTrig ordinaryTrig,
   reg.ctrl2_bit.octesel_l = static_cast<uint8_t>(ordinaryTrig) & 0x7;
   reg.ctrl2_bit.octesel_h = 0;
 
-  if (static_cast<uint8_t>(ordinaryTrig) > 7) 
+  if (static_cast<uint8_t>(ordinaryTrig) > 7)
     reg.ctrl2_bit.octesel_h = 1;
-    
+
   reg.ctrl2_bit.octen = newState;
   return;
 }
@@ -321,7 +322,7 @@ void ADC::preemptConversionTriggerSet(Register& reg, PreemptTrig preemptTrig, bo
   reg.ctrl2_bit.pctesel_l = static_cast<uint8_t>(preemptTrig) & 0x7;
   reg.ctrl2_bit.pctesel_h = 0;
 
-  if (static_cast<uint8_t>(preemptTrig) > 7) 
+  if (static_cast<uint8_t>(preemptTrig) > 7)
     reg.ctrl2_bit.pctesel_h = 1;
 
   reg.ctrl2_bit.pcten = newState;

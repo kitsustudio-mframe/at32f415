@@ -4,8 +4,6 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef CHIP_5EEBC672_C525_4154_B02C_876E00D786B8
-#define CHIP_5EEBC672_C525_4154_B02C_876E00D786B8
 
 /* ****************************************************************************************
  * Include folder
@@ -28,14 +26,14 @@
 
 #ifdef USING_PROCESSOR_CORE
 #include "./ProcessorCore.h"
+#undef USING_PROCESSOR_CORE
 #endif
 
 #ifdef USING_PROCESSOR_INTERRUPT
 #include "./ProcessorInterrupt.h"
+#undef USING_PROCESSOR_INTERRUPT
 #endif
 
 /* ****************************************************************************************
  * End of file
  */
-
-#endif /* CHIP_5EEBC672_C525_4154_B02C_876E00D786B8 */

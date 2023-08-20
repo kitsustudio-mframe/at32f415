@@ -11,20 +11,10 @@
  * Include
  */
 #include "mframe.h"
+#define USING_CHIP_ADC
+#include "chip.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../Processor.h"
-#include "./../adc/Channel.h"
-#include "./../adc/Config.h"
-#include "./../adc/DataAlign.h"
-#include "./../adc/Flag.h"
-#include "./../adc/Interrupt.h"
-#include "./../adc/OrdinaryTrig.h"
-#include "./../adc/PreemptChannel.h"
-#include "./../adc/PreemptTrig.h"
-#include "./../adc/Register.h"
-#include "./../adc/SampleTime.h"
-#include "./../adc/VoltageMonitoring.h"
 
 /* ****************************************************************************************
  * Namespace
@@ -444,15 +434,15 @@ class chip::adc::ADC {
 
   /**
    * @brief set voltage monitoring's high and low thresholds value of the specified adc peripheral.
-   * 
+   *
    * @param reg 選擇adc外設。.
    *        該參數可以是以下值之一:
    *        ADC1.
-   * 
+   *
    * @param highThreshold voltage monitoring's high thresholds value.
    *        this parameter can be:
    *        - (0x000~0xFFF)
-   * 
+   *
    * @param lowThreshold voltage monitoring's low thresholds value.
    *        this parameter can be:
    *        - (0x000~0xFFF)
@@ -461,11 +451,11 @@ class chip::adc::ADC {
 
   /**
    * @brief configure preempt channel's corresponding rank in the sequencer and sample time of the specified adc peripheral.
-   * 
+   *
    * @param reg 選擇adc外設。.
    *        該參數可以是以下值之一:
    *        ADC1.
-   * 
+   *
    * @param channel select the channel.
    *        該參數可以是以下值之一:
    *        - Channel::CHANNEL0
@@ -486,11 +476,11 @@ class chip::adc::ADC {
    *        - Channel::CHANNEL15
    *        - Channel::CHANNEL16
    *        - Channel::CHANNEL17
-   * 
+   *
    * @param sequence set rank in the preempt group sequencer.
    *        this parameter must be:
    *        - between 1 to 4
-   * 
+   *
    * @param sampleTime config the sampletime of adc channel.
    *        該參數可以是以下值之一:
    *        - SampleTime::CYCLE_1_5
@@ -507,11 +497,11 @@ class chip::adc::ADC {
   /**
    * @brief enable or disable the ordinary channel's external trigger and
    *        set external trigger event of the specified adc peripheral.
-   * 
+   *
    * @param reg 選擇adc外設。.
    *        該參數可以是以下值之一:
    *        ADC1.
-   * 
+   *
    * @param ordinaryTrig select the external trigger event.
    *        該參數可以是以下值之一:
    *        - OrdinaryTrig::TMR1CH1
@@ -523,7 +513,7 @@ class chip::adc::ADC {
    *        - OrdinaryTrig::EXINT11_TMR1TRGOUT
    *        - OrdinaryTrig::SOFTWARE
    *        - OrdinaryTrig::TMR1TRGOUT
-   * 
+   *
    * @param newState new state of ordinary channel's external trigger.
    */
   static void ordinaryConversionTriggerSet(Register& reg, OrdinaryTrig ordinaryTrig, bool newState);
@@ -569,7 +559,7 @@ class chip::adc::ADC {
    *        - ADC_SAMPLETIME_41_5
    *        - ADC_SAMPLETIME_55_5
    *        - ADC_SAMPLETIME_71_5
-   *        - ADC_SAMPLETIME_239_5   
+   *        - ADC_SAMPLETIME_239_5
    */
   static void ordinaryChannelSet(Register& reg, Channel channel, uint8_t sequence, SampleTime sampleTime);
 
@@ -610,7 +600,7 @@ class chip::adc::ADC {
    *        - ADC_SAMPLETIME_41_5
    *        - ADC_SAMPLETIME_55_5
    *        - ADC_SAMPLETIME_71_5
-   *        - ADC_SAMPLETIME_239_5   
+   *        - ADC_SAMPLETIME_239_5
    */
   static void setChannelSampleTime(Register& reg, Channel channel, SampleTime sampleTime);
 
@@ -660,18 +650,18 @@ class chip::adc::ADC {
 
   /**
    * @brief return the conversion data for selection preempt channel of the specified adc peripheral.
-   * 
+   *
    * @param reg 選擇adc外設。.
    *         該參數可以是以下值之一:
    *         ADC1.
-   * 
+   *
    * @param preemptChannel select the preempt channel.
    *        該參數可以是以下值之一:
    *        - PreemptChannel::CHANNEL1
    *        - PreemptChannel::CHANNEL2
    *        - PreemptChannel::CHANNEL3
    *        - PreemptChannel::CHANNEL4
-   * 
+   *
    * @return the conversion data for selection preempt channel.   */
   static uint16_t preemptConversionDataGet(Register& reg, PreemptChannel preemptChannel);
 

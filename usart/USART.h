@@ -15,23 +15,11 @@
  * Include
  */
 
-//-----------------------------------------------------------------------------------------
-#include "./../Processor.h"
 #include "mframe.h"
+#define USING_CHIP_USART
+#include "chip.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./BreakBit.h"
-#include "./ClockLast.h"
-#include "./ClockPhase.h"
-#include "./ClockPolarity.h"
-#include "./DataBit.h"
-#include "./Flag.h"
-#include "./HardwareFlow.h"
-#include "./Interrupt.h"
-#include "./ParitySelection.h"
-#include "./Register.h"
-#include "./StopBit.h"
-#include "./WakeupMode.h"
 
 /* ****************************************************************************************
  * Namespace

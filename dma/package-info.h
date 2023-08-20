@@ -4,8 +4,15 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef CHIP_864E883D_65DF_46B9_AE12_29DC726008C3
-#define CHIP_864E883D_65DF_46B9_AE12_29DC726008C3
+
+/* ****************************************************************************************
+ * Define
+ */
+#ifdef USING_CHIP
+#ifndef USING_CHIP_DMA
+#define USING_CHIP_DMA
+#endif
+#endif
 
 /* ****************************************************************************************
  * Include folder
@@ -14,6 +21,7 @@
 /* ****************************************************************************************
  * Include
  */
+#ifdef USING_CHIP_DMA
 #include "./Channel.h"
 #include "./ChannelRegister.h"
 #include "./Config.h"
@@ -28,9 +36,9 @@
 #include "./PeripheralInc.h"
 #include "./PriorityLevel.h"
 #include "./Register.h"
+#undef USING_CHIP_DMA
+#endif
 
 /* ****************************************************************************************
  * End of file
  */
-
-#endif /* CHIP_864E883D_65DF_46B9_AE12_29DC726008C3 */

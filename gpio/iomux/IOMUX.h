@@ -11,13 +11,10 @@
  * Include
  */
 #include "mframe.h"
+#define USING_CHIP_GPIO
+#include "chip.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../../Processor.h"
-#include "./../../gpio/PinsSource.h"
-#include "./../../gpio/PortSource.h"
-#include "./../../gpio/iomux/PinMap.h"
-#include "./../../gpio/iomux/Register.h"
 
 /* ****************************************************************************************
  * Namespace

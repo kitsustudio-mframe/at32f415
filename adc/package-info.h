@@ -4,8 +4,15 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef CHIP_7AEEAC94_D57E_43D6_92B3_E2D65B18F32B
-#define CHIP_7AEEAC94_D57E_43D6_92B3_E2D65B18F32B
+
+/* ****************************************************************************************
+ * Define
+ */
+#ifdef USING_CHIP
+#ifndef USING_CHIP_ADC
+#define USING_CHIP_ADC
+#endif
+#endif
 
 /* ****************************************************************************************
  * Include folder
@@ -14,6 +21,7 @@
 /* ****************************************************************************************
  * Include
  */
+#ifdef USING_CHIP_ADC
 #include "./ADC.h"
 #include "./Channel.h"
 #include "./Config.h"
@@ -26,9 +34,8 @@
 #include "./Register.h"
 #include "./SampleTime.h"
 #include "./VoltageMonitoring.h"
-
+#undef USING_CHIP_ADC
+#endif
 /* ****************************************************************************************
  * End of file
  */
-
-#endif /* CHIP_7AEEAC94_D57E_43D6_92B3_E2D65B18F32B */

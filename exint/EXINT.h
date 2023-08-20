@@ -11,14 +11,10 @@
  * Include
  */
 #include "mframe.h"
+#define USING_CHIP_EXINT
+#include "chip.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../Processor.h"
-#include "./../exint/Config.h"
-#include "./../exint/Line.h"
-#include "./../exint/Mode.h"
-#include "./../exint/Polarity.h"
-#include "./../exint/Register.h"
 
 /* ****************************************************************************************
  * Namespace

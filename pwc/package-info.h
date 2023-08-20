@@ -4,8 +4,15 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef CHIP_0F69076B_BA5B_492E_BAC5_D5FBF0E782D4
-#define CHIP_0F69076B_BA5B_492E_BAC5_D5FBF0E782D4
+
+/* ****************************************************************************************
+ * Define
+ */
+#ifdef USING_CHIP
+#ifndef USING_CHIP_PWC
+#define USING_CHIP_PWC
+#endif
+#endif
 
 /* ****************************************************************************************
  * Include folder
@@ -14,6 +21,7 @@
 /* ****************************************************************************************
  * Include
  */
+#ifdef USING_CHIP_PWC
 #include "DeepSleepEnter.h"
 #include "Flag.h"
 #include "PWC.h"
@@ -21,9 +29,9 @@
 #include "Register.h"
 #include "Regulator.h"
 #include "SleepEnter.h"
+#undef USING_CHIP_PWC
+#endif
 
 /* ****************************************************************************************
  * End of file
  */
-
-#endif /* CHIP_0F69076B_BA5B_492E_BAC5_D5FBF0E782D4 */

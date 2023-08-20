@@ -4,8 +4,15 @@
  *
  * SPDX-License-Identifier: MIT
  */
-#ifndef CHIP_BB5F2BD2_370B_4FB1_817B_16ACB18E4742
-#define CHIP_BB5F2BD2_370B_4FB1_817B_16ACB18E4742
+
+/* ****************************************************************************************
+ * Define
+ */
+#ifdef USING_CHIP_TMR
+#ifndef USING_CHIP_TMR_INPUT
+#define USING_CHIP_TMR_INPUT
+#endif
+#endif
 
 /* ****************************************************************************************
  * Include folder
@@ -14,13 +21,14 @@
 /* ****************************************************************************************
  * Include
  */
+#ifdef USING_CHIP_TMR_INPUT
 #include "Config.h"
 #include "DirectionMapped.h"
 #include "Divider.h"
 #include "Polarity.h"
+#undef USING_CHIP_TMR_INPUT
+#endif
 
 /* ****************************************************************************************
  * End of file
  */
-
-#endif /* CHIP_BB5F2BD2_370B_4FB1_817B_16ACB18E4742 */

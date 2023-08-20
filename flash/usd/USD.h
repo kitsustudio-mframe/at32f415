@@ -11,11 +11,10 @@
  * Include
  */
 #include "mframe.h"
+#define USING_CHIP_FLASH_USD
+#include "chip.h"
 
 //-----------------------------------------------------------------------------------------
-#include "./../../Processor.h"
-#include "./../../flash/usd/Key.h"
-#include "./../../flash/usd/Register.h"
 
 /* ****************************************************************************************
  * Namespace
