@@ -7,16 +7,29 @@
 #ifndef CHIP_F4FCF7C7_7A29_4865_BF90_32ED6A92AF8E
 #define CHIP_F4FCF7C7_7A29_4865_BF90_32ED6A92AF8E
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Include
  */
+
+//-----------------------------------------------------------------------------
 #include "mframe.h"
-#define USING_CHIP_DMA
-#include "chip.h"
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#include "chip_arterytek_at32f415/dma/Channel.h"
+#include "chip_arterytek_at32f415/dma/ChannelRegister.h"
+#include "chip_arterytek_at32f415/dma/Config.h"
+#include "chip_arterytek_at32f415/dma/Direction.h"
+#include "chip_arterytek_at32f415/dma/Flag.h"
+#include "chip_arterytek_at32f415/dma/Flexible.h"
+#include "chip_arterytek_at32f415/dma/Interrupt.h"
+#include "chip_arterytek_at32f415/dma/MemoryDataSize.h"
+#include "chip_arterytek_at32f415/dma/MemoryInc.h"
+#include "chip_arterytek_at32f415/dma/PeripheralDataSize.h"
+#include "chip_arterytek_at32f415/dma/PeripheralInc.h"
+#include "chip_arterytek_at32f415/dma/PriorityLevel.h"
+#include "chip_arterytek_at32f415/dma/Register.h"
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Namespace
  */
 namespace chip::dma {
@@ -40,31 +53,25 @@ namespace chip::dma {
   extern ChannelRegister& DMA2_CHANNEL7;
 }  // namespace chip::dma
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Class/Interface/Struct/Enum
  */
 class chip::dma::DMA {
-  /* **************************************************************************************
-   * Variable <Public>
+  /* **************************************************************************
+   * Variable
    */
 
-  /* **************************************************************************************
-   * Variable <Protected>
+
+
+
+
+
+
+  /* **************************************************************************
+   * Abstract method
    */
 
-  /* **************************************************************************************
-   * Variable <Private>
-   */
-
-  /* **************************************************************************************
-   * Abstract method <Public>
-   */
-
-  /* **************************************************************************************
-   * Abstract method <Protected>
-   */
-
-  /* **************************************************************************************
+  /* **************************************************************************
    * Construct Method
    */
  public:
@@ -72,11 +79,11 @@ class chip::dma::DMA {
 
   virtual ~DMA(void) = default;
 
-  /* **************************************************************************************
+  /* **************************************************************************
    * Operator Method
    */
 
-  /* **************************************************************************************
+  /* **************************************************************************
    * Public Method <Static Inline>
    */
  public:
@@ -100,7 +107,7 @@ class chip::dma::DMA {
    *         - DMA2_CHANNEL7
    * @param  data_number: the number of data to be transferred(0x0000~0xFFFF)
    *         transfer.
-   * @retval none.
+   * @return none.
    */
   static void dataNumberSet(ChannelRegister& reg, uint16_t dataNumber) {
     reg.dtcnt = dataNumber;
@@ -125,7 +132,7 @@ class chip::dma::DMA {
    *         - DMA2_CHANNEL5
    *         - DMA2_CHANNEL6
    *         - DMA2_CHANNEL7
-   * @retval the number of data.
+   * @return the number of data.
    */
   static inline uint16_t dataNumberGet(ChannelRegister& reg) {
     return static_cast<uint16_t>(reg.dtcnt);
@@ -155,7 +162,7 @@ class chip::dma::DMA {
    *         - DMA_HDT_INT
    *         - DMA_DTERR_INT
    * @param  new_state (TRUE or FALSE)
-   * @retval none
+   * @return none
    */
   static void inline interruptEnable(ChannelRegister& reg, Interrupt interrupt, bool newState) {
     if (newState)
@@ -185,7 +192,7 @@ class chip::dma::DMA {
    *         - DMA2_CHANNEL6
    *         - DMA2_CHANNEL7
    * @param  new_state (TRUE or FALSE)
-   * @retval None
+   * @return None
    */
   static inline void channelEnable(ChannelRegister& reg, bool newState) {
     reg.ctrl_bit.chen = newState;
@@ -210,7 +217,7 @@ class chip::dma::DMA {
    *         - DMA2_GL5        - DMA2_FDT5        - DMA2_HDT5        - DMA2_DTERR5
    *         - DMA2_GL6        - DMA2_FDT6        - DMA2_HDT6        - DMA2_DTERR6
    *         - DMA2_GL7        - DMA2_FDT7        - DMA2_HDT7        - DMA2_DTERR7
-   * @retval state of dma flag
+   * @return state of dma flag
    */
   static inline bool flagGet(Flag flag) {
     if ((flag & Flag::DMA2_MARK) == Flag::DMA2_MARK)
@@ -238,7 +245,7 @@ class chip::dma::DMA {
    *         - DMA2_GL5        - DMA2_FDT5        - DMA2_HDT5        - DMA2_DTERR5
    *         - DMA2_GL6        - DMA2_FDT6        - DMA2_HDT6        - DMA2_DTERR6
    *         - DMA2_GL7        - DMA2_FDT7        - DMA2_HDT7        - DMA2_DTERR7
-   * @retval none
+   * @return none
    */
   static inline void flagClear(Flag flag) {
     if ((flag & Flag::DMA2_MARK) == Flag::DMA2_MARK)
@@ -249,8 +256,8 @@ class chip::dma::DMA {
 
     return;
   }
-  /* **************************************************************************************
-   * Public Method <Static>
+  /* **************************************************************************
+   * Public Static Method
    */
  public:
   /**
@@ -271,7 +278,7 @@ class chip::dma::DMA {
    *         - DMA2_CHANNEL5
    *         - DMA2_CHANNEL6
    *         - DMA2_CHANNEL7
-   * @retval none
+   * @return none
    */
   static void reset(ChannelRegister& reg);
 
@@ -279,7 +286,7 @@ class chip::dma::DMA {
    * @brief  dma init config with its default value.
    * @param  config : pointer to a dma_init_type structure which will
    *         be initialized.
-   * @retval none
+   * @return none
    */
   static void defaultParaInit(Config& config);
 
@@ -302,7 +309,7 @@ class chip::dma::DMA {
    *         - DMA2_CHANNEL6
    *         - DMA2_CHANNEL7
    * @param  dma_initstruct : pointer to a dma_init_type structure.
-   * @retval none
+   * @return none
    */
   static void init(ChannelRegister& reg, Config& config);
 
@@ -336,44 +343,35 @@ class chip::dma::DMA {
    *         - Flexible::TMR4_OVERFLOW- Flexible::TMR4_CH1     - Flexible::TMR4_CH2     - Flexible::TMR4_CH3
    *         - Flexible::TMR4_CH4     - Flexible::TMR5_TRIG    - Flexible::TMR5_OVERFLOW- Flexible::TMR5_CH1
    *         - Flexible::TMR5_CH2     - Flexible::TMR5_CH3     - Flexible::TMR5_CH4
-   * @retval none
+   * @return none
    */
   static void flexibleConfig(Register& reg, Channel channel, Flexible flexible);
 
-  /* **************************************************************************************
+  /* **************************************************************************
    * Public Method <Override>
    */
 
-  /* **************************************************************************************
+  /* **************************************************************************
    * Public Method
    */
 
-  /* **************************************************************************************
-   * Protected Method <Static>
-   */
 
-  /* **************************************************************************************
-   * Protected Method <Override>
-   */
 
-  /* **************************************************************************************
+
+
+  /* **************************************************************************
    * Protected Method
    */
 
-  /* **************************************************************************************
-   * Private Method <Static>
-   */
 
-  /* **************************************************************************************
-   * Private Method <Override>
-   */
 
-  /* **************************************************************************************
+
+  /* **************************************************************************
    * Private Method
    */
 };
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * End of file
  */
 

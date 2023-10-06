@@ -7,16 +7,47 @@
 #ifndef CHIP_22D1950D_0E59_4772_9CB3_21586637F24F
 #define CHIP_22D1950D_0E59_4772_9CB3_21586637F24F
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Include
  */
+
+//-----------------------------------------------------------------------------
 #include "mframe.h"
-#define USING_CHIP_TMR
-#include "chip.h"
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#include "chip_arterytek_at32f415/tmr/BreakDutyConfig.h"
+#include "chip_arterytek_at32f415/tmr/BreakPolarity.h"
+#include "chip_arterytek_at32f415/tmr/ClockDivision.h"
+#include "chip_arterytek_at32f415/tmr/CountMode.h"
+#include "chip_arterytek_at32f415/tmr/EncoderMode.h"
+#include "chip_arterytek_at32f415/tmr/EventTrigger.h"
+#include "chip_arterytek_at32f415/tmr/Flag.h"
+#include "chip_arterytek_at32f415/tmr/Interrupt.h"
+#include "chip_arterytek_at32f415/tmr/PolarityActive.h"
+#include "chip_arterytek_at32f415/tmr/PrimarySelect.h"
+#include "chip_arterytek_at32f415/tmr/Register.h"
+#include "chip_arterytek_at32f415/tmr/TMR.h"
+#include "chip_arterytek_at32f415/tmr/WriteProtectLevel.h"
+#include "chip_arterytek_at32f415/tmr/channel/InputConnected.h"
+#include "chip_arterytek_at32f415/tmr/channel/Select.h"
+#include "chip_arterytek_at32f415/tmr/dma/BaseAddress.h"
+#include "chip_arterytek_at32f415/tmr/dma/Request.h"
+#include "chip_arterytek_at32f415/tmr/dma/RequestSource.h"
+#include "chip_arterytek_at32f415/tmr/dma/TransferLength.h"
+#include "chip_arterytek_at32f415/tmr/external/Divider.h"
+#include "chip_arterytek_at32f415/tmr/external/Polarity.h"
+#include "chip_arterytek_at32f415/tmr/input/Config.h"
+#include "chip_arterytek_at32f415/tmr/input/DirectionMapped.h"
+#include "chip_arterytek_at32f415/tmr/input/Divider.h"
+#include "chip_arterytek_at32f415/tmr/input/Polarity.h"
+#include "chip_arterytek_at32f415/tmr/output/Config.h"
+#include "chip_arterytek_at32f415/tmr/output/ControlMode.h"
+#include "chip_arterytek_at32f415/tmr/output/Force.h"
+#include "chip_arterytek_at32f415/tmr/output/Polarity.h"
+#include "chip_arterytek_at32f415/tmr/subordinate/InputSelect.h"
+#include "chip_arterytek_at32f415/tmr/subordinate/ModeSelect.h"
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Namespace
  */
 namespace chip::tmr {
@@ -31,31 +62,19 @@ namespace chip::tmr {
   extern Register& TMR11;
 }  // namespace chip::tmr
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Class/Interface/Struct/Enum
  */
 class chip::tmr::TMR {
-  /* **************************************************************************************
-   * Variable <Public>
+  /* **************************************************************************
+   * Variable
    */
 
-  /* **************************************************************************************
-   * Variable <Protected>
+  /* **************************************************************************
+   * Abstract method
    */
 
-  /* **************************************************************************************
-   * Variable <Private>
-   */
-
-  /* **************************************************************************************
-   * Abstract method <Public>
-   */
-
-  /* **************************************************************************************
-   * Abstract method <Protected>
-   */
-
-  /* **************************************************************************************
+  /* **************************************************************************
    * Construct Method
    */
  public:
@@ -63,12 +82,32 @@ class chip::tmr::TMR {
 
   virtual ~TMR(void) = default;
 
-  /* **************************************************************************************
+  /* **************************************************************************
    * Operator Method
    */
 
-  /* **************************************************************************************
-   * Public Method <Static Inline>
+  /* **************************************************************************
+   * Public Method <Override>
+   */
+
+  /* **************************************************************************
+   * Public Method
+   */
+
+  /* **************************************************************************
+   * Protected Method
+   */
+
+  /* **************************************************************************
+   * Private Method
+   */
+
+  /* **************************************************************************
+   * Static Variable
+   */
+
+  /* **************************************************************************
+   * Static Method
    */
  public:
   /**
@@ -124,7 +163,7 @@ class chip::tmr::TMR {
    *         - TWO_WAY_1
    *         - TWO_WAY_2
    *         - TWO_WAY_3
-   * @retval none
+   * @return none
    */
   static inline void cntDirSet(Register& reg, CountMode countMode) {
     /* set the cnt direct */
@@ -138,7 +177,7 @@ class chip::tmr::TMR {
    *         TMR1, TMR2, TMR3, TMR4, TMR5, TMR9, TMR10, TMR11
    * @param  cntValue (for 16 bit tmr 0x0000~0xFFFF,
    *                        for 32 bit tmr 0x0000_0000~0xFFFF_FFFF)
-   * @retval none
+   * @return none
    */
   static inline void counterValueSet(Register& reg, uint32_t cntValue) {
     /* set the tmr counter value */
@@ -150,7 +189,7 @@ class chip::tmr::TMR {
    * @param  reg: select the tmr peripheral.
    *         this parameter can be one of the following values:
    *         TMR1, TMR2, TMR3, TMR4, TMR5, TMR9, TMR10, TMR11
-   * @retval tmr counter value
+   * @return tmr counter value
    */
   static inline uint32_t counterValueGet(Register& reg) {
     return reg.cval;
@@ -163,7 +202,7 @@ class chip::tmr::TMR {
    *         TMR1, TMR2, TMR3, TMR4, TMR5, TMR9, TMR10, TMR11
    * @param  divValue (for 16 bit tmr 0x0000~0xFFFF,
    *                        for 32 bit tmr 0x0000_0000~0xFFFF_FFFF)
-   * @retval none
+   * @return none
    */
   static inline void divValueSet(Register& reg, uint32_t divValue) {
     /* set the tmr div value */
@@ -175,7 +214,7 @@ class chip::tmr::TMR {
    * @param  reg: select the tmr peripheral.
    *         this parameter can be one of the following values:
    *         TMR1, TMR2, TMR3, TMR4, TMR5, TMR9, TMR10, TMR11
-   * @retval tmr div value
+   * @return tmr div value
    */
   static inline uint32_t divValueGet(Register& reg) {
     return reg.div;
@@ -189,7 +228,7 @@ class chip::tmr::TMR {
    * @param  prValue: timer period register value of counter
    *                       (for 16 bit tmr 0x0000~0xFFFF,
    *                       for 32 bit tmr 0x0000_0000~0xFFFF_FFFF)
-   * @retval none
+   * @return none
    */
   static inline void periodValueSet(Register& reg, uint32_t prValue) {
     /* set tmr period value */
@@ -201,7 +240,7 @@ class chip::tmr::TMR {
    * @param  reg: select the tmr peripheral.
    *         this parameter can be one of the following values:
    *         TMR1, TMR2, TMR3, TMR4, TMR5, TMR9, TMR10, TMR11
-   * @retval timer period register value of counter
+   * @return timer period register value of counter
    *         (for 16 bit tmr 0x0000~0xFFFF, for 32 bit tmr
    *         0x0000_0000~0xFFFF_FFFF)
    */
@@ -215,7 +254,7 @@ class chip::tmr::TMR {
    *         this parameter can be one of the following values:
    *         TMR1, TMR2, TMR3, TMR4, TMR5, TMR9, TMR10, TMR11
    * @param  newState (TRUE or FALSE)
-   * @retval none
+   * @return none
    */
   static void periodBufferEnable(Register& reg, bool newState) {
     /* tmr period buffer set */
@@ -228,7 +267,7 @@ class chip::tmr::TMR {
    *         this parameter can be one of the following values:
    *         TMR1, TMR2, TMR3, TMR4, TMR5, TMR9
    * @param  newState (TRUE or FALSE)
-   * @retval none
+   * @return none
    */
   static inline void oneCycleModeEnable(Register& reg, bool newState) {
     /* tmr one cycle mode enable */
@@ -241,7 +280,7 @@ class chip::tmr::TMR {
    *         this parameter can be one of the following values:
    *         TMR1, TMR2, TMR3, TMR4, TMR5, TMR9, TMR10, TMR11
    * @param  newState (TRUE or FALSE)
-   * @retval none
+   * @return none
    */
   static inline void overflowRequestSourceSet(Register& reg, bool newState) {
     reg.ctrl1_bit.ovfs = newState;
@@ -253,7 +292,7 @@ class chip::tmr::TMR {
    *         this parameter can be one of the following values:
    *         TMR1, TMR2, TMR3, TMR4, TMR5, TMR9, TMR10, TMR11
    * @param  newState (TRUE or FALSE)
-   * @retval none
+   * @return none
    */
   static inline void overflowEventDisable(Register& reg, bool newState) {
     reg.ctrl1_bit.ovfen = newState;
@@ -268,7 +307,7 @@ class chip::tmr::TMR {
    *         this parameter can be one of the following values:
    *         - C1IRAW
    *         - C1IRAW_XOR
-   * @retval none
+   * @return none
    */
   static void channelInputSelect(Register& reg, channel::InputConnected inputConnected) {
     reg.ctrl2_bit.c1insel = static_cast<uint8_t>(inputConnected);
@@ -289,7 +328,7 @@ class chip::tmr::TMR {
    *         - PrimarySelect::C2ORAW
    *         - PrimarySelect::C3ORAW
    *         - PrimarySelect::C4ORAW
-   * @retval none
+   * @return none
    */
   static inline void primaryModeSelect(Register& reg, PrimarySelect primaryMode) {
     reg.ctrl2_bit.ptos = static_cast<uint8_t>(primaryMode);
@@ -311,7 +350,7 @@ class chip::tmr::TMR {
    *         - subordinate::ModeSelect::HANG
    *         - subordinate::ModeSelect::TRIGGER
    *         - subordinate::ModeSelect::EXTERNAL_CLOCK_A
-   * @retval none
+   * @return none
    */
   static inline void subModeSelect(Register& reg, subordinate::ModeSelect subMode) {
     reg.stctrl_bit.smsel = static_cast<uint8_t>(subMode);
@@ -327,7 +366,7 @@ class chip::tmr::TMR {
    *         this parameter can be one of the following values:
    *         - dma::RequestSource::CHANNEL
    *         - dma::RequestSource::OVERFLOW
-   * @retval none
+   * @return none
    */
   static inline void channelDmaSelect(Register& reg, dma::RequestSource requestSource) {
     reg.ctrl2_bit.drs = static_cast<uint8_t>(requestSource);
@@ -340,7 +379,7 @@ class chip::tmr::TMR {
    *         this parameter can be one of the following values:
    *         TMR1
    * @param  newState (TRUE or FALSE)
-   * @retval none
+   * @return none
    */
   static inline void hallSelect(Register& reg, bool newState) {
     reg.ctrl2_bit.ccfs = newState;
@@ -353,7 +392,7 @@ class chip::tmr::TMR {
    *         this parameter can be one of the following values:
    *         TMR1
    * @param  newState (TRUE or FALSE)
-   * @retval none
+   * @return none
    */
   static inline void channelBufferEnable(Register& reg, bool newState) {
     reg.ctrl2_bit.cbctrl = newState;
@@ -386,7 +425,7 @@ class chip::tmr::TMR {
    *         this parameter can be one of the following values:
    *         TMR1, TMR2, TMR3, TMR4, TMR5, TMR9
    * @param  newState (TRUE or FALSE)
-   * @retval none
+   * @return none
    */
   static inline void subSyncModeSet(Register& reg, bool newState) {
     reg.stctrl_bit.sts = newState;
@@ -408,7 +447,7 @@ class chip::tmr::TMR {
    *         - dma::Request::HALL
    *         - dma::Request::TRIGGER
    * @param  newState
-   * @retval none
+   * @return none
    */
   static inline void dmaRequestEnable(Register& reg, dma::Request dmaRequest, bool newState) {
     if (newState)
@@ -436,7 +475,7 @@ class chip::tmr::TMR {
    *         - Interrupt::TRIGGER
    *         - Interrupt::BRK
    * @param  newState
-   * @retval none
+   * @return none
    */
   static inline void interruptEnable(Register& reg, Interrupt interrupt, bool newState) {
     if (newState)
@@ -466,22 +505,18 @@ class chip::tmr::TMR {
    *         - Flag::C2_RECAPTURE
    *         - Flag::C3_RECAPTURE
    *         - Flag::C4_RECAPTURE
-   * @retval state of tmr flag
+   * @return state of tmr flag
    */
   static inline bool flagGet(Register& reg, Flag flag) {
     return reg.ists & static_cast<uint32_t>(flag);
   }
 
-  /* **************************************************************************************
-   * Public Method <Static>
-   */
- public:
   /**
    * @brief  tmr reset by crm reset register
    * @param  reg: select the tmr peripheral.
    *         this parameter can be one of the following values:
    *         TMR1, TMR2, TMR3, TMR4, TMR5, TMR9, TMR10, TMR11
-   * @retval none
+   * @return none
    */
   static void reset(Register& reg);
 
@@ -489,7 +524,7 @@ class chip::tmr::TMR {
    * @brief  init tmr output default para
    * @param  outputStruct
    *         - to the structure of tmr_output_config_type
-   * @retval none
+   * @return none
    */
   static void outputDefaultParaInit(output::Config& outputStruct);
 
@@ -497,7 +532,7 @@ class chip::tmr::TMR {
    * @brief  init tmr input default para
    * @param  inputStruct
    *         - to the structure of tmr_input_config_type
-   * @retval none
+   * @return none
    */
   static void inputDefaultParaInit(input::Config& inputStruct);
 
@@ -505,7 +540,7 @@ class chip::tmr::TMR {
    * @brief  init tmr brkdt default para
    * @param  breakDutyConfig
    *         - to the structure of tmr_brkdt_config_type
-   * @retval none
+   * @return none
    */
   static void brkdtDefaultParaInit(BreakDutyConfig& breakDutyConfig);
 
@@ -517,7 +552,7 @@ class chip::tmr::TMR {
    * @param  tmr_pr (for 16 bit tmr 0x0000~0xFFFF,
    *                  for 32 bit tmr 0x0000_0000~0xFFFF_FFFF)
    * @param  tmr_div (timer div value:0x0000~0xFFFF)
-   * @retval none
+   * @return none
    */
   static void baseInit(Register& reg, uint32_t pr, uint32_t div);
 
@@ -527,7 +562,7 @@ class chip::tmr::TMR {
    *         this parameter can be one of the following values:
    *         TMR1
    * @param  tmr_rpr_value (0x00~0xFF)
-   * @retval none
+   * @return none
    */
   static void repetitionCounterSet(Register& reg, uint8_t rprValue);
 
@@ -544,7 +579,7 @@ class chip::tmr::TMR {
    *         - channel::Select::CHANNEL4
    * @param  tmr_output_struct
    *         - to the structure of tmr_output_config_type
-   * @retval none
+   * @return none
    */
   static void outputChannelConfig(Register& reg, channel::Select channel, output::Config& outputStruct);
 
@@ -569,7 +604,7 @@ class chip::tmr::TMR {
    *         - TMR_OUTPUT_CONTROL_FORCE_LOW
    *         - TMR_OUTPUT_CONTROL_PWM_MODE_A
    *         - TMR_OUTPUT_CONTROL_PWM_MODE_B
-   * @retval none
+   * @return none
    */
   static void outputChannelModeSelect(Register& reg, channel::Select channel, output::ControlMode ocMode);
 
@@ -586,7 +621,7 @@ class chip::tmr::TMR {
    *         - channel::Select::CHANNEL4
    * @param  tmr_channel_value (for 16 bit tmr 0x0000~0xFFFF,
    *                       for 32 bit tmr 0x0000_0000~0xFFFF_FFFF)
-   * @retval none
+   * @return none
    */
 
   static void channelValueSet(Register& reg, channel::Select channel, uint32_t channelValue);
@@ -601,7 +636,7 @@ class chip::tmr::TMR {
    *         - channel::Select::CHANNEL2
    *         - channel::Select::CHANNEL3
    *         - channel::Select::CHANNEL4
-   * @retval tmr channel value
+   * @return tmr channel value
    */
   static uint32_t channelValueGet(Register& reg, channel::Select channel);
 
@@ -617,7 +652,7 @@ class chip::tmr::TMR {
    *         - channel::Select::CHANNEL3
    *         - channel::Select::CHANNEL4
    * @param  newState (TRUE or FALSE)
-   * @retval none
+   * @return none
    */
   static void outputChannelBufferEnable(Register& reg, channel::Select channel, bool newState);
 
@@ -633,7 +668,7 @@ class chip::tmr::TMR {
    *         - channel::Select::CHANNEL3
    *         - channel::Select::CHANNEL4
    * @param  newState (TRUE or FALSE)
-   * @retval none
+   * @return none
    */
   static void outputChannelImmediatelySet(Register& reg, channel::Select channel, bool newState);
 
@@ -649,7 +684,7 @@ class chip::tmr::TMR {
    *         - channel::Select::CHANNEL3
    *         - channel::Select::CHANNEL4
    * @param  newState (TRUE or FALSE)
-   * @retval none
+   * @return none
    */
   static void outputChannelSwitchSet(Register& reg, channel::Select channel, bool newState);
 
@@ -659,7 +694,7 @@ class chip::tmr::TMR {
    *         this parameter can be one of the following values:
    *         TMR2, TMR5
    * @param  newState (TRUE or FALSE)
-   * @retval none
+   * @return none
    */
   static void bit32FunctionEnable(Register& reg, bool newState);
 
@@ -676,7 +711,7 @@ class chip::tmr::TMR {
    *         - DIV2
    *         - DIV4
    *         - DIV8
-   * @retval none
+   * @return none
    */
   static void inputChannelInit(Register& reg, input::Config& config, input::Divider divider);
 
@@ -695,7 +730,7 @@ class chip::tmr::TMR {
    *         - channel::Select::CHANNEL3C
    *         - channel::Select::CHANNEL4
    * @param  newState (TRUE or FALSE)
-   * @retval none
+   * @return none
    */
   static void channelEnable(Register& reg, channel::Select channel, bool newState);
 
@@ -711,7 +746,7 @@ class chip::tmr::TMR {
    *         - channel::Select::CHANNEL3
    *         - channel::Select::CHANNEL4
    * @param  filterValue (0x0~0xf)
-   * @retval none
+   * @return none
    */
   static void inputChannelfilterSet(Register& reg, channel::Select channel, uint16_t filterValue);
 
@@ -728,7 +763,7 @@ class chip::tmr::TMR {
    *         - input::Divider::DIV2
    *         - input::Divider::DIV4
    *         - input::Divider::DIV8
-   * @retval none
+   * @return none
    */
   static void pwmInputConfig(Register& reg, input::Config& config, input::Divider divider);
 
@@ -749,7 +784,7 @@ class chip::tmr::TMR {
    *         - input::Divider::DIV2
    *         - input::Divider::DIV4
    *         - input::Divider::DIV8
-   * @retval none
+   * @return none
    */
   static void inputChannelDividerSet(Register& reg, channel::Select channel, input::Divider divider);
 
@@ -772,7 +807,7 @@ class chip::tmr::TMR {
    *         - Flag::C2_RECAPTURE
    *         - Flag::C3_RECAPTURE
    *         - Flag::C4_RECAPTURE
-   * @retval none
+   * @return none
    */
   static inline void flagClear(Register& reg, Flag flag) {
     reg.ists = ~static_cast<uint32_t>(flag);
@@ -794,7 +829,7 @@ class chip::tmr::TMR {
    *         - EventTrigger::HALL
    *         - EventTrigger::TRIGGER
    *         - EventTrigger::BRK
-   * @retval none
+   * @return none
    */
   static inline void eventSwTrigger(Register& reg, EventTrigger event) {
     reg.swevt |= static_cast<uint32_t>(event);
@@ -807,7 +842,7 @@ class chip::tmr::TMR {
    *         this parameter can be one of the following values:
    *         TMR1
    * @param  newState (TRUE or FALSE)
-   * @retval none
+   * @return none
    */
   static inline void outputEnable(Register& reg, bool newState) {
     reg.brk_bit.oen = newState;
@@ -818,7 +853,7 @@ class chip::tmr::TMR {
    * @param  reg: select the tmr peripheral.
    *         this parameter can be one of the following values:
    *         TMR1, TMR2, TMR3, TMR4, TMR5, TMR9
-   * @retval none
+   * @return none
    */
   static inline void internalClockSet(Register& reg) {
     reg.stctrl_bit.smsel = static_cast<uint8_t>(subordinate::ModeSelect::DISABLE);
@@ -843,7 +878,7 @@ class chip::tmr::TMR {
    *         this parameter can be one of the following values:
    *         - TMR_POLARITY_ACTIVE_HIGH
    *         - TMR_POLARITY_ACTIVE_LOW
-   * @retval none
+   * @return none
    */
   static void outputChannelPolaritySet(Register& reg, channel::Select channel, PolarityActive ocPolarity);
 
@@ -882,7 +917,7 @@ class chip::tmr::TMR {
    *         - external::Polarity::NON_INVERTED
    *         - external::Polarity::INVERTED
    * @param  filter (0x0~0xf)
-   * @retval none
+   * @return none
    */
   static void externalClockMode1Config(Register& reg, external::Divider divider, external::Polarity polarity, uint16_t filter);
 
@@ -902,7 +937,7 @@ class chip::tmr::TMR {
    *         - external::Polarity::NON_INVERTED
    *         - external::Polarity::INVERTED
    * @param  filter (0x0~0xf)
-   * @retval none
+   * @return none
    */
   static void externalClockMode2Config(Register& reg, external::Divider divider, external::Polarity polarity, uint16_t filter);
 
@@ -926,7 +961,7 @@ class chip::tmr::TMR {
    *         - TMR_INPUT_RISING_EDGE
    *         - TMR_INPUT_FALLING_EDGE
    *         - TMR_INPUT_BOTH_EDGE
-   * @retval none
+   * @return none
    */
   static void encoderModeConfig(Register& reg, EncoderMode encoderMode, input::Polarity ic1Polarity, input::Polarity ic2Polarity);
 
@@ -945,7 +980,7 @@ class chip::tmr::TMR {
    *         this parameter can be one of the following values:
    *         - TMR_FORCE_OUTPUT_HIGH
    *         - TMR_FORCE_OUTPUT_LOW
-   * @retval none
+   * @return none
    */
   static void forceOutputSet(Register& reg, channel::Select channel, output::Force forceOutput);
 
@@ -983,7 +1018,7 @@ class chip::tmr::TMR {
    *         - TMR_C4DT_ADDRESS
    *         - TMR_BRK_ADDRESS
    *         - TMR_DMACTRL_ADDRESS
-   * @retval none
+   * @return none
    */
   static void dmaControlConfig(Register& reg, dma::TransferLength dmaLength, dma::BaseAddress dmaBaseAddress);
 
@@ -994,44 +1029,12 @@ class chip::tmr::TMR {
    *         TMR1
    * @param  brkdt_struct
    *         - to the structure of tmr_brkdt_config_type
-   * @retval none
+   * @return none
    */
   static void brkdtConfig(Register& reg, BreakDutyConfig& brkdtStruct);
-
-  /* **************************************************************************************
-   * Public Method <Override>
-   */
-
-  /* **************************************************************************************
-   * Public Method
-   */
-
-  /* **************************************************************************************
-   * Protected Method <Static>
-   */
-
-  /* **************************************************************************************
-   * Protected Method <Override>
-   */
-
-  /* **************************************************************************************
-   * Protected Method
-   */
-
-  /* **************************************************************************************
-   * Private Method <Static>
-   */
-
-  /* **************************************************************************************
-   * Private Method <Override>
-   */
-
-  /* **************************************************************************************
-   * Private Method
-   */
 };
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * End of file
  */
 

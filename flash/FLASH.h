@@ -7,16 +7,25 @@
 #ifndef CHIP_39BF0942_072C_4AB3_9CBC_16781034D7F9
 #define CHIP_39BF0942_072C_4AB3_9CBC_16781034D7F9
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Include
  */
+
+//-----------------------------------------------------------------------------
 #include "mframe.h"
-#define USING_CHIP_FLASH
-#include "chip.h"
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#include "chip_arterytek_at32f415/flash/Flag.h"
+#include "chip_arterytek_at32f415/flash/Interrupt.h"
+#include "chip_arterytek_at32f415/flash/Register.h"
+#include "chip_arterytek_at32f415/flash/Status.h"
+#include "chip_arterytek_at32f415/flash/Timeout.h"
+#include "chip_arterytek_at32f415/flash/WaitCycle.h"
+#include "chip_arterytek_at32f415/flash/usd/Key.h"
+#include "chip_arterytek_at32f415/flash/usd/Register.h"
+#include "chip_arterytek_at32f415/flash/usd/USD.h"
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Namespace
  */
 namespace chip::flash {
@@ -24,12 +33,12 @@ namespace chip::flash {
   extern Register &FLASH0;
 }  // namespace chip::flash
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Class/Interface/Struct/Enum
  */
 class chip::flash::FLASH : public mframe::lang::Object {
-  /* **************************************************************************************
-   * Variable <Public>
+  /* **************************************************************************
+   * Variable
    */
  public:
   static const uint32_t FLASH_UNLOCK_KEY1 = 0x45670123; /*!< flash operation unlock order key1 */
@@ -42,23 +51,11 @@ class chip::flash::FLASH : public mframe::lang::Object {
   static const uint32_t SLIB_DATA_START_SECTOR = 0x003FF800; /*!< flash slib d-bus area start sector */
   static const uint32_t SLIB_END_SECTOR = 0xFFC00000;        /*!< flash slib end sector */
 
-  /* **************************************************************************************
-   * Variable <Protected>
+  /* **************************************************************************
+   * Abstract method
    */
 
-  /* **************************************************************************************
-   * Variable <Private>
-   */
-
-  /* **************************************************************************************
-   * Abstract method <Public>
-   */
-
-  /* **************************************************************************************
-   * Abstract method <Protected>
-   */
-
-  /* **************************************************************************************
+  /* **************************************************************************
    * Construct Method
    */
  public:
@@ -74,11 +71,11 @@ class chip::flash::FLASH : public mframe::lang::Object {
    */
   virtual ~FLASH(void) override;
 
-  /* **************************************************************************************
+  /* **************************************************************************
    * Operator Method
    */
 
-  /* **************************************************************************************
+  /* **************************************************************************
    * Public Method <Static Inline>
    */
  public:
@@ -103,7 +100,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
    *         - ODF
    *         - PRGMERR
    *         - EPPERR
-   * @retval none
+   * @return none
    */
   static void flagClear(Flag flag) {
     FLASH0.sts = static_cast<uint32_t>(flag);
@@ -113,7 +110,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
   /**
    * @brief  unlock the flash controller.
    * @param  none
-   * @retval none
+   * @return none
    */
   static inline void unlock(void) {
     FLASH0.unlock = FLASH_UNLOCK_KEY1;
@@ -124,7 +121,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
   /**
    * @brief  lock the flash controller.
    * @param  none
-   * @retval none
+   * @return none
    */
   static inline void lock(void) {
     FLASH0.ctrl_bit.oplk = true;
@@ -133,7 +130,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
   /**
    * @brief  return the flash erase/program protection status.
    * @param  sector_bits: pointer to get the epps register.
-   * @retval none
+   * @return none
    */
   static inline void eppStatusGet(uint32_t *sectorBits) {
     sectorBits[0] = static_cast<uint32_t>(FLASH0.epps);
@@ -143,7 +140,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
   /**
    * @brief  check the flash access protection status.
    * @param  none
-   * @retval flash access protection status(SET or RESET)
+   * @return flash access protection status(SET or RESET)
    */
   static inline bool fapStatusGet(void) {
     return FLASH0.usd_bit.fap;
@@ -152,7 +149,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
   /**
    * @brief  check the flash access protection high level status.
    * @param  none
-   * @retval flash access protection high level status(SET or RESET)
+   * @return flash access protection high level status(SET or RESET)
    */
   static inline bool fapHighLevelStatusGet(void) {
     return FLASH0.usd_bit.fap_hl;
@@ -161,7 +158,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
   /**
    * @brief  get the main block slib state.
    * @param  none
-   * @retval SET or RESET
+   * @return SET or RESET
    */
   static inline bool slibStateGet(void) {
     return FLASH0.slib_sts0_bit.slib_enf;
@@ -170,7 +167,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
   /**
    * @brief  get the main block start sector of slib.
    * @param  none
-   * @retval uint16_t
+   * @return uint16_t
    */
   static inline uint16_t slibStartSectorGet(void) {
     return static_cast<uint16_t>(FLASH0.slib_sts1_bit.slib_ss);
@@ -179,7 +176,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
   /**
    * @brief  get the main block data start sector of slib.
    * @param  none
-   * @retval uint16_t
+   * @return uint16_t
    */
   static inline uint16_t slibDatastartSectorGet(void) {
     return static_cast<uint16_t>(FLASH0.slib_sts1_bit.slib_dat_ss);
@@ -188,7 +185,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
   /**
    * @brief  get the main block end sector of slib.
    * @param  none
-   * @retval uint16_t
+   * @return uint16_t
    */
   static inline uint16_t slibEndSectorGet(void) {
     return static_cast<uint16_t>(FLASH0.slib_sts1_bit.slib_es);
@@ -197,7 +194,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
   /**
    * @brief  get the extension memory slib state.
    * @param  none
-   * @retval SET or RESET
+   * @return SET or RESET
    */
   static inline bool extensionMemorySlibStateGet(void) {
     return FLASH0.slib_sts0_bit.em_slib_enf;
@@ -206,13 +203,13 @@ class chip::flash::FLASH : public mframe::lang::Object {
   /**
    * @brief  get the extension memory data start sector of slib.
    * @param  none
-   * @retval uint16_t
+   * @return uint16_t
    */
   static inline uint16_t emSlibDatastartSectorGet(void) {
     return static_cast<uint16_t>(FLASH0.slib_sts0_bit.em_slib_dat_ss);
   }
-  /* **************************************************************************************
-   * Public Method <Static>
+  /* **************************************************************************
+   * Public Static Method
    */
  public:
   /**
@@ -224,14 +221,14 @@ class chip::flash::FLASH : public mframe::lang::Object {
    *         - PRGMERR
    *         - EPPERR
    *         - USDERR
-   * @retval the new state of flash_flag (SET or RESET).
+   * @return the new state of flash_flag (SET or RESET).
    */
   static bool flagGet(Flag flag);
 
   /**
    * @brief  return the flash operation status.
    * @param  none
-   * @retval status: the returned value can be: FLASH_OPERATE_BUSY,
+   * @return status: the returned value can be: FLASH_OPERATE_BUSY,
    *         FLASH_PROGRAM_ERROR, FLASH_EPP_ERROR or FLASH_OPERATE_DONE.
    */
   static Status operationStatusGet(void);
@@ -250,7 +247,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
   /**
    * @brief  erase a specified flash sector.
    * @param  sector_address: the sector address to be erased.
-   * @retval status: the returned value can be: Status::PROGRAM_ERROR,
+   * @return status: the returned value can be: Status::PROGRAM_ERROR,
    *         Status::EPP_ERROR, Status::DONE or Status::TIMEOUT.
    */
   static Status sectorErase(uint32_t sectorAddress);
@@ -258,7 +255,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
   /**
    * @brief  erase flash all internal sectors.
    * @param  none
-   * @retval status: the returned value can be: Status::PROGRAM_ERROR,
+   * @return status: the returned value can be: Status::PROGRAM_ERROR,
    *         Status::EPP_ERROR, Status::DONE or Status::TIMEOUT.
    */
   static Status internalAllErase(void);
@@ -268,7 +265,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
    * @note   this functions erases all user system data except the fap byte.
    *         when fap high level enabled, can't use this function.
    * @param  none
-   * @retval status: the returned value can be: Status::PROGRAM_ERROR,
+   * @return status: the returned value can be: Status::PROGRAM_ERROR,
    *         Status::EPP_ERROR, Status::DONE or Status::TIMEOUT.
    */
   static Status userSystemDataErase(void);
@@ -277,7 +274,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
    * @brief  program a word at a specified address.
    * @param  address: specifies the address to be programmed, word alignment is recommended.
    * @param  data: specifies the data to be programmed.
-   * @retval status: the returned value can be: Status::PROGRAM_ERROR,
+   * @return status: the returned value can be: Status::PROGRAM_ERROR,
    *         Status::EPP_ERROR, Status::DONE or Status::TIMEOUT.
    */
   static Status wordProgram(uint32_t address, uint32_t data);
@@ -286,7 +283,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
    * @brief  program a halfword at a specified address.
    * @param  address: specifies the address to be programmed, halfword alignment is recommended.
    * @param  data: specifies the data to be programmed.
-   * @retval status: the returned value can be: Status::PROGRAM_ERROR,
+   * @return status: the returned value can be: Status::PROGRAM_ERROR,
    *         Status::EPP_ERROR, Status::DONE or Status::TIMEOUT.
    */
   static Status halfwordProgram(uint32_t address, uint16_t data);
@@ -295,7 +292,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
    * @brief  program a byte at a specified address.
    * @param  address: specifies the address to be programmed.
    * @param  data: specifies the data to be programmed.
-   * @retval status: the returned value can be: Status::PROGRAM_ERROR,
+   * @return status: the returned value can be: Status::PROGRAM_ERROR,
    *         Status::EPP_ERROR, Status::DONE or Status::TIMEOUT.
    */
   static Status byteProgram(uint32_t address, uint8_t data);
@@ -304,7 +301,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
    * @brief  program a halfword at a specified user system data address.
    * @param  address: specifies the address to be programmed.
    * @param  data: specifies the data to be programmed.
-   * @retval status: the returned value can be: Status::PROGRAM_ERROR,
+   * @return status: the returned value can be: Status::PROGRAM_ERROR,
    *         Status::EPP_ERROR, Status::DONE or Status::TIMEOUT.
    */
   static Status userSystemDataProgram(uint32_t address, uint8_t data);
@@ -315,7 +312,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
    *         the pointer of the address of the sectors to be erase/program protected.
    *         the first 31 bits general every bit is used to protect 2 sectors. the bit
    *         31 is used to protect the rest sectors and extension memory.
-   * @retval status: the returned value can be: Status::PROGRAM_ERROR,
+   * @return status: the returned value can be: Status::PROGRAM_ERROR,
    *         Status::EPP_ERROR, Status::DONE or Status::TIMEOUT.
    */
   static Status eppSet(uint32_t *sectorBits);
@@ -326,7 +323,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
    *         this function, must re-program them since this function erase all user system data.
    * @param  new_state: new state of the flash access protection.
    *         this parameter can be: TRUE or FALSE.
-   * @retval status: the returned value can be: Status::PROGRAM_ERROR,
+   * @return status: the returned value can be: Status::PROGRAM_ERROR,
    *         Status::EPP_ERROR, Status::DONE or Status::TIMEOUT.
    */
   static Status fapEnable(bool newState);
@@ -337,7 +334,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
    *         this function, must re-program them since this function erase all user system data.
    * @param  new_state: new state of the flash access protection high level.
    *         this parameter can be: TRUE or FALSE.
-   * @retval status: the returned value can be: Status::PROGRAM_ERROR,
+   * @return status: the returned value can be: Status::PROGRAM_ERROR,
    *         Status::EPP_ERROR, Status::DONE or Status::TIMEOUT.
    */
   static Status fapHighLevelEnable(bool newState);
@@ -358,7 +355,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
    *         this data can be one of the following values:
    *         - USD_STDBY_NO_RST: no reset generated when entering in standby
    *         - USD_STDBY_RST: reset generated when entering in standby
-   * @retval status: the returned value can be: Status::PROGRAM_ERROR,
+   * @return status: the returned value can be: Status::PROGRAM_ERROR,
    *         Status::EPP_ERROR, Status::DONE or Status::TIMEOUT.
    */
   static Status ssbSet(uint8_t usdSsb);
@@ -366,7 +363,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
   /**
    * @brief  return the flash system setting byte status.
    * @param  none
-   * @retval values from flash_usd register: wdt_ato_en(bit0), depslp_rst(bit1),
+   * @return values from flash_usd register: wdt_ato_en(bit0), depslp_rst(bit1),
    *         stdby_rst(bit2).
    */
   static inline uint8_t ssbStatusGet(void) {
@@ -382,7 +379,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
    *         - Interrupt::ODF
    * @param  new_state: new state of the specified flash interrupts.
    *         this parameter can be: TRUE or FALSE.
-   * @retval none
+   * @return none
    */
   static inline void interruptEnable(Interrupt interrupt, bool newState) {
     if (static_cast<uint32_t>(interrupt) & static_cast<uint32_t>(Interrupt::ERR))
@@ -397,7 +394,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
    *         start_sector: security library start sector
    *         data_start_sector: security library d-bus area start sector
    *         end_sector: security library end sector
-   * @retval status: the returned value can be: Status::PROGRAM_ERROR,
+   * @return status: the returned value can be: Status::PROGRAM_ERROR,
    *         Status::EPP_ERROR, Status::DONE or Status::TIMEOUT.
    */
   static Status slibEnable(uint32_t pwd, uint16_t startSector, uint16_t dataStartSector, uint16_t endSector);
@@ -405,7 +402,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
   /**
    * @brief  disable main block slib when slib enabled.
    * @param  pwd: slib password
-   * @retval success or error
+   * @return success or error
    */
   static bool slibDisable(uint32_t pwd);
 
@@ -413,7 +410,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
    * @brief  flash crc calibration.
    * @param  start_addr: crc calibration start sector address
    *         sector_cnt: crc calibration sector count
-   * @retval uint32: crc calibration result
+   * @return uint32: crc calibration result
    */
   static uint32_t crcCalibrate(uint32_t start_addr, uint32_t sectorCnt);
 
@@ -421,7 +418,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
    * @brief  enable boot memory as extension mode.
    * @note   this function is irreversible, can not disable!!!
    * @param  none
-   * @retval none.
+   * @return none.
    */
   static void bootMemoryExtensionModeEnable(void);
 
@@ -429,45 +426,29 @@ class chip::flash::FLASH : public mframe::lang::Object {
    * @brief  enable extension memory security library function.
    * @param  pwd: slib password
    *         data_start_sector: extension memory security library d-bus area start sector, range 1~17 or 0xFF
-   * @retval status: the returned value can be: Status::PROGRAM_ERROR,
+   * @return status: the returned value can be: Status::PROGRAM_ERROR,
    *         Status::EPP_ERROR, Status::DONE or Status::TIMEOUT.
    */
   static Status extensionMemorySlibEnable(uint32_t pwd, uint16_t dataStartSector);
 
-  /* **************************************************************************************
+  /* **************************************************************************
    * Public Method <Override>
    */
 
-  /* **************************************************************************************
+  /* **************************************************************************
    * Public Method
    */
 
-  /* **************************************************************************************
-   * Protected Method <Static>
-   */
-
-  /* **************************************************************************************
-   * Protected Method <Override>
-   */
-
-  /* **************************************************************************************
+  /* **************************************************************************
    * Protected Method
    */
 
-  /* **************************************************************************************
-   * Private Method <Static>
-   */
-
-  /* **************************************************************************************
-   * Private Method <Override>
-   */
-
-  /* **************************************************************************************
+  /* **************************************************************************
    * Private Method
    */
 };
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * End of file
  */
 

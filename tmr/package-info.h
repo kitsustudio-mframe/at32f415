@@ -1,18 +1,13 @@
 /**
  * Copyright (c) 2020 ZxyKira
  * All rights reserved.
- *
+ * 
  * SPDX-License-Identifier: MIT
  */
 
 /* ****************************************************************************************
  * Define
  */
-#ifdef USING_CHIP
-#ifndef USING_CHIP_TMR
-#define USING_CHIP_TMR
-#endif
-#endif
 
 /* ****************************************************************************************
  * Include folder
@@ -27,7 +22,6 @@
 /* ****************************************************************************************
  * Include
  */
-#ifdef USING_CHIP_TMR
 #include "BreakDutyConfig.h"
 #include "BreakPolarity.h"
 #include "ClockDivision.h"
@@ -41,8 +35,6 @@
 #include "Register.h"
 #include "TMR.h"
 #include "WriteProtectLevel.h"
-#undef USING_CHIP_TMR
-#endif
 
 /* ****************************************************************************************
  * End of file

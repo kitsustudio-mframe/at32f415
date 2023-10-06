@@ -5,14 +5,17 @@
  * SPDX-License-Identifier: MIT
  */
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Include
  */
-#include "./CRM.h"
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#include "CRM.h"
 
-/* ****************************************************************************************
+//-----------------------------------------------------------------------------
+#include "chip_arterytek_at32f415/Processor.h"
+
+/* ****************************************************************************
  * Macro
  */
 #pragma clang diagnostic push
@@ -28,46 +31,37 @@
 #define CRM_REG(value) PERIPH_REG(Processor::BASE_CRM, value)
 #define CRM_REG_BIT(value) PERIPH_REG_BIT(value)
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Using
  */
 using chip::crm::CRM;
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 using chip::crm::Register;
 
-/* ****************************************************************************************
- * Variable <Static>
+/* ****************************************************************************
+ * Static Variable
  */
 Register& chip::crm::CRM0 = *reinterpret_cast<Register*>(chip::Processor::BASE_CRM);
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Construct Method
  */
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Operator Method
  */
 
-/* ****************************************************************************************
- * Public Method <Static>
- */
-
-/* ****************************************************************************************
+/* ****************************************************************************
  * Public Method <Override>
  */
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Public Method
  */
 
-/* ****************************************************************************************
- * Protected Method <Static>
- */
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void CRM::reset(void) {
   /* reset the crm clock configuration to the default reset state(for debug purpose) */
   /* set hicken bit */
@@ -101,9 +95,7 @@ void CRM::reset(void) {
   CRM0.clkint = 0x009F0000;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 bool CRM::flagGet(Flag flag) {
   uint32_t f = static_cast<uint32_t>(flag);
   if ((CRM_REG(f) & CRM_REG_BIT(f)) != CRM_REG_BIT(f))
@@ -112,9 +104,7 @@ bool CRM::flagGet(Flag flag) {
   return true;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 bool CRM::hextStableWait(void) {
   uint32_t stable_cnt = 0;
 
@@ -125,9 +115,7 @@ bool CRM::hextStableWait(void) {
   return flagGet(Flag::HEXT_STABLE);
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void CRM::hickClockCalibrationSet(uint8_t caliValue) {
   /* enable write hick calibration */
   CRM0.misc1_bit.hickcal_key = 0x5A;
@@ -139,9 +127,7 @@ void CRM::hickClockCalibrationSet(uint8_t caliValue) {
   CRM0.misc1_bit.hickcal_key = 0x0;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void CRM::periphClockEnable(PeriphClock value, bool newState) {
   uint32_t v = static_cast<uint32_t>(value);
   /* enable periph clock */
@@ -154,16 +140,12 @@ void CRM::periphClockEnable(PeriphClock value, bool newState) {
 
   return;
 }
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 bool CRM::getPeriphClockEnable(PeriphClock value) {
   uint32_t v = static_cast<uint32_t>(value);
   return CRM_REG(v) & CRM_REG_BIT(v);
 }
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void CRM::periphReset(PeriphReset value, bool newState) {
   uint32_t v = static_cast<uint32_t>(value);
   /* enable periph reset */
@@ -177,9 +159,7 @@ void CRM::periphReset(PeriphReset value, bool newState) {
   return;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void CRM::periphSleepModeClockEnable(PeriphClockSleepMode value, bool newState) {
   uint32_t v = static_cast<uint32_t>(value);
   /* enable periph clock in sleep mode */
@@ -191,9 +171,7 @@ void CRM::periphSleepModeClockEnable(PeriphClockSleepMode value, bool newState) 
     CRM_REG(v) &= ~(CRM_REG_BIT(v));
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void CRM::clockSourceEnable(SourceClockCore source, bool newState) {
   switch (source) {
     case SourceClockCore::CLOCK_HICK:
@@ -221,9 +199,7 @@ void CRM::clockSourceEnable(SourceClockCore source, bool newState) {
   }
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void CRM::flagClear(Flag flag) {
   switch (flag) {
     case Flag::NRST_RESET:
@@ -265,9 +241,7 @@ void CRM::flagClear(Flag flag) {
   }
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void CRM::adcClockDivSet(DividerADC divValue) {
   uint8_t v = static_cast<uint8_t>(divValue);
 
@@ -277,9 +251,7 @@ void CRM::adcClockDivSet(DividerADC divValue) {
   return;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void CRM::usbClockDivSet(DividerUSB divValue) {
   uint8_t v = static_cast<uint8_t>(divValue);
 
@@ -289,9 +261,7 @@ void CRM::usbClockDivSet(DividerUSB divValue) {
   return;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void CRM::pllConfig(SourceClockPLL clockSource, MultPLL multValue) {
   uint32_t pllrcfreq = 0;
   ReferenceClockPLL pllfref = ReferenceClockPLL::REF_4M;
@@ -334,9 +304,7 @@ void CRM::pllConfig(SourceClockPLL clockSource, MultPLL multValue) {
   return;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void CRM::pllConfig2(SourceClockPLL clockSource, uint16_t pllNs, uint16_t pllMs, PostDividerPLL pllFr) {
   /* config pll clock source */
   if (clockSource == SourceClockPLL::HICK) {
@@ -359,9 +327,7 @@ void CRM::pllConfig2(SourceClockPLL clockSource, uint16_t pllNs, uint16_t pllMs,
   return;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void CRM::clocksFreqGet(CoreClock& coreClock) {
   uint32_t pll_mult = 0, pll_mult_h = 0, pll_clock_source = 0, temp = 0, div_value = 0;
   uint32_t pllrcsfreq = 0, pll_ms = 0, pll_ns = 0, pll_fr = 0;
@@ -464,27 +430,21 @@ void CRM::clocksFreqGet(CoreClock& coreClock) {
   return;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void CRM::clockOutSet(ClockOutSelect clkout) {
   CRM0.cfg_bit.clkout_sel = static_cast<uint8_t>(clkout) & 0x7;
   CRM0.misc1_bit.clkout_sel = (static_cast<uint8_t>(clkout) >> 3) & 0x1;
   return;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void CRM::hickSclkFrequencySelect(HickFrequencySCLK value) {
   hickDividerSelect(DividerHICK::NODIV);
   CRM0.misc2_bit.hick_to_sclk = static_cast<uint8_t>(value);
   return;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void CRM::usbClockSourceSelect(SourceClockUSB value) {
   if (value == SourceClockUSB::HICK)
     hickSclkFrequencySelect(HickFrequencySCLK::HICK_48MHZ);
@@ -492,19 +452,17 @@ void CRM::usbClockSourceSelect(SourceClockUSB value) {
   CRM0.misc2_bit.hick_to_usb = static_cast<uint8_t>(value);
   return;
 }
-/* ****************************************************************************************
- * Protected Method <Override>
- */
 
-/* ****************************************************************************************
+
+/* ****************************************************************************
  * Protected Method
  */
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Private Method
  */
 
 #pragma clang diagnostic pop
-/* ****************************************************************************************
+/* ****************************************************************************
  * End of file
  */

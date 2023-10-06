@@ -5,16 +5,18 @@
  * SPDX-License-Identifier: MIT
  */
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Include
  */
-#define USING_CHIP_CRM
-#include "chip.h"
 
-//-----------------------------------------------------------------------------------------
-#include "./ADC.h"
+//-----------------------------------------------------------------------------
+#include "ADC.h"
 
-/* ****************************************************************************************
+//-----------------------------------------------------------------------------
+#include "chip_arterytek_at32f415/Processor.h"
+#include "chip_arterytek_at32f415/crm/CRM.h"
+
+/* ****************************************************************************
  * Macro
  */
 #pragma clang diagnostic push
@@ -22,36 +24,32 @@
 #pragma clang diagnostic ignored "-Wcovered-switch-default"
 #pragma clang diagnostic ignored "-Wswitch-enum"
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Using
  */
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 using chip::adc::ADC;
 using chip::adc::Register;
 using chip::crm::CRM;
 using chip::crm::PeriphReset;
 
-/* ****************************************************************************************
- * Variable <Static>
+/* ****************************************************************************
+ * Static Variable
  */
 Register& chip::adc::ADC1 = *reinterpret_cast<Register*>(chip::Processor::BASE_ADC1);
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Construct Method
  */
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Operator Method
  */
 
-/* ****************************************************************************************
- * Public Method <Static>
- */
-
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 void ADC::reset(Register& reg) {
   if (reinterpret_cast<uint32_t>(&reg) == chip::Processor::BASE_ADC1) {
     CRM::periphReset(PeriphReset::RESET_ADC1, true);
@@ -59,7 +57,7 @@ void ADC::reset(Register& reg) {
   }
 }
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 void ADC::baseDefaultParaInit(Config& config) {
   config.sequenceMode = false;
   config.repeatMode = false;
@@ -68,7 +66,7 @@ void ADC::baseDefaultParaInit(Config& config) {
   return;
 }
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 void ADC::baseConfig(Register& reg, Config& baseStruct) {
   reg.ctrl1_bit.sqen = baseStruct.sequenceMode;
   reg.ctrl2_bit.rpen = baseStruct.repeatMode;
@@ -77,7 +75,7 @@ void ADC::baseConfig(Register& reg, Config& baseStruct) {
   return;
 }
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 void ADC::voltageMonitorEnable(Register& reg, VoltageMonitoring voltageMonitoring) {
   reg.ctrl1_bit.ocvmen = false;
   reg.ctrl1_bit.pcvmen = false;
@@ -86,14 +84,14 @@ void ADC::voltageMonitorEnable(Register& reg, VoltageMonitoring voltageMonitorin
   return;
 }
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 void ADC::voltageMonitorThresholdValueSet(Register& reg, uint16_t highThreshold, uint16_t lowThreshold) {
   reg.vmhb_bit.vmhb = highThreshold;
   reg.vmlb_bit.vmlb = lowThreshold;
   return;
 }
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 void ADC::preemptChannelSet(Register& reg, Channel channel, uint8_t sequence, SampleTime sampleTime) {
   uint16_t sequence_index = 0;
   switch (channel) {
@@ -174,7 +172,7 @@ void ADC::preemptChannelSet(Register& reg, Channel channel, uint8_t sequence, Sa
   }
 }
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 void ADC::ordinaryChannelSet(Register& reg, Channel channel, uint8_t sequence, SampleTime sampleTime) {
   switch (channel) {
     case Channel::CHANNEL0:
@@ -289,7 +287,7 @@ void ADC::ordinaryChannelSet(Register& reg, Channel channel, uint8_t sequence, S
   }
 }
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 void ADC::setChannelSampleTime(Register& reg, Channel channel, SampleTime sampleTime) {
   uint32_t ch = static_cast<uint32_t>(channel);
   volatile uint32_t* ptr = &reg.spt2;
@@ -305,7 +303,7 @@ void ADC::setChannelSampleTime(Register& reg, Channel channel, SampleTime sample
   return;
 }
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 void ADC::ordinaryConversionTriggerSet(Register& reg, OrdinaryTrig ordinaryTrig, bool newState) {
   reg.ctrl2_bit.octesel_l = static_cast<uint8_t>(ordinaryTrig) & 0x7;
   reg.ctrl2_bit.octesel_h = 0;
@@ -317,7 +315,7 @@ void ADC::ordinaryConversionTriggerSet(Register& reg, OrdinaryTrig ordinaryTrig,
   return;
 }
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 void ADC::preemptConversionTriggerSet(Register& reg, PreemptTrig preemptTrig, bool newState) {
   reg.ctrl2_bit.pctesel_l = static_cast<uint8_t>(preemptTrig) & 0x7;
   reg.ctrl2_bit.pctesel_h = 0;
@@ -329,7 +327,7 @@ void ADC::preemptConversionTriggerSet(Register& reg, PreemptTrig preemptTrig, bo
   return;
 }
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 void ADC::preemptOffsetValueSet(Register& reg, PreemptChannel preemptChannel, uint16_t offsetValue) {
   switch (preemptChannel) {
     case PreemptChannel::CHANNEL1:
@@ -353,7 +351,7 @@ void ADC::preemptOffsetValueSet(Register& reg, PreemptChannel preemptChannel, ui
   }
 }
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 uint16_t ADC::preemptConversionDataGet(Register& reg, PreemptChannel preemptChannel) {
   uint16_t preempt_conv_data_index = 0;
 
@@ -380,31 +378,27 @@ uint16_t ADC::preemptConversionDataGet(Register& reg, PreemptChannel preemptChan
 
   return preempt_conv_data_index;
 }
-/* ****************************************************************************************
+/* ****************************************************************************
  * Public Method <Override>
  */
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Public Method
  */
 
-/* ****************************************************************************************
- * Protected Method <Static>
- */
 
-/* ****************************************************************************************
- * Protected Method <Override>
- */
 
-/* ****************************************************************************************
+
+
+/* ****************************************************************************
  * Protected Method
  */
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Private Method
  */
 
 #pragma clang diagnostic pop
-/* ****************************************************************************************
+/* ****************************************************************************
  * End of file
  */

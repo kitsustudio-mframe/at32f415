@@ -7,16 +7,23 @@
 #ifndef CHIP_B3F74285_D4AA_47C7_A7BA_F460F199D3C1
 #define CHIP_B3F74285_D4AA_47C7_A7BA_F460F199D3C1
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Include
  */
+
+//-----------------------------------------------------------------------------
 #include "mframe.h"
-#define USING_CHIP_PWC
-#include "chip.h"
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#include "chip_arterytek_at32f415/pwc/DeepSleepEnter.h"
+#include "chip_arterytek_at32f415/pwc/Flag.h"
+#include "chip_arterytek_at32f415/pwc/PWC.h"
+#include "chip_arterytek_at32f415/pwc/PvmVoltage.h"
+#include "chip_arterytek_at32f415/pwc/Register.h"
+#include "chip_arterytek_at32f415/pwc/Regulator.h"
+#include "chip_arterytek_at32f415/pwc/SleepEnter.h"
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Namespace
  */
 namespace chip::pwc {
@@ -24,31 +31,19 @@ namespace chip::pwc {
   extern Register& PWC0;
 }  // namespace chip::pwc
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Class/Interface/Struct/Enum
  */
 class chip::pwc::PWC : public mframe::lang::Object {
-  /* **************************************************************************************
-   * Variable <Public>
+  /* **************************************************************************
+   * Variable
    */
 
-  /* **************************************************************************************
-   * Variable <Protected>
+  /* **************************************************************************
+   * Abstract method
    */
 
-  /* **************************************************************************************
-   * Variable <Private>
-   */
-
-  /* **************************************************************************************
-   * Abstract method <Public>
-   */
-
-  /* **************************************************************************************
-   * Abstract method <Protected>
-   */
-
-  /* **************************************************************************************
+  /* **************************************************************************
    * Construct Method
    */
  public:
@@ -56,19 +51,39 @@ class chip::pwc::PWC : public mframe::lang::Object {
 
   virtual ~PWC(void) override;
 
-  /* **************************************************************************************
+  /* **************************************************************************
    * Operator Method
    */
 
-  /* **************************************************************************************
-   * Public Method <Static Inline>
+  /* **************************************************************************
+   * Public Method <Override>
+   */
+
+  /* **************************************************************************
+   * Public Method
+   */
+
+  /* **************************************************************************
+   * Protected Method
+   */
+
+  /* **************************************************************************
+   * Private Method
+   */
+
+  /* **************************************************************************
+   * Static Variable
+   */
+
+  /* **************************************************************************
+   * Static Method
    */
  public:
   /**
    * @brief  enable or disable access to the battery powered domain.
    * @param  newState: new state of battery powered domain access.
    *         this parameter can be: TRUE or FALSE.
-   * @retval none
+   * @return none
    */
   static inline void batteryPoweredDomainAccess(bool newState) {
     PWC0.ctrl_bit.bpwen = newState;
@@ -87,7 +102,7 @@ class chip::pwc::PWC : public mframe::lang::Object {
    *         - VOLTAGE_2V7
    *         - VOLTAGE_2V8
    *         - VOLTAGE_2V9
-   * @retval none
+   * @return none
    */
   static inline void pvmLevelSelect(PvmVoltage pvmVoltage) {
     PWC0.ctrl_bit.pvmsel = static_cast<uint8_t>(pvmVoltage);
@@ -98,7 +113,7 @@ class chip::pwc::PWC : public mframe::lang::Object {
    * @brief  enable or disable pwc power voltage monitor (pvm)
    * @param  new_state: new state of pvm.
    *         this parameter can be: TRUE or FALSE.
-   * @retval none
+   * @return none
    */
   static inline void powerVoltageMonitorEnable(bool newState) {
     PWC0.ctrl_bit.pvmen = newState;
@@ -133,7 +148,7 @@ class chip::pwc::PWC : public mframe::lang::Object {
    *         - PWC_STANDBY_FLAG
    *         - note:"PWC_PVM_OUTPUT_FLAG" cannot be choose!this bit is
    * readonly bit,it means the voltage monitoring output state
-   * @retval none
+   * @return none
    */
   static inline void flagClear(Flag flag) {
     if (static_cast<uint32_t>(flag) & static_cast<uint32_t>(Flag::STANDBY))
@@ -150,7 +165,7 @@ class chip::pwc::PWC : public mframe::lang::Object {
    *         - PWC_WAKEUP_FLAG
    *         - PWC_STANDBY_FLAG
    *         - PWC_PVM_OUTPUT_FLAG
-   * @retval state of select flag(SET or RESET).
+   * @return state of select flag(SET or RESET).
    */
   static inline bool flagGet(Flag flag) {
     return (PWC0.ctrlsts & static_cast<uint32_t>(flag));
@@ -162,56 +177,20 @@ class chip::pwc::PWC : public mframe::lang::Object {
    *         this parameter can be one of the following values:
    *         - PWC_REGULATOR_ON
    *         - PWC_REGULATOR_LOW_POWER
-   * @retval none
+   * @return none
    */
   static inline void voltageRegulateSet(Regulator regulator) {
     PWC0.ctrl_bit.vrsel = static_cast<uint8_t>(regulator);
     return;
   }
 
-  /* **************************************************************************************
-   * Public Method <Static>
-   */
- public:
   static void reset(void);
   static void sleepModeEnter(SleepEnter sleepEnter);
   static void deepSleepModeEnter(DeepSleepEnter deepSleepEnter);
   static void standbyModeEnter(void);
-
-  /* **************************************************************************************
-   * Public Method <Override>
-   */
-
-  /* **************************************************************************************
-   * Public Method
-   */
-
-  /* **************************************************************************************
-   * Protected Method <Static>
-   */
-
-  /* **************************************************************************************
-   * Protected Method <Override>
-   */
-
-  /* **************************************************************************************
-   * Protected Method
-   */
-
-  /* **************************************************************************************
-   * Private Method <Static>
-   */
-
-  /* **************************************************************************************
-   * Private Method <Override>
-   */
-
-  /* **************************************************************************************
-   * Private Method
-   */
 };
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * End of file
  */
 

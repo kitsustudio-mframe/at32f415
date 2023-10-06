@@ -10,13 +10,13 @@
       <TargetName>chip</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>6160000::V6.16::ARMCLANG</pCCUsed>
+      <pCCUsed>6180000::V6.18::ARMCLANG</pCCUsed>
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>ARMCM4</Device>
           <Vendor>ARM</Vendor>
-          <PackID>ARM.CMSIS.5.8.0</PackID>
+          <PackID>ARM.CMSIS.5.9.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000,0x00020000) IROM(0x00000000,0x00040000) CPUTYPE("Cortex-M4") CLOCK(12000000) ESEL ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -186,6 +186,7 @@
             <RvdsVP>0</RvdsVP>
             <RvdsMve>0</RvdsMve>
             <RvdsCdeCp>0</RvdsCdeCp>
+            <nBranchProt>0</nBranchProt>
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -339,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>AT32F415RBT7</Define>
               <Undefine></Undefine>
-              <IncludePath>.\</IncludePath>
+              <IncludePath>.\..\</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -381,7 +382,7 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>src</GroupName>
+          <GroupName>root</GroupName>
           <Files>
             <File>
               <FileName>package-info.h</FileName>
@@ -411,7 +412,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>src/adc</GroupName>
+          <GroupName>root/adc</GroupName>
           <Files>
             <File>
               <FileName>ADC.cpp</FileName>
@@ -481,7 +482,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>src/crm</GroupName>
+          <GroupName>root/crm</GroupName>
           <Files>
             <File>
               <FileName>AutoStepMode.h</FileName>
@@ -626,7 +627,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>src/dma</GroupName>
+          <GroupName>root/dma</GroupName>
           <Files>
             <File>
               <FileName>Channel.h</FileName>
@@ -711,7 +712,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>src/exint</GroupName>
+          <GroupName>root/exint</GroupName>
           <Files>
             <File>
               <FileName>Config.h</FileName>
@@ -751,7 +752,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>src/pwc</GroupName>
+          <GroupName>root/pwc</GroupName>
           <Files>
             <File>
               <FileName>DeepSleepEnter.h</FileName>
@@ -796,7 +797,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>src/misc</GroupName>
+          <GroupName>root/misc</GroupName>
           <Files>
             <File>
               <FileName>InterruptService.h</FileName>
@@ -836,7 +837,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>src/flash</GroupName>
+          <GroupName>root/flash</GroupName>
           <Files>
             <File>
               <FileName>Flag.h</FileName>
@@ -886,7 +887,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>src/flash/usd</GroupName>
+          <GroupName>root/flash/usd</GroupName>
           <Files>
             <File>
               <FileName>Key.h</FileName>
@@ -916,7 +917,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>src/gpio</GroupName>
+          <GroupName>root/gpio</GroupName>
           <Files>
             <File>
               <FileName>DriveMode.h</FileName>
@@ -976,7 +977,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>src/gpio/iomux</GroupName>
+          <GroupName>root/gpio/iomux</GroupName>
           <Files>
             <File>
               <FileName>IOMUX.cpp</FileName>
@@ -1001,7 +1002,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>src/usart</GroupName>
+          <GroupName>root/usart</GroupName>
           <Files>
             <File>
               <FileName>BreakBit.h</FileName>
@@ -1081,7 +1082,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>src/tmr</GroupName>
+          <GroupName>root/tmr</GroupName>
           <Files>
             <File>
               <FileName>BreakDutyConfig.h</FileName>
@@ -1161,7 +1162,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>src/tmr/channel</GroupName>
+          <GroupName>root/tmr/channel</GroupName>
           <Files>
             <File>
               <FileName>InputConnected.h</FileName>
@@ -1181,7 +1182,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>src/tmr/dma</GroupName>
+          <GroupName>root/tmr/dma</GroupName>
           <Files>
             <File>
               <FileName>BaseAddress.h</FileName>
@@ -1211,7 +1212,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>src/tmr/external</GroupName>
+          <GroupName>root/tmr/external</GroupName>
           <Files>
             <File>
               <FileName>Divider.h</FileName>
@@ -1231,7 +1232,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>src/tmr/input</GroupName>
+          <GroupName>root/tmr/input</GroupName>
           <Files>
             <File>
               <FileName>Config.h</FileName>
@@ -1261,7 +1262,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>src/tmr/output</GroupName>
+          <GroupName>root/tmr/output</GroupName>
           <Files>
             <File>
               <FileName>Config.h</FileName>
@@ -1291,7 +1292,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>src/tmr/subordinate</GroupName>
+          <GroupName>root/tmr/subordinate</GroupName>
           <Files>
             <File>
               <FileName>InputSelect.h</FileName>

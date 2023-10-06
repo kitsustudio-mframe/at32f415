@@ -7,16 +7,26 @@
 #ifndef CHIP_C53C5B22_4DD0_47EE_84ED_09DCE17C5F33
 #define CHIP_C53C5B22_4DD0_47EE_84ED_09DCE17C5F33
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Include
  */
+
+//-----------------------------------------------------------------------------
 #include "mframe.h"
-#define USING_CHIP_GPIO
-#include "chip.h"
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#include "chip_arterytek_at32f415/gpio/DriveMode.h"
+#include "chip_arterytek_at32f415/gpio/GPIO.h"
+#include "chip_arterytek_at32f415/gpio/Mode.h"
+#include "chip_arterytek_at32f415/gpio/OutputMode.h"
+#include "chip_arterytek_at32f415/gpio/PinConfig.h"
+#include "chip_arterytek_at32f415/gpio/Pins.h"
+#include "chip_arterytek_at32f415/gpio/PinsSource.h"
+#include "chip_arterytek_at32f415/gpio/PortSource.h"
+#include "chip_arterytek_at32f415/gpio/PullMode.h"
+#include "chip_arterytek_at32f415/gpio/Register.h"
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Namespace
  */
 namespace chip::gpio {
@@ -28,31 +38,19 @@ namespace chip::gpio {
   extern Register& GPIOF;
 }  // namespace chip::gpio
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Class/Interface/Struct/Enum
  */
 class chip::gpio::GPIO {
-  /* **************************************************************************************
-   * Variable <Public>
+  /* **************************************************************************
+   * Variable
    */
 
-  /* **************************************************************************************
-   * Variable <Protected>
+  /* **************************************************************************
+   * Abstract method
    */
 
-  /* **************************************************************************************
-   * Variable <Private>
-   */
-
-  /* **************************************************************************************
-   * Abstract method <Public>
-   */
-
-  /* **************************************************************************************
-   * Abstract method <Protected>
-   */
-
-  /* **************************************************************************************
+  /* **************************************************************************
    * Construct Method
    */
  public:
@@ -60,11 +58,11 @@ class chip::gpio::GPIO {
 
   virtual ~GPIO(void) = default;
 
-  /* **************************************************************************************
+  /* **************************************************************************
    * Operator Method
    */
 
-  /* **************************************************************************************
+  /* **************************************************************************
    * Public Method <Static Inline>
    */
  public:
@@ -74,7 +72,7 @@ class chip::gpio::GPIO {
    *         this parameter can be one of the following values:
    *         GPIOA, GPIOB, GPIOC, GPIOD, GPIOF.
    * @param  pins: gpio pin number
-   * @retval flag_status (SET or RESET)
+   * @return flag_status (SET or RESET)
    */
   static inline bool inputDataBitRead(Register& reg, Pins pins) {
     return (reg.idt & static_cast<uint32_t>(pins));
@@ -85,7 +83,7 @@ class chip::gpio::GPIO {
    * @param  reg: to select the gpio peripheral.
    *         this parameter can be one of the following values:
    *         GPIOA, GPIOB, GPIOC, GPIOD, GPIOF.
-   * @retval gpio input data port value.
+   * @return gpio input data port value.
    */
   static inline uint16_t inputDataRead(Register& reg) {
     return static_cast<uint16_t>(reg.idt);
@@ -108,7 +106,7 @@ class chip::gpio::GPIO {
    * @param  reg: to select the gpio peripheral.
    *         this parameter can be one of the following values:
    *         GPIOA, GPIOB, GPIOC, GPIOD, GPIOF.
-   * @retval gpio input data port value.
+   * @return gpio input data port value.
    */
   static inline uint16_t outputDataRead(Register& reg) {
     return static_cast<uint16_t>(reg.odt);
@@ -120,7 +118,7 @@ class chip::gpio::GPIO {
    *         this parameter can be one of the following values:
    *         GPIOA, GPIOB, GPIOC, GPIOD, GPIOF.
    * @param  pins: gpio pin number
-   * @retval none
+   * @return none
    */
   static inline void bitsSet(Register& reg, Pins pins) {
     reg.scr = static_cast<uint16_t>(pins);
@@ -133,7 +131,7 @@ class chip::gpio::GPIO {
    *         this parameter can be one of the following values:
    *         GPIOA, GPIOB, GPIOC, GPIOD, GPIOF.
    * @param  pins: gpio pin number
-   * @retval none
+   * @return none
    */
   static inline void bitsReset(Register& reg, Pins pins) {
     reg.scr = static_cast<uint16_t>(pins);
@@ -146,7 +144,7 @@ class chip::gpio::GPIO {
    *         GPIOA, GPIOB, GPIOC, GPIOD, GPIOF.
    * @param  pins: gpio pin number
    * @param  bit_state: specifies the value to be written to the selected bit (TRUE or FALSE).
-   * @retval none
+   * @return none
    */
   static inline void bitsWrite(Register& reg, Pins pins, bool bitState) {
     if (bitState)
@@ -164,15 +162,15 @@ class chip::gpio::GPIO {
    *         this parameter can be one of the following values:
    *         GPIOA, GPIOB, GPIOC, GPIOD, GPIOF.
    * @param  port_value: specifies the value to be written to the port output data register.
-   * @retval none
+   * @return none
    */
   static void portWirte(Register& reg, uint16_t portValue) {
     reg.odt = portValue;
     return;
   }
 
-  /* **************************************************************************************
-   * Public Method <Static>
+  /* **************************************************************************
+   * Public Static Method
    */
  public:
   /**
@@ -180,7 +178,7 @@ class chip::gpio::GPIO {
    * @param  reg: to select the gpio peripheral.
    *         this parameter can be one of the following values:
    *         GPIOA, GPIOB, GPIOC, GPIOD, GPIOF.
-   * @retval none
+   * @return none
    */
   static void reset(Register& reg);
 
@@ -190,14 +188,14 @@ class chip::gpio::GPIO {
    *         this parameter can be one of the following values:
    *         GPIOA, GPIOB, GPIOC, GPIOD, GPIOF.
    * @param  gpio_init_struct: pointer to gpio init structure.
-   * @retval none
+   * @return none
    */
   static void init(Register& reg, PinConfig& pinConfig);
 
   /**
    * @brief  fill each gpio_init_type member with its default value.
    * @param  gpio_init_struct : pointer to a gpio_init_type structure which will be initialized.
-   * @retval none
+   * @return none
    */
   static void defaultParaInit(PinConfig& pinConfig);
 
@@ -207,44 +205,28 @@ class chip::gpio::GPIO {
    *         this parameter can be one of the following values:
    *         GPIOA, GPIOB, GPIOC, GPIOD, GPIOF.
    * @param  pins: gpio pin number
-   * @retval none
+   * @return none
    */
   static void pinWpConfig(Register& reg, Pins pins);
 
-  /* **************************************************************************************
+  /* **************************************************************************
    * Public Method <Override>
    */
 
-  /* **************************************************************************************
+  /* **************************************************************************
    * Public Method
    */
 
-  /* **************************************************************************************
-   * Protected Method <Static>
-   */
-
-  /* **************************************************************************************
-   * Protected Method <Override>
-   */
-
-  /* **************************************************************************************
+  /* **************************************************************************
    * Protected Method
    */
 
-  /* **************************************************************************************
-   * Private Method <Static>
-   */
-
-  /* **************************************************************************************
-   * Private Method <Override>
-   */
-
-  /* **************************************************************************************
+  /* **************************************************************************
    * Private Method
    */
 };
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * End of file
  */
 

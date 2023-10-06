@@ -7,21 +7,33 @@
 #ifndef CHIP_58CF5083_706E_4A10_B60C_0994F1B8798E
 #define CHIP_58CF5083_706E_4A10_B60C_0994F1B8798E
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Macro
  */
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Include
  */
 
+//-----------------------------------------------------------------------------
 #include "mframe.h"
-#define USING_CHIP_USART
-#include "chip.h"
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#include "chip_arterytek_at32f415/usart/BreakBit.h"
+#include "chip_arterytek_at32f415/usart/ClockLast.h"
+#include "chip_arterytek_at32f415/usart/ClockPhase.h"
+#include "chip_arterytek_at32f415/usart/ClockPolarity.h"
+#include "chip_arterytek_at32f415/usart/DataBit.h"
+#include "chip_arterytek_at32f415/usart/Flag.h"
+#include "chip_arterytek_at32f415/usart/HardwareFlow.h"
+#include "chip_arterytek_at32f415/usart/Interrupt.h"
+#include "chip_arterytek_at32f415/usart/ParitySelection.h"
+#include "chip_arterytek_at32f415/usart/Register.h"
+#include "chip_arterytek_at32f415/usart/StopBit.h"
+#include "chip_arterytek_at32f415/usart/USART.h"
+#include "chip_arterytek_at32f415/usart/WakeupMode.h"
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Namespace
  */
 namespace chip::usart {
@@ -33,44 +45,60 @@ namespace chip::usart {
   extern Register& UART5;
 }  // namespace chip::usart
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Class/Interface/Struct/Enum
  */
 class chip::usart::USART : public mframe::lang::Object {
-  /* **************************************************************************************
-   * Variable <Public>
+  /* **************************************************************************
+   * Variable
    */
 
-  /* **************************************************************************************
-   * Variable <Protected>
+  /* **************************************************************************
+   * Abstract method
    */
 
-  /* **************************************************************************************
-   * Variable <Private>
-   */
-
-  /* **************************************************************************************
-   * Abstract method <Public>
-   */
-
-  /* **************************************************************************************
-   * Abstract method <Protected>
-   */
-
-  /* **************************************************************************************
+  /* **************************************************************************
    * Construct Method
    */
  public:
+  /**
+   * @brief Construct a new USART object
+   *
+   */
   USART(void);
 
+  /**
+   * @brief Destroy the USART object
+   *
+   */
   virtual ~USART(void) override;
 
-  /* **************************************************************************************
+  /* **************************************************************************
    * Operator Method
    */
 
-  /* **************************************************************************************
-   * Public Method <Static Inline>
+  /* **************************************************************************
+   * Public Method <Override>
+   */
+
+  /* **************************************************************************
+   * Public Method
+   */
+
+  /* **************************************************************************
+   * Protected Method
+   */
+
+  /* **************************************************************************
+   * Private Method
+   */
+
+  /* **************************************************************************
+   * Static Variable
+   */
+
+  /* **************************************************************************
+   * Static Method
    */
  public:
   /**
@@ -80,7 +108,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         USART1, USART2, USART3, UART4, or UART5.
    * @param  new_state: new state of the usart peripheral.
    *         this parameter can be: TRUE or FALSE.
-   * @retval none
+   * @return none
    */
   static inline void enable(Register& reg, bool newState) {
     reg.ctrl1_bit.uen = newState;
@@ -93,7 +121,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         this parameter can be one of the following values:
    *         USART1, USART2, USART3, UART4, or UART5.
    * @param  new_state: TRUE or FALSE.
-   * @retval none
+   * @return none
    */
   static inline void transmitterEnable(Register& reg, bool newState) {
     reg.ctrl1_bit.ten = newState;
@@ -106,7 +134,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         this parameter can be one of the following values:
    *         USART1, USART2, USART3, UART4, or UART5.
    * @param  new_state: TRUE or FALSE.
-   * @retval none
+   * @return none
    */
   static inline void receiverEnable(Register& reg, bool newState) {
     reg.ctrl1_bit.ren = newState;
@@ -120,7 +148,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         this parameter can be one of the following values:
    *         USART1, USART2 or USART3.
    * @param  new_state: TRUE or FALSE
-   * @retval none
+   * @return none
    */
   static inline void clockEnable(Register& reg, bool newState) {
     reg.ctrl2_bit.clken = newState;
@@ -134,7 +162,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         USART1, USART2, USART3, UART4, or UART5.
    * @param  new_state: new state of the dma request sources.
    *         this parameter can be: TRUE or FALSE.
-   * @retval none
+   * @return none
    */
   static inline void dmaTransmitterEnable(Register& reg, bool newState) {
     reg.ctrl3_bit.dmaten = newState;
@@ -148,7 +176,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         USART1, USART2, USART3, UART4, or UART5.
    * @param  new_state: new state of the dma request sources.
    *         this parameter can be: TRUE or FALSE.
-   * @retval none
+   * @return none
    */
   static inline void dmaReceiverEnable(Register& reg, bool newState) {
     reg.ctrl3_bit.dmaren = newState;
@@ -161,7 +189,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         this parameter can be one of the following values:
    *         USART1, USART2, USART3, UART4, or UART5.
    * @param  usart_id: the matching id(0x0~0xF).
-   * @retval none
+   * @return none
    */
   static inline void wakeupIdSet(Register& reg, uint8_t id) {
     reg.ctrl2_bit.id = id;
@@ -177,7 +205,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         this parameter can be one of the following values:
    *         - USART_WAKEUP_BY_IDLE_FRAME
    *         - USART_WAKEUP_BY_MATCHING_ID
-   * @retval none
+   * @return none
    */
   static inline void wakeupModeSet(Register& reg, WakeupMode wakeupMode) {
     reg.ctrl1_bit.wum = static_cast<uint8_t>(wakeupMode);
@@ -191,7 +219,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         USART1, USART2, USART3, UART4, or UART5.
    * @param  new_state: new state of the usart mute mode.
    *         this parameter can be: TRUE or FALSE.
-   * @retval none
+   * @return none
    */
   static inline void receiverMuteEnable(Register& reg, bool newState) {
     reg.ctrl1_bit.rm = newState;
@@ -207,7 +235,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         this parameter can be one of the following values:
    *         - USART_BREAK_10BITS
    *         - USART_BREAK_11BITS
-   * @retval none
+   * @return none
    */
   static inline void breakBitNumSet(Register& reg, BreakBit breakBit) {
     reg.ctrl2_bit.bfbn = static_cast<uint8_t>(breakBit);
@@ -221,7 +249,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         USART1, USART2, USART3, UART4, or UART5.
    * @param  new_state: new state of the usart lin mode.
    *         this parameter can be: TRUE or FALSE.
-   * @retval none
+   * @return none
    */
   static inline void linModeEnable(Register& reg, bool newState) {
     reg.ctrl2_bit.linen = newState;
@@ -234,7 +262,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         this parameter can be one of the following values:
    *         USART1, USART2, USART3, UART4, or UART5.
    * @param  data: the data to transmit.
-   * @retval none
+   * @return none
    */
   static inline void dataTransmit(Register& reg, uint16_t data) {
     reg.dt = (data & 0x01FF);
@@ -246,7 +274,7 @@ class chip::usart::USART : public mframe::lang::Object {
    * @param  usart_x: select the usart or the uart peripheral.
    *         this parameter can be one of the following values:
    *         USART1, USART2, USART3, UART4, or UART5.
-   * @retval the received data.
+   * @return the received data.
    */
   static inline uint16_t dataReceive(Register& reg) {
     return static_cast<uint16_t>(reg.dt);
@@ -257,7 +285,7 @@ class chip::usart::USART : public mframe::lang::Object {
    * @param  usart_x: select the usart or the uart peripheral.
    *         this parameter can be one of the following values:
    *         USART1, USART2, USART3, UART4, or UART5.
-   * @retval none
+   * @return none
    */
   static inline void breakSend(Register& reg) {
     reg.ctrl1_bit.sbf = true;
@@ -271,7 +299,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         this parameter can be one of the following values:
    *         USART1, USART2 or USART3.
    * @param  guard_time_val: specifies the guard time (0x00~0xFF).
-   * @retval none
+   * @return none
    */
   static inline void smartcardGguardTimeSet(Register& reg, uint8_t guardTimeVal) {
     reg.gdiv_bit.scgt = guardTimeVal;
@@ -285,7 +313,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         this parameter can be one of the following values:
    *         USART1, USART2 or USART3.
    * @param  div_val: specifies the division.
-   * @retval none
+   * @return none
    */
   static inline void irdaSmartcardDivisionSet(Register& reg, uint8_t divVal) {
     reg.gdiv_bit.isdiv = divVal;
@@ -300,7 +328,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         USART1, USART2 or USART3.
    * @param  new_state: new state of the smart card mode.
    *         this parameter can be: TRUE or FALSE.
-   * @retval none
+   * @return none
    */
   static inline void smartcardModeEnable(Register& reg, bool newState) {
     reg.ctrl3_bit.scmen = newState;
@@ -315,7 +343,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         USART1, USART2 or USART3.
    * @param  new_state: new state of the nack transmission.
    *         this parameter can be: TRUE or FALSE.
-   * @retval none
+   * @return none
    */
   static inline void smartcardNackSet(Register& reg, bool newState) {
     reg.ctrl3_bit.scnacken = newState;
@@ -329,7 +357,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         USART1, USART2, USART3, UART4 or UART5.
    * @param  new_state: new state of the single line half-duplex select.
    *         this parameter can be: TRUE or FALSE.
-   * @retval none
+   * @return none
    */
   static inline void singleLineHalfduplexSelect(Register& reg, bool newState) {
     reg.ctrl3_bit.slben = newState;
@@ -343,7 +371,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         USART1, USART2, USART3, UART4 or UART5.
    * @param  new_state: new state of the irda mode.
    *         this parameter can be: TRUE or FALSE.
-   * @retval none
+   * @return none
    */
   static inline void irdaModeEnable(Register& reg, bool newState) {
     reg.ctrl3_bit.irdaen = newState;
@@ -357,7 +385,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         USART1, USART2, USART3, UART4 or UART5.
    * @param  new_state: new state of the irda mode.
    *         this parameter can be: TRUE or FALSE.
-   * @retval none
+   * @return none
    */
   static inline void irdaLowPowerEnable(Register& reg, bool newState) {
     reg.ctrl3_bit.irdalp = newState;
@@ -381,7 +409,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         - USART_NERR_FLAG:  noise error flag
    *         - USART_FERR_FLAG:  framing error flag
    *         - USART_PERR_FLAG:  parity error flag
-   * @retval the new state of usart_flag (SET or RESET).
+   * @return the new state of usart_flag (SET or RESET).
    */
   static inline bool flagGet(Register& reg, Flag flag) {
     if (reg.sts & static_cast<uint32_t>(flag))
@@ -409,23 +437,19 @@ class chip::usart::USART : public mframe::lang::Object {
    *         - USART_TDC_FLAG can be also cleared by software sequence: a read operation to usart sts register (usart_flag_get())
    *           followed by a write operation to usart dt register (usart_data_transmit()).
    *         - USART_TDBE_FLAG is cleared only by a write to the usart dt register(usart_data_transmit()).
-   * @retval none
+   * @return none
    */
   static inline void flagClear(Register& reg, uint32_t flag) {
     reg.sts = ~flag;
     return;
   }
 
-  /* **************************************************************************************
-   * Public Method <Static>
-   */
- public:
   /**
    * @brief  deinitialize the usart peripheral registers to their default reset values.
    * @param  usart_x: select the usart or the uart peripheral.
    *         this parameter can be one of the following values:
    *         USART1, USART2, USART3, UART4, or UART5.
-   * @retval none
+   * @return none
    */
   static void reset(Register& reg);
 
@@ -445,7 +469,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         - USART_STOP_0_5_BIT.
    *         - USART_STOP_2_BIT
    *         - USART_STOP_1_5_BIT.
-   * @retval none
+   * @return none
    */
   static void init(Register& reg, uint32_t baudrate, DataBit dataBit, StopBit stopBit);
 
@@ -459,7 +483,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         - USART_PARITY_NONE
    *         - USART_PARITY_EVEN.
    *         - USART_PARITY_ODD
-   * @retval none
+   * @return none
    */
   static void paritySelectionConfig(Register& reg, ParitySelection parity);
 
@@ -481,7 +505,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         this parameter can be one of the following values:
    *         - USART_CLOCK_LAST_BIT_NONE
    *         - USART_CLOCK_LAST_BIT_OUTPUT
-   * @retval none
+   * @return none
    */
   static void clockConfig(Register& reg, ClockPolarity clockPolarity, ClockPhase clockPhase, ClockLast clk_lb);
 
@@ -502,7 +526,7 @@ class chip::usart::USART : public mframe::lang::Object {
    *         - USART_CTSCF_INT: ctscf interrupt
    * @param  new_state: new state of the specified usart interrupts.
    *         this parameter can be: TRUE or FALSE.
-   * @retval none
+   * @return none
    */
   static void interruptEnable(Register& reg, Interrupt interrupt, bool newState);
 
@@ -517,44 +541,12 @@ class chip::usart::USART : public mframe::lang::Object {
    *         - USART_HARDWARE_FLOW_RTS,
    *         - USART_HARDWARE_FLOW_CTS,
    *         - USART_HARDWARE_FLOW_RTS_CTS
-   * @retval none
+   * @return none
    */
   static void hardwareFlowControlSet(Register& reg, HardwareFlow hardwareFlow);
-
-  /* **************************************************************************************
-   * Public Method <Override>
-   */
-
-  /* **************************************************************************************
-   * Public Method
-   */
-
-  /* **************************************************************************************
-   * Protected Method <Static>
-   */
-
-  /* **************************************************************************************
-   * Protected Method <Override>
-   */
-
-  /* **************************************************************************************
-   * Protected Method
-   */
-
-  /* **************************************************************************************
-   * Private Method <Static>
-   */
-
-  /* **************************************************************************************
-   * Private Method <Override>
-   */
-
-  /* **************************************************************************************
-   * Private Method
-   */
 };
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * End of file
  */
 

@@ -5,38 +5,62 @@
  * SPDX-License-Identifier: MIT
  */
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Include
  */
-#define USING_CHIP_CRM
-#include "chip.h"
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#include "TMR.h"
 
-//-----------------------------------------------------------------------------------------
-#include "./TMR.h"
+//-----------------------------------------------------------------------------
+#include "chip_arterytek_at32f415/Processor.h"
+#include "chip_arterytek_at32f415/crm/CRM.h"
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Macro
  */
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wold-style-cast"
 #pragma clang diagnostic ignored "-Wcovered-switch-default"
 #pragma clang diagnostic ignored "-Wswitch-enum"
-/* ****************************************************************************************
+/* ****************************************************************************
  * Using
  */
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+using chip::tmr::TMR;
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 using chip::crm::CRM;
 using chip::crm::PeriphReset;
 using chip::tmr::Register;
-using chip::tmr::TMR;
 
-/* ****************************************************************************************
- * Variable <Static>
+/* ****************************************************************************
+ * Construct Method
+ */
+
+/* ****************************************************************************
+ * Operator Method
+ */
+
+/* ****************************************************************************
+ * Public Method <Override>
+ */
+
+/* ****************************************************************************
+ * Public Method
+ */
+
+/* ****************************************************************************
+ * Protected Method
+ */
+
+/* ****************************************************************************
+ * Private Method
+ */
+
+/* ****************************************************************************
+ * Static Variable
  */
 Register& chip::tmr::TMR1 = *reinterpret_cast<Register*>(chip::Processor::BASE_TMR1);
 Register& chip::tmr::TMR2 = *reinterpret_cast<Register*>(chip::Processor::BASE_TMR2);
@@ -46,21 +70,11 @@ Register& chip::tmr::TMR5 = *reinterpret_cast<Register*>(chip::Processor::BASE_T
 Register& chip::tmr::TMR9 = *reinterpret_cast<Register*>(chip::Processor::BASE_TMR9);
 Register& chip::tmr::TMR10 = *reinterpret_cast<Register*>(chip::Processor::BASE_TMR10);
 Register& chip::tmr::TMR11 = *reinterpret_cast<Register*>(chip::Processor::BASE_TMR11);
-/* ****************************************************************************************
- * Construct Method
- */
 
-/* ****************************************************************************************
- * Operator Method
+/* ****************************************************************************
+ * Static Method
  */
-
-/* ****************************************************************************************
- * Public Method <Static>
- */
-
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::reset(Register& reg) {
   if (compReg(reg, TMR1)) {
     CRM::periphReset(PeriphReset::RESET_TMR1, true);
@@ -96,9 +110,7 @@ void TMR::reset(Register& reg) {
   }
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::outputDefaultParaInit(output::Config& outputStruct) {
   outputStruct.outputControlMode = output::ControlMode::OFF;
   outputStruct.ocIdleState = false;
@@ -110,9 +122,7 @@ void TMR::outputDefaultParaInit(output::Config& outputStruct) {
   return;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::inputDefaultParaInit(input::Config& inputStruct) {
   inputStruct.channelSelect = channel::Select::CHANNEL1;
   inputStruct.inputPolarity = input::Polarity::RISING_EDGE;
@@ -121,9 +131,7 @@ void TMR::inputDefaultParaInit(input::Config& inputStruct) {
   return;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::brkdtDefaultParaInit(BreakDutyConfig& breakDutyConfig) {
   breakDutyConfig.deadtime = 0x0;
   breakDutyConfig.breakPolarity = BreakPolarity::ACTIVE_LOW;
@@ -134,9 +142,7 @@ void TMR::brkdtDefaultParaInit(BreakDutyConfig& breakDutyConfig) {
   breakDutyConfig.brkEnable = false;
   return;
 }
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::baseInit(Register& reg, uint32_t pr, uint32_t div) {
   /* set the pr value */
   reg.pr = pr;
@@ -150,17 +156,13 @@ void TMR::baseInit(Register& reg, uint32_t pr, uint32_t div) {
   return;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::repetitionCounterSet(Register& reg, uint8_t rprValue) {
   /* set the repetition counter value */
   if (compReg(reg, TMR1))
     reg.rpr_bit.rpr = rprValue;
 }
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::outputChannelConfig(Register& reg, channel::Select channel, output::Config& config) {
   uint16_t index = 0;
   uint16_t index_c = 0;
@@ -235,9 +237,7 @@ void TMR::outputChannelConfig(Register& reg, channel::Select channel, output::Co
   reg.cctrl |= index;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::outputChannelModeSelect(Register& reg, channel::Select channel, output::ControlMode ocMode) {
   switch (channel) {
     case channel::Select::CHANNEL1:
@@ -260,9 +260,7 @@ void TMR::outputChannelModeSelect(Register& reg, channel::Select channel, output
       break;
   }
 }
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::channelValueSet(Register& reg, channel::Select channel, uint32_t channelValue) {
   /* set tmr channel value */
   switch (channel) {
@@ -287,9 +285,7 @@ void TMR::channelValueSet(Register& reg, channel::Select channel, uint32_t chann
   }
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 uint32_t TMR::channelValueGet(Register& reg, channel::Select channel) {
   uint32_t result = 0;
 
@@ -318,9 +314,7 @@ uint32_t TMR::channelValueGet(Register& reg, channel::Select channel) {
   return result;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::outputChannelBufferEnable(Register& reg, channel::Select channel, bool newState) {
   /* get tmr channel value */
   switch (channel) {
@@ -345,9 +339,7 @@ void TMR::outputChannelBufferEnable(Register& reg, channel::Select channel, bool
   }
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::outputChannelImmediatelySet(Register& reg, channel::Select channel, bool newState) {
   /* get tmr channel value */
   switch (channel) {
@@ -372,9 +364,7 @@ void TMR::outputChannelImmediatelySet(Register& reg, channel::Select channel, bo
   }
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::outputChannelSwitchSet(Register& reg, channel::Select channel, bool newState) {
   /* get tmr channel value */
   switch (channel) {
@@ -399,18 +389,14 @@ void TMR::outputChannelSwitchSet(Register& reg, channel::Select channel, bool ne
   }
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::bit32FunctionEnable(Register& reg, bool newState) {
   /* tmr 32 bit function(plus mode) enable,only for TMR2/TMR5 */
   if (compReg(reg, TMR2) || compReg(reg, TMR5))
     reg.ctrl1_bit.pmen = newState;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::inputChannelInit(Register& reg, input::Config& config, input::Divider divider) {
   switch (config.channelSelect) {
     case channel::Select::CHANNEL1:
@@ -453,9 +439,7 @@ void TMR::inputChannelInit(Register& reg, input::Config& config, input::Divider 
   }
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::channelEnable(Register& reg, channel::Select channel, bool newState) {
   switch (channel) {
     case channel::Select::CHANNEL1:
@@ -491,9 +475,7 @@ void TMR::channelEnable(Register& reg, channel::Select channel, bool newState) {
   }
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::inputChannelfilterSet(Register& reg, channel::Select channel, uint16_t filterValue) {
   switch (channel) {
     case channel::Select::CHANNEL1:
@@ -517,9 +499,7 @@ void TMR::inputChannelfilterSet(Register& reg, channel::Select channel, uint16_t
   }
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::pwmInputConfig(Register& reg, input::Config& config, input::Divider divider) {
   switch (config.channelSelect) {
     case channel::Select::CHANNEL1:
@@ -597,9 +577,7 @@ void TMR::pwmInputConfig(Register& reg, input::Config& config, input::Divider di
   }
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::inputChannelDividerSet(Register& reg, channel::Select channel, input::Divider divider) {
   switch (channel) {
     case channel::Select::CHANNEL1:
@@ -623,9 +601,7 @@ void TMR::inputChannelDividerSet(Register& reg, channel::Select channel, input::
   }
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::outputChannelPolaritySet(Register& reg, channel::Select channel, PolarityActive ocPolarity) {
   switch (channel) {
     case channel::Select::CHANNEL1:
@@ -661,18 +637,14 @@ void TMR::outputChannelPolaritySet(Register& reg, channel::Select channel, Polar
   }
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::externalClockConfig(Register& reg, external::Divider divider, external::Polarity polarity, uint16_t filter) {
   reg.stctrl_bit.esdiv = static_cast<uint8_t>(divider);
   reg.stctrl_bit.esp = static_cast<uint8_t>(polarity);
   reg.stctrl_bit.esf = filter;
   return;
 }
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::externalClockMode1Config(Register& reg, external::Divider divider, external::Polarity polarity, uint16_t filter) {
   externalClockConfig(reg, divider, polarity, filter);
   reg.stctrl_bit.smsel = static_cast<uint8_t>(subordinate::ModeSelect::EXTERNAL_CLOCK_A);
@@ -680,18 +652,14 @@ void TMR::externalClockMode1Config(Register& reg, external::Divider divider, ext
   return;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::externalClockMode2Config(Register& reg, external::Divider divider, external::Polarity polarity, uint16_t filter) {
   externalClockConfig(reg, divider, polarity, filter);
   reg.stctrl_bit.ecmben = true;
   return;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::encoderModeConfig(Register& reg, EncoderMode encoderMode, input::Polarity ic1Polarity, input::Polarity ic2Polarity) {
   reg.stctrl_bit.smsel = static_cast<uint8_t>(encoderMode);
 
@@ -710,9 +678,7 @@ void TMR::encoderModeConfig(Register& reg, EncoderMode encoderMode, input::Polar
   return;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::forceOutputSet(Register& reg, channel::Select channel, output::Force forceOutput) {
   switch (channel) {
     case channel::Select::CHANNEL1:
@@ -735,17 +701,13 @@ void TMR::forceOutputSet(Register& reg, channel::Select channel, output::Force f
       break;
   }
 }
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::dmaControlConfig(Register& reg, dma::TransferLength dmaLength, dma::BaseAddress dmaBaseAddress) {
   reg.dmactrl_bit.dtb = static_cast<uint8_t>(dmaLength);
   reg.dmactrl_bit.addr = static_cast<uint16_t>(dmaBaseAddress);
   return;
 }
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void TMR::brkdtConfig(Register& reg, BreakDutyConfig& brkdtStruct) {
   reg.brk_bit.brken = brkdtStruct.brkEnable;
   reg.brk_bit.dtc = brkdtStruct.deadtime;
@@ -756,31 +718,8 @@ void TMR::brkdtConfig(Register& reg, BreakDutyConfig& brkdtStruct) {
   reg.brk_bit.wpc = static_cast<uint8_t>(brkdtStruct.writeProtectLevel);
   return;
 }
-/* ****************************************************************************************
- * Public Method <Override>
- */
-
-/* ****************************************************************************************
- * Public Method
- */
-
-/* ****************************************************************************************
- * Protected Method <Static>
- */
-
-/* ****************************************************************************************
- * Protected Method <Override>
- */
-
-/* ****************************************************************************************
- * Protected Method
- */
-
-/* ****************************************************************************************
- * Private Method
- */
 
 #pragma clang diagnostic pop
-/* ****************************************************************************************
+/* ****************************************************************************
  * End of file
  */

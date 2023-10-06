@@ -7,16 +7,41 @@
 #ifndef CHIP_3B3265D7_1A90_4225_920F_1A2377378018
 #define CHIP_3B3265D7_1A90_4225_920F_1A2377378018
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Include
  */
 #include "mframe.h"
-#define USING_CHIP_CRM
-#include "chip.h"
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
-/* ****************************************************************************************
+//-----------------------------------------------------------------------------
+#include "chip_arterytek_at32f415/crm/AutoStepMode.h"
+#include "chip_arterytek_at32f415/crm/ClockOutSelect.h"
+#include "chip_arterytek_at32f415/crm/CoreClock.h"
+#include "chip_arterytek_at32f415/crm/DividerADC.h"
+#include "chip_arterytek_at32f415/crm/DividerAHB.h"
+#include "chip_arterytek_at32f415/crm/DividerAPB1.h"
+#include "chip_arterytek_at32f415/crm/DividerAPB2.h"
+#include "chip_arterytek_at32f415/crm/DividerClockOut.h"
+#include "chip_arterytek_at32f415/crm/DividerHICK.h"
+#include "chip_arterytek_at32f415/crm/DividerUSB.h"
+#include "chip_arterytek_at32f415/crm/Flag.h"
+#include "chip_arterytek_at32f415/crm/HickFrequencySCLK.h"
+#include "chip_arterytek_at32f415/crm/Interrupt.h"
+#include "chip_arterytek_at32f415/crm/MultPLL.h"
+#include "chip_arterytek_at32f415/crm/PeriphClock.h"
+#include "chip_arterytek_at32f415/crm/PeriphClockSleepMode.h"
+#include "chip_arterytek_at32f415/crm/PeriphReset.h"
+#include "chip_arterytek_at32f415/crm/PostDividerPLL.h"
+#include "chip_arterytek_at32f415/crm/ReferenceClockPLL.h"
+#include "chip_arterytek_at32f415/crm/Register.h"
+#include "chip_arterytek_at32f415/crm/SourceClockCore.h"
+#include "chip_arterytek_at32f415/crm/SourceClockERTC.h"
+#include "chip_arterytek_at32f415/crm/SourceClockPLL.h"
+#include "chip_arterytek_at32f415/crm/SourceClockSCLK.h"
+#include "chip_arterytek_at32f415/crm/SourceClockUSB.h"
+
+/* ****************************************************************************
  * Namespace
  */
 namespace chip::crm {
@@ -24,35 +49,23 @@ namespace chip::crm {
   extern Register& CRM0;
 }  // namespace chip::crm
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Class/Interface/Struct/Enum
  */
 class chip::crm::CRM : public mframe::lang::Object {
-  /* **************************************************************************************
-   * Variable <Public>
+  /* **************************************************************************
+   * Variable
    */
  public:
   static const uint32_t HEXT_STARTUP_TIMEOUT = 0x00003000;
   static const uint32_t HICK_VALUE = 8000000;
   static const uint32_t HEXT_VALUE = 8000000;
 
-  /* **************************************************************************************
-   * Variable <Protected>
+  /* **************************************************************************
+   * Abstract method
    */
 
-  /* **************************************************************************************
-   * Variable <Private>
-   */
-
-  /* **************************************************************************************
-   * Abstract method <Public>
-   */
-
-  /* **************************************************************************************
-   * Abstract method <Protected>
-   */
-
-  /* **************************************************************************************
+  /* **************************************************************************
    * Construct Method
    */
  public:
@@ -60,17 +73,18 @@ class chip::crm::CRM : public mframe::lang::Object {
 
   virtual ~CRM(void) override = default;
 
-  /* **************************************************************************************
+  /* **************************************************************************
    * Operator Method
    */
-  /* **************************************************************************************
-   * Public Method <Static Inline>
+
+  /* **************************************************************************
+   * Public Method
    */
  public:
   /**
    * @brief  enable or disable crm low speed external crystal bypass
    * @param  newState (true or false)
-   * @retval none
+   * @return none
    */
   static inline void lextBypass(bool newState) {
     CRM0.bpdc_bit.lextbyps = newState;
@@ -79,7 +93,7 @@ class chip::crm::CRM : public mframe::lang::Object {
   /**
    * @brief  enable or disable crm high speed external crystal bypass
    * @param  newState (true or false)
-   * @retval none
+   * @return none
    */
   static inline void hextBypass(bool newState) {
     CRM0.ctrl_bit.hextbyps = newState;
@@ -88,7 +102,7 @@ class chip::crm::CRM : public mframe::lang::Object {
   /**
    * @brief  set the hick trimming value
    * @param  trimValue (0x00~0x3F)
-   * @retval none
+   * @return none
    */
   static inline void hickClockTrimmingSet(uint8_t trimValue) {
     CRM0.ctrl_bit.hicktrim = trimValue;
@@ -101,7 +115,7 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         - SourceClockERTC::CLOCK_LEXT
    *         - SourceClockERTC::CLOCK_LICK
    *         - SourceClockERTC::CLOCK_HEXT_DIV
-   * @retval none
+   * @return none
    */
   static inline void ertcClockSelect(SourceClockERTC value) {
     CRM0.bpdc_bit.ertcsel = static_cast<uint8_t>(value);
@@ -111,7 +125,7 @@ class chip::crm::CRM : public mframe::lang::Object {
   /**
    * @brief  enable or disable ertc
    * @param  newState (true or false)
-   * @retval none
+   * @return none
    */
   static inline void ertcClockEnable(bool newState) {
     CRM0.bpdc_bit.ertcen = newState;
@@ -130,7 +144,7 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         - DividerAHB::DIV128
    *         - DividerAHB::DIV256
    *         - DividerAHB::DIV512
-   * @retval none
+   * @return none
    */
   static inline void ahbDivSet(DividerAHB value) {
     CRM0.cfg_bit.ahbdiv = static_cast<uint8_t>(value);
@@ -145,7 +159,7 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         - DividerAPB1::DIV4
    *         - DividerAPB1::DIV8
    *         - DividerAPB1::DIV16
-   * @retval none
+   * @return none
    */
   static inline void apb1DivSet(DividerAPB1 value) {
     CRM0.cfg_bit.apb1div = static_cast<uint8_t>(value);
@@ -160,7 +174,7 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         -  DividerAPB2::DIV4
    *         -  DividerAPB2::DIV8
    *         -  DividerAPB2::DIV16
-   * @retval none
+   * @return none
    */
   static inline void apb2DivSet(DividerAPB2 value) {
     CRM0.cfg_bit.apb2div = static_cast<uint8_t>(value);
@@ -173,7 +187,7 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         - SourceClockSCLK::HICK
    *         - SourceClockSCLK::HEXT
    *         - SourceClockSCLK::PLL
-   * @retval none
+   * @return none
    */
   static void sysclkSwitch(SourceClockSCLK value) {
     CRM0.cfg_bit.sclksel = static_cast<uint8_t>(value);
@@ -183,7 +197,7 @@ class chip::crm::CRM : public mframe::lang::Object {
   /**
    * @brief  indicate which clock source is used as system clock
    * @param  none
-   * @retval crm_sclk
+   * @return crm_sclk
    *         this return can be one of the following values:
    *         - SourceClockSCLK::HIC
    *         - SourceClockSCLK::HEX
@@ -206,7 +220,7 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         - DividerClockOut::DIV128
    *         - DividerClockOut::DIV256
    *         - DividerClockOut::DIV512
-   * @retval none
+   * @return none
    */
   static inline void clkoutDivSet(DividerClockOut clkoutDiv) {
     CRM0.misc1_bit.clkoutdiv = static_cast<uint8_t>(clkoutDiv);
@@ -219,7 +233,7 @@ class chip::crm::CRM : public mframe::lang::Object {
    *
    *         at32f415xx revision C: (support)
    *         support configuration ep3 remap.
-   * @retval none
+   * @return none
    */
   static inline void otgfsEp3RemapEnable(bool newState) {
     CRM0.otg_extctrl_bit.ep3_rmpen = newState;
@@ -233,20 +247,20 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         at32f415xx revision C: (support)
    *         usb divider(CRM_CFG[usbdiv]) support to be reset.
    * @param  newState (true or false)
-   * @retval none
+   * @return none
    */
   static inline void usbdivReset(bool newState) {
     CRM0.otg_extctrl_bit.usbdivrst = newState;
   }
 
-  /* **************************************************************************************
-   * Public Method <Static>
+  /* **************************************************************************
+   * Public Static Method
    */
  public:
   /**
    * @brief  reset the crm register
    * @param  none
-   * @retval none
+   * @return none
    */
   static void reset(void);
   /**
@@ -271,21 +285,21 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         - Flag::HEXT_READY_INT
    *         - Flag::PLL_READY_INT
    *         - Flag::CLOCK_FAILURE_INT
-   * @retval flag_status
+   * @return flag_status
    */
   static bool flagGet(Flag flag);
 
   /**
    * @brief  wait for hext stable
    * @param  none
-   * @retval error_status (ERROR or SUCCESS)
+   * @return error_status (ERROR or SUCCESS)
    */
   static bool hextStableWait(void);
 
   /**
    * @brief  set the crm calibration value
    * @param  cali_value (0x00~0xFF)
-   * @retval none
+   * @return none
    */
   static void hickClockCalibrationSet(uint8_t caliValue);
 
@@ -304,7 +318,7 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         - PeriphClock::CLOCK_UART5        - PeriphClock::CLOCK_I2C1         - PeriphClock::CLOCK_I2C2        - PeriphClock::CLOCK_CAN1
    *         - PeriphClock::CLOCK_PWC
    * @param  newState (true or false)
-   * @retval none
+   * @return none
    */
   static void periphClockEnable(PeriphClock value, bool newState);
 
@@ -322,7 +336,7 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         - PeriphClock::CLOCK_SPI2         - PeriphClock::CLOCK_USART2       - PeriphClock::CLOCK_USART3      - PeriphClock::CLOCK_UART4
    *         - PeriphClock::CLOCK_UART5        - PeriphClock::CLOCK_I2C1         - PeriphClock::CLOCK_I2C2        - PeriphClock::CLOCK_CAN1
    *         - PeriphClock::CLOCK_PWC
-   * @retval none
+   * @return none
    */
   static bool getPeriphClockEnable(PeriphClock value);
 
@@ -339,7 +353,7 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         - PeriphReset::RESET_UART5        - PeriphReset::RESET_I2C1         - PeriphReset::RESET_I2C2        - PeriphReset::RESET_CAN1
    *         - PeriphReset::RESET_PWC          - PeriphReset::RESET_OTGFS1
    * @param  newState (true or false)
-   * @retval none
+   * @return none
    */
   static void periphReset(PeriphReset value, bool newState);
 
@@ -350,7 +364,7 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         - CRM_SRAM_PERIPH_CLOCK_SLEEP_MODE
    *         - CRM_FLASH_PERIPH_CLOCK_SLEEP_MODE
    * @param  newState (true or false)
-   * @retval none
+   * @return none
    */
   static void periphSleepModeClockEnable(PeriphClockSleepMode value, bool newState);
 
@@ -364,7 +378,7 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         - SourceClockCore::CLOCL_LEXT
    *         - SourceClockCore::CLOCL_LICK
    * @param  newState (true or false)
-   * @retval none
+   * @return none
    */
   static void clockSourceEnable(SourceClockCore source, bool newState);
 
@@ -387,7 +401,7 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         - Flag::HEXT_READY_INT
    *         - Flag::PLL_READY_INT
    *         - Flag::CLOCK_FAILURE_INT
-   * @retval none
+   * @return none
    */
   static void flagClear(Flag flag);
 
@@ -401,7 +415,7 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         - DividerADC::DIV8
    *         - DividerADC::DIV12
    *         - DividerADC::DIV16
-   * @retval none
+   * @return none
    */
   static void adcClockDivSet(DividerADC divValue);
 
@@ -416,14 +430,14 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         - DividerUSB::DIV3_5
    *         - DividerUSB::DIV3
    *         - DividerUSB::DIV4
-   * @retval none
+   * @return none
    */
   static void usbClockDivSet(DividerUSB divValue);
 
   /**
    * @brief  enable or disable clock failure detection
    * @param  newState (true or false)
-   * @retval none
+   * @return none
    */
   static inline void clockFailureDetectionEnable(bool newState) {
     CRM0.ctrl_bit.cfden = newState;
@@ -432,7 +446,7 @@ class chip::crm::CRM : public mframe::lang::Object {
   /**
    * @brief  battery powered domain software reset
    * @param  newState (true or false)
-   * @retval none
+   * @return none
    */
   static void batteryPoweredDomainReset(bool newState) {
     CRM0.bpdc_bit.bpdrst = newState;
@@ -446,7 +460,7 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         - SourceClockPLL::HEXT
    *         - SourceClockPLL::HEXT_DIV
    * @param  mult_value (CRM_PLL_MULT_2~64)
-   * @retval none
+   * @return none
    */
   static void pllConfig(SourceClockPLL clockSource, MultPLL multValue);
 
@@ -481,7 +495,7 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         - PostDividerPLL::DIV8
    *         - PostDividerPLL::DIV16
    *         - PostDividerPLL::DIV32
-   * @retval none
+   * @return none
    */
   static void pllConfig2(SourceClockPLL clockSource, uint16_t pll_ns, uint16_t pllMs, PostDividerPLL pllFr);
 
@@ -489,7 +503,7 @@ class chip::crm::CRM : public mframe::lang::Object {
    * @brief  get crm clocks freqency
    * @param  clocks
    *         - pointer to the crm_clocks_freq structure
-   * @retval none
+   * @return none
    */
   static void clocksFreqGet(CoreClock& coreClock);
 
@@ -507,7 +521,7 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         - ClockOutSelect::SELECT_PLL_DIV_4
    *         - ClockOutSelect::SELECT_USB
    *         - ClockOutSelect::SELECT_ADC
-   * @retval none
+   * @return none
    */
   static void clockOutSet(ClockOutSelect clkout);
 
@@ -521,7 +535,7 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         - Interrupt::HEXT_STABLE
    *         - Interrupt::PLL_STABLE
    * @param  newState (true or false)
-   * @retval none
+   * @return none
    */
   static inline void interruptEnable(Interrupt interrupt, bool newState) {
     if (newState)
@@ -535,7 +549,7 @@ class chip::crm::CRM : public mframe::lang::Object {
   /**
    * @brief  auto step clock switch enable
    * @param  newState (true or false)
-   * @retval none
+   * @return none
    */
   static void autoStepModeEnable(bool newState) {
     if (newState == true)
@@ -553,7 +567,7 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         this parameter can be one of the following values:
    *         - DividerHICK::DIV6
    *         - DividerHICK::NODIV
-   * @retval none
+   * @return none
    */
   static void hickDividerSelect(DividerHICK value) {
     CRM0.misc1_bit.hickdiv = static_cast<uint8_t>(value);
@@ -566,7 +580,7 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         this parameter can be one of the following values:
    *         - HickFrequencySCLK::HICK_8MHZ
    *         - HickFrequencySCLK::HICK_48MHZ
-   * @retval none
+   * @return none
    */
   static void hickSclkFrequencySelect(HickFrequencySCLK value);
 
@@ -576,44 +590,28 @@ class chip::crm::CRM : public mframe::lang::Object {
    *         this parameter can be one of the following values:
    *         - SourceClockUSB::SOURCE_PLL
    *         - SourceClockUSB::SOURCE_HICK
-   * @retval none
+   * @return none
    */
   static void usbClockSourceSelect(SourceClockUSB value);
 
-  /* **************************************************************************************
+  /* **************************************************************************
    * Public Method <Override>
    */
 
-  /* **************************************************************************************
+  /* **************************************************************************
    * Public Method
    */
 
-  /* **************************************************************************************
-   * Protected Method <Static>
-   */
-
-  /* **************************************************************************************
-   * Protected Method <Override>
-   */
-
-  /* **************************************************************************************
+  /* **************************************************************************
    * Protected Method
    */
 
-  /* **************************************************************************************
-   * Private Method <Static>
-   */
-
-  /* **************************************************************************************
-   * Private Method <Override>
-   */
-
-  /* **************************************************************************************
+  /* **************************************************************************
    * Private Method
    */
 };
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * End of file
  */
 

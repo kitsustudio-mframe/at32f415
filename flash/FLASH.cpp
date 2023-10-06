@@ -5,26 +5,27 @@
  * SPDX-License-Identifier: MIT
  */
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Include
  */
-#include "./FLASH.h"
 
-//-----------------------------------------------------------------------------------------
-#define USING_CHIP_FLASH
-#include "chip.h"
+//-----------------------------------------------------------------------------
+#include "FLASH.h"
 
-/* ****************************************************************************************
+//-----------------------------------------------------------------------------
+#include "chip_arterytek_at32f415/Processor.h"
+
+/* ****************************************************************************
  * Macro
  */
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wold-style-cast"
-/* ****************************************************************************************
+/* ****************************************************************************
  * Using
  */
 using chip::flash::FLASH;
 
-//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 using chip::Processor;
 using chip::flash::Interrupt;
 using chip::flash::Register;
@@ -32,26 +33,22 @@ using chip::flash::Status;
 using chip::flash::Timeout;
 using chip::flash::WaitCycle;
 
-/* ****************************************************************************************
- * Variable <Static>
+/* ****************************************************************************
+ * Static Variable
  */
 Register &chip::flash::FLASH0 = *reinterpret_cast<Register *>(Processor::BASE_FLASH_REG);
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Construct Method
  */
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Operator Method
  */
 
-/* ****************************************************************************************
- * Public Method <Static>
- */
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+
+//-----------------------------------------------------------------------------
 bool FLASH::flagGet(Flag flag) {
   uint32_t flash_flag = static_cast<uint32_t>(flag);
   uint32_t flag_position;
@@ -74,9 +71,7 @@ bool FLASH::flagGet(Flag flag) {
   return false;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 Status FLASH::operationStatusGet(void) {
   Status result = Status::DONE;
   if (FLASH0.sts_bit.obf != false) {
@@ -92,9 +87,7 @@ Status FLASH::operationStatusGet(void) {
   return result;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 Status FLASH::operationWaitFor(Timeout timeout) {
   uint32_t time_out = static_cast<uint32_t>(timeout);
   Status status = Status::DONE;
@@ -112,9 +105,7 @@ Status FLASH::operationWaitFor(Timeout timeout) {
   return status;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 Status FLASH::sectorErase(uint32_t sectorAddress) {
   Status status = Status::DONE;
   /* wait for last operation to be completed */
@@ -136,9 +127,7 @@ Status FLASH::sectorErase(uint32_t sectorAddress) {
   return status;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 Status FLASH::internalAllErase(void) {
   Status status = Status::DONE;
   /* wait for last operation to be completed */
@@ -159,9 +148,7 @@ Status FLASH::internalAllErase(void) {
   return status;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 Status FLASH::userSystemDataErase(void) {
   Status status = Status::DONE;
   uint16_t fap_val = FAP_RELIEVE_KEY;
@@ -208,9 +195,7 @@ Status FLASH::userSystemDataErase(void) {
   return status;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 Status FLASH::wordProgram(uint32_t address, uint32_t data) {
   Status status = Status::DONE;
   /* wait for last operation to be completed */
@@ -229,9 +214,7 @@ Status FLASH::wordProgram(uint32_t address, uint32_t data) {
   return status;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 Status FLASH::halfwordProgram(uint32_t address, uint16_t data) {
   Status status = Status::DONE;
   /* wait for last operation to be completed */
@@ -250,9 +233,7 @@ Status FLASH::halfwordProgram(uint32_t address, uint16_t data) {
   return status;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 Status FLASH::byteProgram(uint32_t address, uint8_t data) {
   Status status = Status::DONE;
   /* wait for last operation to be completed */
@@ -271,9 +252,7 @@ Status FLASH::byteProgram(uint32_t address, uint8_t data) {
   return status;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 Status FLASH::userSystemDataProgram(uint32_t address, uint8_t data) {
   Status status = Status::DONE;
   status = operationWaitFor(Timeout::PROGRAMMING);
@@ -298,9 +277,7 @@ Status FLASH::userSystemDataProgram(uint32_t address, uint8_t data) {
   return status;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 Status FLASH::eppSet(uint32_t *sectorBits) {
   uint16_t epp_data[4] = {0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF};
   Status status = Status::DONE;
@@ -346,9 +323,7 @@ Status FLASH::eppSet(uint32_t *sectorBits) {
   return status;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 Status FLASH::fapEnable(bool newState) {
   Status status = Status::DONE;
   status = operationWaitFor(Timeout::ERASE);
@@ -385,9 +360,7 @@ Status FLASH::fapEnable(bool newState) {
   return status;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 Status FLASH::fapHighLevelEnable(bool newState) {
   Status status = Status::DONE;
   status = operationWaitFor(Timeout::ERASE);
@@ -448,9 +421,7 @@ Status FLASH::fapHighLevelEnable(bool newState) {
   return status;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 Status FLASH::ssbSet(uint8_t usdSsb) {
   Status status = Status::DONE;
   /* wait for last operation to be completed */
@@ -477,9 +448,7 @@ Status FLASH::ssbSet(uint8_t usdSsb) {
   return status;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 Status FLASH::slibEnable(uint32_t pwd, uint16_t startSector, uint16_t dataStartSector, uint16_t endSector) {
   uint32_t slib_range;
   Status status = Status::DONE;
@@ -508,9 +477,7 @@ Status FLASH::slibEnable(uint32_t pwd, uint16_t startSector, uint16_t dataStartS
   return status;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 bool FLASH::slibDisable(uint32_t pwd) {
   Status status = Status::DONE;
   /* write password to disable slib */
@@ -526,9 +493,7 @@ bool FLASH::slibDisable(uint32_t pwd) {
   return false;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 uint32_t FLASH::crcCalibrate(uint32_t start_addr, uint32_t sectorCnt) {
   FLASH0.crc_addr = start_addr;
   FLASH0.crc_ctrl = sectorCnt | 0x10000;
@@ -536,9 +501,7 @@ uint32_t FLASH::crcCalibrate(uint32_t start_addr, uint32_t sectorCnt) {
   return FLASH0.crc_chkr;
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 void FLASH::bootMemoryExtensionModeEnable(void) {
   if (FLASH0.slib_sts0_bit.btm_ap_enf == false) {
     FLASH0.slib_unlock = SLIB_UNLOCK_KEY;
@@ -550,9 +513,7 @@ void FLASH::bootMemoryExtensionModeEnable(void) {
   }
 }
 
-/** ---------------------------------------------------------------------------------------
- *
- */
+//-----------------------------------------------------------------------------
 Status FLASH::extensionMemorySlibEnable(uint32_t pwd, uint16_t dataStartSector) {
   Status status = Status::DONE;
   /* wait for last operation to be completed */
@@ -572,31 +533,27 @@ Status FLASH::extensionMemorySlibEnable(uint32_t pwd, uint16_t dataStartSector) 
   }
   return status;
 }
-/* ****************************************************************************************
+/* ****************************************************************************
  * Public Method <Override>
  */
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Public Method
  */
 
-/* ****************************************************************************************
- * Protected Method <Static>
- */
 
-/* ****************************************************************************************
- * Protected Method <Override>
- */
 
-/* ****************************************************************************************
+
+
+/* ****************************************************************************
  * Protected Method
  */
 
-/* ****************************************************************************************
+/* ****************************************************************************
  * Private Method
  */
 
 #pragma clang diagnostic pop
-/* ****************************************************************************************
+/* ****************************************************************************
  * End of file
  */
