@@ -78,8 +78,16 @@ class chip::tmr::TMR {
    * Construct Method
    */
  public:
+  /**
+   * @brief Construct a new TMR object
+   *
+   */
   TMR(void) = default;
 
+  /**
+   * @brief Destroy the TMR object
+   *
+   */
   virtual ~TMR(void) = default;
 
   /* **************************************************************************

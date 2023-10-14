@@ -47,8 +47,16 @@ class chip::pwc::PWC : public mframe::lang::Object {
    * Construct Method
    */
  public:
+  /**
+   * @brief Construct a new PWC object
+   *
+   */
   PWC(void);
 
+  /**
+   * @brief Destroy the PWC object
+   *
+   */
   virtual ~PWC(void) override;
 
   /* **************************************************************************

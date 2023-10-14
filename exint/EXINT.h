@@ -46,8 +46,16 @@ class chip::exint::EXINT : public mframe::lang::Object {
    * Construct Method
    */
  public:
+  /**
+   * @brief Construct a new EXINT object
+   *
+   */
   EXINT(void);
 
+  /**
+   * @brief Destroy the EXINT object
+   *
+   */
   virtual ~EXINT(void) override;
 
   /* **************************************************************************
@@ -55,7 +63,27 @@ class chip::exint::EXINT : public mframe::lang::Object {
    */
 
   /* **************************************************************************
-   * Public Method <Static Inline>
+   * Public Method <Override>
+   */
+
+  /* **************************************************************************
+   * Public Method
+   */
+
+  /* **************************************************************************
+   * Protected Method
+   */
+
+  /* **************************************************************************
+   * Private Method
+   */
+
+  /* **************************************************************************
+   * Static Variable
+   */
+
+  /* **************************************************************************
+   * Static Method
    */
  public:
   /**
@@ -116,10 +144,6 @@ class chip::exint::EXINT : public mframe::lang::Object {
     return;
   }
 
-  /* **************************************************************************
-   * Public Static Method
-   */
- public:
   static void reset(void);
   static void defaultParaInit(Config& config);
   static void init(Config& config);

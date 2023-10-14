@@ -40,16 +40,6 @@ class chip::flash::FLASH : public mframe::lang::Object {
   /* **************************************************************************
    * Variable
    */
- public:
-  static const uint32_t FLASH_UNLOCK_KEY1 = 0x45670123; /*!< flash operation unlock order key1 */
-  static const uint32_t FLASH_UNLOCK_KEY2 = 0xCDEF89AB; /*!< flash operation unlock order key2 */
-  static const uint16_t FAP_RELIEVE_KEY = 0x00A5;       /*!< flash fap relieve key val */
-  static const uint16_t FAP_HIGH_LEVEL_KEY = 0x00CC;    /*!< flash fap high level enable key val */
-  static const uint32_t SLIB_UNLOCK_KEY = 0xA35F6D24;   /*!< flash slib operation unlock order key */
-
-  static const uint32_t SLIB_START_SECTOR = 0x000007FF;      /*!< flash slib start sector */
-  static const uint32_t SLIB_DATA_START_SECTOR = 0x003FF800; /*!< flash slib d-bus area start sector */
-  static const uint32_t SLIB_END_SECTOR = 0xFFC00000;        /*!< flash slib end sector */
 
   /* **************************************************************************
    * Abstract method
@@ -76,7 +66,37 @@ class chip::flash::FLASH : public mframe::lang::Object {
    */
 
   /* **************************************************************************
-   * Public Method <Static Inline>
+   * Public Method <Override>
+   */
+
+  /* **************************************************************************
+   * Public Method
+   */
+
+  /* **************************************************************************
+   * Protected Method
+   */
+
+  /* **************************************************************************
+   * Private Method
+   */
+
+  /* **************************************************************************
+   * Static Variable
+   */
+ public:
+  static const uint32_t FLASH_UNLOCK_KEY1 = 0x45670123; /*!< flash operation unlock order key1 */
+  static const uint32_t FLASH_UNLOCK_KEY2 = 0xCDEF89AB; /*!< flash operation unlock order key2 */
+  static const uint16_t FAP_RELIEVE_KEY = 0x00A5;       /*!< flash fap relieve key val */
+  static const uint16_t FAP_HIGH_LEVEL_KEY = 0x00CC;    /*!< flash fap high level enable key val */
+  static const uint32_t SLIB_UNLOCK_KEY = 0xA35F6D24;   /*!< flash slib operation unlock order key */
+
+  static const uint32_t SLIB_START_SECTOR = 0x000007FF;      /*!< flash slib start sector */
+  static const uint32_t SLIB_DATA_START_SECTOR = 0x003FF800; /*!< flash slib d-bus area start sector */
+  static const uint32_t SLIB_END_SECTOR = 0xFFC00000;        /*!< flash slib end sector */
+
+  /* **************************************************************************
+   * Static Method
    */
  public:
   /**
@@ -208,10 +228,7 @@ class chip::flash::FLASH : public mframe::lang::Object {
   static inline uint16_t emSlibDatastartSectorGet(void) {
     return static_cast<uint16_t>(FLASH0.slib_sts0_bit.em_slib_dat_ss);
   }
-  /* **************************************************************************
-   * Public Static Method
-   */
- public:
+
   /**
    * @brief  check whether the specified flash flag is set or not.
    * @param  flag: specifies the flash flag to check.
@@ -430,22 +447,6 @@ class chip::flash::FLASH : public mframe::lang::Object {
    *         Status::EPP_ERROR, Status::DONE or Status::TIMEOUT.
    */
   static Status extensionMemorySlibEnable(uint32_t pwd, uint16_t dataStartSector);
-
-  /* **************************************************************************
-   * Public Method <Override>
-   */
-
-  /* **************************************************************************
-   * Public Method
-   */
-
-  /* **************************************************************************
-   * Protected Method
-   */
-
-  /* **************************************************************************
-   * Private Method
-   */
 };
 
 /* ****************************************************************************

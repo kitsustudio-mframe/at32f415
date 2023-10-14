@@ -10,9 +10,9 @@
 /* ****************************************************************************
  * Include
  */
-#include "mframe.h"
 
 //-----------------------------------------------------------------------------
+#include "mframe.h"
 
 //-----------------------------------------------------------------------------
 #include "chip_arterytek_at32f415/crm/AutoStepMode.h"
@@ -56,10 +56,6 @@ class chip::crm::CRM : public mframe::lang::Object {
   /* **************************************************************************
    * Variable
    */
- public:
-  static const uint32_t HEXT_STARTUP_TIMEOUT = 0x00003000;
-  static const uint32_t HICK_VALUE = 8000000;
-  static const uint32_t HEXT_VALUE = 8000000;
 
   /* **************************************************************************
    * Abstract method
@@ -69,16 +65,48 @@ class chip::crm::CRM : public mframe::lang::Object {
    * Construct Method
    */
  public:
+  /**
+   * @brief Construct a new CRM object
+   *
+   */
   CRM(void) = default;
 
+  /**
+   * @brief Destroy the CRM object
+   *
+   */
   virtual ~CRM(void) override = default;
 
   /* **************************************************************************
    * Operator Method
    */
+  
+  /* **************************************************************************
+   * Public Method <Override>
+   */
 
   /* **************************************************************************
    * Public Method
+   */
+
+  /* **************************************************************************
+   * Protected Method
+   */
+
+  /* **************************************************************************
+   * Private Method
+   */
+
+  /* **************************************************************************
+   * Static Variable
+   */
+ public:
+  static const uint32_t HEXT_STARTUP_TIMEOUT = 0x00003000;
+  static const uint32_t HICK_VALUE = 8000000;
+  static const uint32_t HEXT_VALUE = 8000000;
+
+  /* **************************************************************************
+   * Static Method
    */
  public:
   /**
@@ -253,10 +281,6 @@ class chip::crm::CRM : public mframe::lang::Object {
     CRM0.otg_extctrl_bit.usbdivrst = newState;
   }
 
-  /* **************************************************************************
-   * Public Static Method
-   */
- public:
   /**
    * @brief  reset the crm register
    * @param  none
@@ -593,22 +617,6 @@ class chip::crm::CRM : public mframe::lang::Object {
    * @return none
    */
   static void usbClockSourceSelect(SourceClockUSB value);
-
-  /* **************************************************************************
-   * Public Method <Override>
-   */
-
-  /* **************************************************************************
-   * Public Method
-   */
-
-  /* **************************************************************************
-   * Protected Method
-   */
-
-  /* **************************************************************************
-   * Private Method
-   */
 };
 
 /* ****************************************************************************
