@@ -1,0 +1,4 @@
+.git
+.keil
+.vscode
+.kconfig
